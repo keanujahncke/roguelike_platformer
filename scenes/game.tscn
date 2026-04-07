@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://n2ohq57w3ju"]
+
+[ext_resource type="Script" uid="uid://ck3gm8r2dqkhv" path="res://roguelike_platformer/scripts/level_manager.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://bvmuchjbxdrpj" path="res://roguelike_platformer/scenes/player.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://c0o4fyr5m58tx" path="res://roguelike_platformer/scenes/rooms/hybrid_room_01.tscn" id="2_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://b4qcr4e3iipc6" path="res://roguelike_platformer/scenes/rooms/precision_room_01.tscn" id="3_vef74"]
+[ext_resource type="PackedScene" uid="uid://deoomctdnh3xl" path="res://roguelike_platformer/scenes/rooms/standard_room_01.tscn" id="4_hve3p"]
+[ext_resource type="PackedScene" uid="uid://dfeyc4v6jo0hu" path="res://roguelike_platformer/scenes/rooms/standard_room_02.tscn" id="5_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://b7wwu7ep80n3i" path="res://roguelike_platformer/scenes/rooms/starting_room.tscn" id="6_iotsf"]
+[ext_resource type="PackedScene" uid="uid://cf8uib5lyxtd0" path="res://roguelike_platformer/scenes/rooms/wall_jump_room_01.tscn" id="7_lc2xo"]
+
+[node name="Game" type="Node2D" unique_id=1310302999]
+script = ExtResource("1_e2o6t")
+rooms = Array[PackedScene]([ExtResource("2_j5wjh"), ExtResource("3_vef74"), ExtResource("4_hve3p"), ExtResource("5_mfdv2"), ExtResource("6_iotsf"), ExtResource("7_lc2xo")])
+
+[node name="Player" parent="." unique_id=1122822699 instance=ExtResource("2_feb5d")]
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1763733998]
+position_smoothing_enabled = true

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b7wwu7ep80n3i"]
+
+[ext_resource type="PackedScene" uid="uid://dfwnp32cmwrc6" path="res://roguelike_platformer/scenes/room_base.tscn" id="1_chkj8"]
+
+[node name="RoomBase" unique_id=2127497181 instance=ExtResource("1_chkj8")]
