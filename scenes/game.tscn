@@ -2,18 +2,80 @@
 
 [ext_resource type="Script" uid="uid://ck3gm8r2dqkhv" path="res://roguelike_platformer/scripts/level_manager.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://bvmuchjbxdrpj" path="res://roguelike_platformer/scenes/player.tscn" id="2_feb5d"]
-[ext_resource type="PackedScene" uid="uid://c0o4fyr5m58tx" path="res://roguelike_platformer/scenes/rooms/hybrid_room_01.tscn" id="2_j5wjh"]
-[ext_resource type="PackedScene" uid="uid://b4qcr4e3iipc6" path="res://roguelike_platformer/scenes/rooms/precision_room_01.tscn" id="3_vef74"]
-[ext_resource type="PackedScene" uid="uid://deoomctdnh3xl" path="res://roguelike_platformer/scenes/rooms/standard_room_01.tscn" id="4_hve3p"]
-[ext_resource type="PackedScene" uid="uid://dfeyc4v6jo0hu" path="res://roguelike_platformer/scenes/rooms/standard_room_02.tscn" id="5_mfdv2"]
-[ext_resource type="PackedScene" uid="uid://b7wwu7ep80n3i" path="res://roguelike_platformer/scenes/rooms/starting_room.tscn" id="6_iotsf"]
-[ext_resource type="PackedScene" uid="uid://cf8uib5lyxtd0" path="res://roguelike_platformer/scenes/rooms/wall_jump_room_01.tscn" id="7_lc2xo"]
+[ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_wo7d7"]
+[ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://roguelike_platformer/scenes/room_choice.tscn" id="5_gv0uq"]
+[ext_resource type="Script" uid="uid://bave5t5ry40ko" path="res://roguelike_platformer/scripts/room_picker.gd" id="5_t43y2"]
+[ext_resource type="PackedScene" uid="uid://b7wwu7ep80n3i" path="res://rooms/room_scenes/starting_room.tscn" id="6_iotsf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gv0uq"]
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yc7t"]
+bg_color = Color(0, 0, 0, 0.5019608)
 
 [node name="Game" type="Node2D" unique_id=1310302999]
 script = ExtResource("1_e2o6t")
-rooms = Array[PackedScene]([ExtResource("2_j5wjh"), ExtResource("3_vef74"), ExtResource("4_hve3p"), ExtResource("5_mfdv2"), ExtResource("6_iotsf"), ExtResource("7_lc2xo")])
+starting_room = ExtResource("6_iotsf")
+room_database = ExtResource("3_wo7d7")
+choices_per_pick = null
 
 [node name="Player" parent="." unique_id=1122822699 instance=ExtResource("2_feb5d")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1763733998]
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=228265798]
+
+[node name="RoomPicker" type="Control" parent="CanvasLayer" unique_id=13136989]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_t43y2")
+choice_scene = ExtResource("5_gv0uq")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/RoomPicker" unique_id=390186172]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 256.0
+offset_right = 719.0
+offset_bottom = 385.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/RoomPicker/CenterContainer" unique_id=902271645]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/RoomPicker/CenterContainer/VBoxContainer" unique_id=1610333243]
+layout_mode = 2
+text = "Room Selection"
+label_settings = SubResource("LabelSettings_gv0uq")
+horizontal_alignment = 1
+
+[node name="ChoiceContainer" type="PanelContainer" parent="CanvasLayer/RoomPicker/CenterContainer/VBoxContainer" unique_id=1686770591]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1yc7t")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/RoomPicker/CenterContainer/VBoxContainer/ChoiceContainer" unique_id=565194282]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/RoomPicker/CenterContainer/VBoxContainer/ChoiceContainer/MarginContainer" unique_id=1959155348]
+layout_mode = 2
+theme_override_constants/separation = 82
+
+[node name="RoomChoice" parent="CanvasLayer/RoomPicker/CenterContainer/VBoxContainer/ChoiceContainer/MarginContainer/HBoxContainer" unique_id=1402156080 instance=ExtResource("5_gv0uq")]
+layout_mode = 2
+
+[node name="RoomChoice2" parent="CanvasLayer/RoomPicker/CenterContainer/VBoxContainer/ChoiceContainer/MarginContainer/HBoxContainer" unique_id=930217141 instance=ExtResource("5_gv0uq")]
+layout_mode = 2
+
+[node name="RoomChoice3" parent="CanvasLayer/RoomPicker/CenterContainer/VBoxContainer/ChoiceContainer/MarginContainer/HBoxContainer" unique_id=1380161197 instance=ExtResource("5_gv0uq")]
+layout_mode = 2
