@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dfwnp32cmwrc6"]
 
 [ext_resource type="Texture2D" uid="uid://cywbmkd1fpthm" path="res://roguelike_platformer/assets/placeholder_tiles.png" id="1_88gup"]
-[ext_resource type="Script" uid="uid://c2yb6yqcxa6l" path="res://roguelike_platformer/scenes/exit.gd" id="1_blkga"]
+[ext_resource type="Script" uid="uid://c2yb6yqcxa6l" path="res://roguelike_platformer/scripts/exit.gd" id="1_blkga"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5vuv"]
 
