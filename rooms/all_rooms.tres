@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RoomDatabase" format=3 uid="uid://c4jifodginq5u"]
+
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://roguelike_platformer/scripts/room_data.gd" id="1_3s7hy"]
+[ext_resource type="Resource" uid="uid://crbf0rwihbllo" path="res://roguelike_platformer/rooms/room_data/hybrid_room_01.tres" id="2_5pux4"]
+[ext_resource type="Script" uid="uid://c7tyxjnhcnlh0" path="res://roguelike_platformer/scripts/room_database.gd" id="2_yqhpg"]
+[ext_resource type="Resource" uid="uid://dfvpp50073l66" path="res://roguelike_platformer/rooms/room_data/precision_room_01.tres" id="3_c65sq"]
+[ext_resource type="Resource" uid="uid://cuy8kyo4qjae2" path="res://roguelike_platformer/rooms/room_data/standard_room_01.tres" id="4_88oy0"]
+[ext_resource type="Resource" uid="uid://dng4ft23vtwla" path="res://roguelike_platformer/rooms/room_data/standard_room_02.tres" id="5_8bjt5"]
+[ext_resource type="Resource" uid="uid://bflnr6wkduq13" path="res://roguelike_platformer/rooms/room_data/wall_jump_room_01.tres" id="6_0qgse"]
+
+[resource]
+script = ExtResource("2_yqhpg")
+rooms = Array[ExtResource("1_3s7hy")]([ExtResource("2_5pux4"), ExtResource("3_c65sq"), ExtResource("4_88oy0"), ExtResource("5_8bjt5"), ExtResource("6_0qgse")])
+metadata/_custom_type_script = "uid://c7tyxjnhcnlh0"

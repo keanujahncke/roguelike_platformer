@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ck3gm8r2dqkhv" path="res://roguelike_platformer/scripts/level_manager.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://bvmuchjbxdrpj" path="res://roguelike_platformer/scenes/player.tscn" id="2_feb5d"]
-[ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_wo7d7"]
+[ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://roguelike_platformer/rooms/all_rooms.tres" id="3_wo7d7"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://roguelike_platformer/scenes/room_choice.tscn" id="5_gv0uq"]
 [ext_resource type="Script" uid="uid://bave5t5ry40ko" path="res://roguelike_platformer/scripts/room_picker.gd" id="5_t43y2"]
-[ext_resource type="PackedScene" uid="uid://b7wwu7ep80n3i" path="res://rooms/room_scenes/starting_room.tscn" id="6_iotsf"]
+[ext_resource type="PackedScene" uid="uid://b7wwu7ep80n3i" path="res://roguelike_platformer/rooms/room_scenes/starting_room.tscn" id="6_iotsf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gv0uq"]
 font_size = 32

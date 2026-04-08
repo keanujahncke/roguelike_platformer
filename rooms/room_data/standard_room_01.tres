@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://cuy8kyo4qjae2"]
+
+[ext_resource type="Texture2D" uid="uid://cmt6p8x6fbph2" path="res://roguelike_platformer/rooms/room_images/standard_room_01.png" id="1_husvj"]
+[ext_resource type="PackedScene" uid="uid://deoomctdnh3xl" path="res://roguelike_platformer/rooms/room_scenes/standard_room_01.tscn" id="2_jgyb0"]
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://roguelike_platformer/scripts/room_data.gd" id="3_y6nl1"]
+
+[resource]
+script = ExtResource("3_y6nl1")
+scene = ExtResource("2_jgyb0")
+preview = ExtResource("1_husvj")
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
