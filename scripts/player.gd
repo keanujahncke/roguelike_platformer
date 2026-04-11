@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+
 # MOVEMENT
 @export var move_speed = 220.0
 @export var acceleration = 1400.0
@@ -33,14 +35,19 @@ var coyote_timer = 0.0
 var jump_buffer_timer = 0.0
 var wall_jump_timer = 0.0
 
-
 # STATE
 var facing = 1
 var wall_sliding = false
+var was_running = false
+var is_stopping = false
+var run_time = 0.0
+
+@export var stop_min_run_time = 0.2
 
 
 func _ready():
 	dashes_left = max_dashes
+	anim.play("idle")
 
 
 func _physics_process(delta):
@@ -125,6 +132,63 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+	# face sprite
+	anim.flip_h = facing < 0
+
+	# animation logic
+	update_animation(input_axis, delta)
+
+
+func update_animation(input_axis, delta):
+	var is_running = abs(velocity.x) > 1 and input_axis != 0
+
+	# Track how long player has been running
+	if is_running and is_on_floor():
+		run_time += delta
+
+	# Air states take priority
+	if not is_on_floor():
+		is_stopping = false
+		if velocity.y < 0:
+			if anim.animation != "jump":
+				anim.play("jump")
+		else:
+			if anim.animation != "fall":
+				anim.play("fall")
+		was_running = is_running
+		return
+
+	# Trigger stop only if player ran long enough
+	if (
+		was_running
+		and input_axis == 0
+		and abs(velocity.x) > 1
+		and not is_stopping
+		and run_time >= stop_min_run_time
+	):
+		is_stopping = true
+		anim.play("stop")
+		was_running = false
+		run_time = 0.0
+		return
+
+	# Let stop finish before idle
+	if is_stopping:
+		if not anim.is_playing() or anim.frame >= anim.sprite_frames.get_frame_count("stop") - 1:
+			is_stopping = false
+			anim.play("idle")
+		return
+
+	# Normal ground states
+	if is_running:
+		if anim.animation != "run":
+			anim.play("run")
+		was_running = true
+	else:
+		if anim.animation != "idle":
+			anim.play("idle")
+		was_running = false
+		run_time = 0.0
 
 
 func start_dash():
@@ -139,6 +203,5 @@ func start_dash():
 	velocity.x = dash_dir * dash_speed
 	velocity.y = 0
 	
-
 	await get_tree().create_timer(dash_time).timeout
 	is_dashing = false
