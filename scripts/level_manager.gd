@@ -15,6 +15,7 @@ var exit_used := false
 
 func _ready():
 	picker.room_selected.connect(_on_room_selected)
+	player.died.connect(_on_player_died)
 	load_room(starting_room)
 
 
@@ -44,6 +45,8 @@ func load_room(room_scene : PackedScene):
 
 	current_room = room_scene.instantiate()
 	add_child(current_room)
+	
+	player.current_room = current_room
 
 	# move player to spawn
 	var spawn = current_room.get_node("Spawn")
@@ -70,3 +73,12 @@ func _on_exit_entered():
 	exit_used = true
 	pick_next_rooms()
 	picker.show_choices(current_choices)
+
+func respawn_player(player_node):
+	var spawn = current_room.get_node("Spawn")
+	player_node.global_position = spawn.global_position
+
+	player_node.is_dead = false
+
+func _on_player_died() -> void:
+	respawn_player(player)

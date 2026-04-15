@@ -1,5 +1,11 @@
 extends CharacterBody2D
 
+
+signal died
+var current_room : Node2D
+var is_dead := false   # ✅ NEW
+
+
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 # MOVEMENT
@@ -131,6 +137,7 @@ func _physics_process(delta):
 			)
 
 	move_and_slide()
+	check_hazards()
 
 	# face sprite
 	anim.flip_h = facing < 0
@@ -205,3 +212,25 @@ func start_dash():
 	
 	await get_tree().create_timer(dash_time).timeout
 	is_dashing = false
+
+func die_and_respawn():
+	if is_dead:
+		return
+
+	is_dead = true
+
+	died.emit()
+	velocity = Vector2.ZERO
+	is_dashing = false
+
+func check_hazards():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if not collision:
+			continue
+
+		var collider = collision.get_collider()
+
+		if collider.is_in_group("hazard"):
+			die_and_respawn()
+			return

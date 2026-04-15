@@ -17,7 +17,6 @@ bg_color = Color(0, 0, 0, 0.5019608)
 script = ExtResource("1_e2o6t")
 starting_room = ExtResource("6_iotsf")
 room_database = ExtResource("3_wo7d7")
-choices_per_pick = null
 
 [node name="Player" parent="." unique_id=1122822699 instance=ExtResource("2_feb5d")]
 
@@ -78,3 +77,5 @@ layout_mode = 2
 
 [node name="RoomChoice3" parent="CanvasLayer/RoomPicker/CenterContainer/VBoxContainer/ChoiceContainer/MarginContainer/HBoxContainer" unique_id=1380161197 instance=ExtResource("5_gv0uq")]
 layout_mode = 2
+
+[connection signal="died" from="Player" to="." method="_on_player_died"]
