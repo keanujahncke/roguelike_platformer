@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://c21eqq2o1l7qs"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hxixw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4utl"]
+size = Vector2(10.836692, 18.000004)
+
+[sub_resource type="Animation" id="Animation_hxixw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y4utl"]
+resource_name = "move"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(30, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t7stf"]
+_data = {
+&"RESET": SubResource("Animation_hxixw"),
+&"move": SubResource("Animation_y4utl")
+}
+
+[node name="MoveablePlatform" type="Node2D" unique_id=209559702]
+scale = Vector2(8, 8)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1049868907]
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D" unique_id=546027974]
+position = Vector2(0, 1.4901161e-08)
+scale = Vector2(-3.72, 1.2249998)
+texture = SubResource("CanvasTexture_hxixw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1966446525]
+position = Vector2(-8.288771e-08, -2.9802322e-08)
+scale = Vector2(0.34604657, 0.068531446)
+shape = SubResource("RectangleShape2D_y4utl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D" unique_id=738115697]
+libraries/ = SubResource("AnimationLibrary_t7stf")
+autoplay = &"move"
