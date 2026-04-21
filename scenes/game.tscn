@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://n2ohq57w3ju"]
 
 [ext_resource type="Script" uid="uid://ck3gm8r2dqkhv" path="res://scripts/level_manager.gd" id="1_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://bvmuchjbxdrpj" path="res://scenes/player.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://bvmuchjbxdrpj" path="res://player/player.tscn" id="2_feb5d"]
 [ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_wo7d7"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/room_choice.tscn" id="5_gv0uq"]
 [ext_resource type="Script" uid="uid://bave5t5ry40ko" path="res://scripts/room_picker.gd" id="5_t43y2"]
