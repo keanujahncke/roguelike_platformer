@@ -36,6 +36,10 @@ var run_time := 0.0
 
 @export var stop_min_run_time := 0.2
 
+@export var max_health := 5
+var health := 5
+
+
 
 func _ready():
 	anim.play("idle")
@@ -197,6 +201,9 @@ func die_and_respawn():
 
 
 func check_hazards():
+	if is_dead:
+		return
+	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 
@@ -206,9 +213,27 @@ func check_hazards():
 		var collider = collision.get_collider()
 
 		if collider and collider.is_in_group("hazard"):
-			die_and_respawn()
+			take_damage(1)
 			return
+			
+func take_damage(amount: int):
+	health -= amount
+	print("Hearts left: ", health)
 
+	if health <= 0:
+		is_dead = true
+		died.emit() 
+	else:
+		var spawn = current_room.get_node("Spawn")
+		global_position = spawn.global_position
+		velocity = Vector2.ZERO
+
+func reset_stats():
+	is_dead = false
+	health = max_health
+	velocity = Vector2.ZERO
+	set_physics_process(true)
+	anim.play("idle")
 
 func unlock_ability(name: String):
 	match name:

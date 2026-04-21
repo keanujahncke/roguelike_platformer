@@ -6,6 +6,7 @@ extends Node2D
 
 @onready var player = $Player
 @onready var picker = $CanvasLayer/RoomPicker
+@onready var game_over = $CanvasLayer/GameOver
 
 var current_room : Node2D
 var current_choices : Array[RoomData]
@@ -14,6 +15,7 @@ var current_exit : Area2D
 var exit_used := false
 
 func _ready():
+	game_over.hide()
 	picker.room_selected.connect(_on_room_selected)
 	player.died.connect(_on_player_died)
 	load_room(starting_room)
@@ -81,4 +83,9 @@ func respawn_player(player_node):
 	player_node.is_dead = false
 
 func _on_player_died() -> void:
-	respawn_player(player)
+	game_over.show()
+	
+func restart_game():
+	game_over.hide()
+	player.reset_stats() 
+	load_room(starting_room)
