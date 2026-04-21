@@ -1,9 +1,11 @@
 [gd_scene format=4 uid="uid://dfwnp32cmwrc6"]
 
+[ext_resource type="Texture2D" uid="uid://bllmfuunc5f7l" path="res://assets/exitdoor.png" id="1_6qhtq"]
 [ext_resource type="Texture2D" uid="uid://cywbmkd1fpthm" path="res://assets/placeholder_tiles.png" id="1_88gup"]
 [ext_resource type="Script" uid="uid://c2yb6yqcxa6l" path="res://scripts/exit.gd" id="1_blkga"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5vuv"]
+size = Vector2(18, 29)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_88gup"]
 texture = ExtResource("1_88gup")
@@ -29,13 +31,18 @@ sources/0 = SubResource("TileSetAtlasSource_88gup")
 [node name="Spawn" type="Marker2D" parent="." unique_id=1516571430]
 position = Vector2(42, -18)
 
-[node name="Exit" type="Area2D" parent="." unique_id=1270889774]
+[node name="Exit" type="Area2D" parent="." unique_id=763921746]
 position = Vector2(1255, -48)
-scale = Vector2(4, 4.341)
+scale = Vector2(2, 2)
 script = ExtResource("1_blkga")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit" unique_id=830906334]
+position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_v5vuv")
+
+[node name="Area2D" type="Sprite2D" parent="Exit" unique_id=993396429]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_6qhtq")
 
 [node name="GroundMap" type="TileMapLayer" parent="." unique_id=477515611]
 use_parent_material = true
@@ -46,5 +53,3 @@ tile_set = SubResource("TileSet_bisa2")
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAQAAEAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAAUAAEAAAAAAAAAAAAVAAEAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_bisa2")
-
-[connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]

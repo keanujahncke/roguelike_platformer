@@ -1029,6 +1029,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1122822699 groups=["player"]]
+z_index = 5
 collision_mask = 5
 script = ExtResource("1_onrkg")
 
