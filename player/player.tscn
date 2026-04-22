@@ -690,62 +690,62 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_dqoq3")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_y8tjj")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_6ptwb")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_8pj6w")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_08upi")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_4tsya")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_68qdx")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_ccnn6")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_mcvyg")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_ealyq")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_qms75")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_1lovq")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_0usgs")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_c7iw1")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_fccsy")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_e4c5e")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_72noi")
 }, {
-"duration": 1.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_0j382")
 }],
-"loop": true,
-"name": &"doublejump",
+"loop": false,
+"name": &"double_jump",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1041,7 +1041,9 @@ shape = SubResource("RectangleShape2D_i3pqv")
 position = Vector2(-3, -2)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_g5jhy")
-animation = &"fall"
+animation = &"double_jump"
+frame = 17
+frame_progress = 1.0
 speed_scale = 2.0
 
 [node name="Abilities" type="Node" parent="." unique_id=581730385]
@@ -1060,6 +1062,7 @@ metadata/_custom_type_script = "uid://crnhhtk5fexa6"
 
 [node name="DoubleJumpAbility" type="Node" parent="Abilities" unique_id=685511709]
 script = ExtResource("12_ebec5")
+unlocked = true
 metadata/_custom_type_script = "uid://3xcx8y8iiojw"
 
 [node name="WallJumpAbility" type="Node" parent="Abilities" unique_id=731123515]

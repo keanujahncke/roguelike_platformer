@@ -33,6 +33,7 @@ var facing: int = 1
 var was_running := false
 var is_stopping := false
 var run_time := 0.0
+var is_doing_double_jump := false
 
 @export var stop_min_run_time := 0.2
 
@@ -123,6 +124,12 @@ func is_dash_active() -> bool:
 
 func update_animation(input_axis: float, delta: float):
 	var is_running: bool = abs(velocity.x) > 1.0 and input_axis != 0.0
+
+	if is_doing_double_jump:
+		if anim.animation == "double_jump" and anim.is_playing():
+			return
+		else:
+			is_doing_double_jump = false
 
 	if is_running and is_on_floor():
 		run_time += delta

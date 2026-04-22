@@ -18,8 +18,17 @@ func ability_process(player, _delta):
 	# Reset on floor / wall
 	if player.is_on_floor() or player.is_on_wall():
 		jumps_left = max_air_jumps
+		player.is_doing_double_jump = false
 		return
 
 	if Input.is_action_just_pressed("jump") and jumps_left > 0:
-		player.velocity.y = jump_velocity
 		jumps_left -= 1
+		player.is_doing_double_jump = true
+		player.play_anim("double_jump")
+
+		# small hover before launch
+		player.velocity.y = 0
+
+		await player.get_tree().create_timer(0.08).timeout
+
+		player.velocity.y = jump_velocity
