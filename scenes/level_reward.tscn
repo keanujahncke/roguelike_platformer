@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://bwm4ym3xm4kcc"]
+
+[ext_resource type="Script" uid="uid://cns5uk4ucmk3l" path="res://level_reward.gd" id="1_g3irf"]
+[ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="2_gibuo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g3irf"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_gibuo"]
+font_size = 24
+
+[node name="LevelReward" type="CanvasLayer" unique_id=2064351492]
+layer = 100
+script = ExtResource("1_g3irf")
+
+[node name="BackgroundDimmer" type="ColorRect" parent="." unique_id=1595461536]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1313467305]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1235755544]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="RewardSection" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=2001835869]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/RewardSection" unique_id=514285052]
+layout_mode = 2
+text = "CHOOSE AN UPGRADE
+"
+label_settings = SubResource("LabelSettings_g3irf")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RewardSection" unique_id=1166033918]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="Choice" parent="CenterContainer/VBoxContainer/RewardSection/HBoxContainer" unique_id=1402156080 instance=ExtResource("2_gibuo")]
+layout_mode = 2
+
+[node name="Choice2" parent="CenterContainer/VBoxContainer/RewardSection/HBoxContainer" unique_id=315168707 instance=ExtResource("2_gibuo")]
+layout_mode = 2
+
+[node name="Choice3" parent="CenterContainer/VBoxContainer/RewardSection/HBoxContainer" unique_id=1985390082 instance=ExtResource("2_gibuo")]
+layout_mode = 2
+
+[node name="NextButton" type="Button" parent="CenterContainer/VBoxContainer/RewardSection" unique_id=1607453756]
+visible = false
+layout_mode = 2
+text = "CONTINUE"
+
+[node name="LevelSection" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=395888731]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/LevelSection" unique_id=878303993]
+layout_mode = 2
+text = "SELECT NEXT DESTINATION"
+label_settings = SubResource("LabelSettings_gibuo")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/LevelSection" unique_id=1266058413]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="Choice" parent="CenterContainer/VBoxContainer/LevelSection/HBoxContainer" unique_id=457077924 instance=ExtResource("2_gibuo")]
+layout_mode = 2
+
+[node name="Choice2" parent="CenterContainer/VBoxContainer/LevelSection/HBoxContainer" unique_id=737961598 instance=ExtResource("2_gibuo")]
+layout_mode = 2
+
+[node name="Choice3" parent="CenterContainer/VBoxContainer/LevelSection/HBoxContainer" unique_id=1782772765 instance=ExtResource("2_gibuo")]
+layout_mode = 2

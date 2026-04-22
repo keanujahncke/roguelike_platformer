@@ -10,10 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cjeqh1n74156h" path="res://assets/Spritesheets/run.png" id="6_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://bcg8v0svayo21" path="res://assets/Spritesheets/stop.png" id="7_d2wvv"]
 [ext_resource type="Script" uid="uid://bgt4getng8cht" path="res://player/abilities/ability_scripts/DashAbility.gd" id="9_y4r1p"]
-[ext_resource type="Script" uid="uid://ljvup0yps8es" path="res://player/abilities/ability_scripts/WallJumpAbility.gd" id="10_d2wvv"]
 [ext_resource type="Script" uid="uid://caelmmfkwoula" path="res://player/abilities/ability_scripts/DirectionalDashAbility.gd" id="11_tqiix"]
 [ext_resource type="Script" uid="uid://crnhhtk5fexa6" path="res://player/abilities/ability_scripts/PhaseDashAbility.gd" id="12_e7oew"]
-[ext_resource type="Script" uid="uid://bw3hj4v65mu4j" path="res://player/abilities/ability_scripts/DoubleJumpAbility.gd" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://bqqcadpr3v8nt" path="res://player/abilities/ability_scripts/GlideAbility.gd" id="15_c35mf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
@@ -1028,6 +1026,92 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_yllr7"]
+script/source = "extends Ability
+
+
+@export var jump_velocity := -300.0
+@export var max_air_jumps := 1
+
+var jumps_left := 0
+
+
+func setup(_player):
+	jumps_left = max_air_jumps
+
+
+func ability_process(player, _delta):
+	if not unlocked:
+		return
+
+	# Reset on floor / wall
+	if player.is_on_floor() or player.is_on_wall():
+		jumps_left = max_air_jumps
+		player.is_doing_double_jump = false
+		return
+
+	if Input.is_action_just_pressed(\"jump\") and jumps_left > 0:
+		jumps_left -= 1
+		player.is_doing_double_jump = true
+		player.play_anim(\"double_jump\")
+
+		# small hover before launch
+		player.velocity.y = 0.2
+
+		await player.get_tree().create_timer(0.08).timeout
+
+		player.velocity.y = jump_velocity
+"
+
+[sub_resource type="GDScript" id="GDScript_kb6p2"]
+script/source = "extends Ability
+
+@export var wall_jump_x := 260.0
+@export var wall_jump_y := -300.0
+@export var wall_slide_speed := 60.0
+@export var wall_jump_grace_time := 0.12
+
+var is_wall_sliding := false
+var wall_jump_grace_timer := 0.0
+var last_wall_normal := Vector2.ZERO
+
+
+func setup(_player):
+	pass
+
+
+func ability_process(player, delta):
+	if not unlocked:
+		is_wall_sliding = false
+		wall_jump_grace_timer = 0.0
+		last_wall_normal = Vector2.ZERO
+		return
+
+	is_wall_sliding = false
+
+	# refresh grace timer while touching wall
+	if player.is_on_wall() and not player.is_on_floor():
+		wall_jump_grace_timer = wall_jump_grace_time
+		last_wall_normal = player.get_wall_normal()
+
+		# Wall slide / hang
+		if player.velocity.y > 0:
+			is_wall_sliding = true
+			player.velocity.y = min(player.velocity.y, wall_slide_speed)
+	else:
+		wall_jump_grace_timer -= delta
+
+	# Wall jump with grace window
+	if wall_jump_grace_timer > 0.0 \\
+	and not player.is_on_floor() \\
+	and Input.is_action_just_pressed(\"jump\") \\
+	and last_wall_normal != Vector2.ZERO:
+
+		player.velocity.y = wall_jump_y
+		player.velocity.x = last_wall_normal.x * wall_jump_x
+		wall_jump_grace_timer = 0.0
+"
+
 [node name="Player" type="CharacterBody2D" unique_id=1122822699 groups=["player"]]
 z_index = 5
 collision_mask = 5
@@ -1061,11 +1145,11 @@ script = ExtResource("12_e7oew")
 metadata/_custom_type_script = "uid://crnhhtk5fexa6"
 
 [node name="DoubleJumpAbility" type="Node" parent="Abilities" unique_id=685511709]
-script = ExtResource("12_ebec5")
+script = SubResource("GDScript_yllr7")
 metadata/_custom_type_script = "uid://3xcx8y8iiojw"
 
 [node name="WallJumpAbility" type="Node" parent="Abilities" unique_id=731123515]
-script = ExtResource("10_d2wvv")
+script = SubResource("GDScript_kb6p2")
 metadata/_custom_type_script = "uid://6i5q48eawy5b"
 
 [node name="GlideAbility" type="Node" parent="Abilities" unique_id=1756042482]

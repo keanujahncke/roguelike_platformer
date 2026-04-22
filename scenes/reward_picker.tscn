@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cpeumwgmatlyh"]
+
+[ext_resource type="Script" uid="uid://3nrrlgd6j4lf" path="res://scenes/reward_picker.gd" id="1_oecmx"]
+[ext_resource type="PackedScene" uid="uid://codpjsbh30r3x" path="res://scenes/upgrade_card.tscn" id="2_h31ri"]
+[ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="3_34xxx"]
+[ext_resource type="Resource" uid="uid://d0gjfwtt475qm" path="res://player/abilities/ability_data/double_jump_data.tres" id="4_34xxx"]
+
+[node name="RewardPicker" type="Control" unique_id=97351657]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_oecmx")
+card_scene = ExtResource("2_h31ri")
+available_abilities = Array[ExtResource("3_34xxx")]([ExtResource("4_34xxx")])
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2108816824]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=80215054]
+layout_mode = 2
+
+[node name="UpgradeCard" parent="VBoxContainer/HBoxContainer" unique_id=553604109 instance=ExtResource("2_h31ri")]
+layout_mode = 2
+
+[node name="UpgradeCard2" parent="VBoxContainer/HBoxContainer" unique_id=305854304 instance=ExtResource("2_h31ri")]
+layout_mode = 2
+
+[node name="UpgradeCard3" parent="VBoxContainer/HBoxContainer" unique_id=774572977 instance=ExtResource("2_h31ri")]
+layout_mode = 2

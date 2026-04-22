@@ -2,90 +2,98 @@ extends Node2D
 
 @export var starting_room : PackedScene
 @export var room_database : RoomDatabase
-@export var choices_per_pick := 3
 
 @onready var player = $Player
-@onready var picker = $CanvasLayer/RoomPicker
 @onready var game_over = $CanvasLayer/GameOver
+@onready var level_rewards_ui = $CanvasLayer/LevelReward
 
 var current_room : Node2D
-var current_choices : Array[RoomData]
 var current_exit : Area2D
 
 var exit_used := false
 
+
 func _ready():
 	game_over.hide()
-	picker.room_selected.connect(_on_room_selected)
+	level_rewards_ui.hide()
+
+	# UI connections
+	level_rewards_ui.room_selected.connect(_on_room_selected)
+	level_rewards_ui.ability_selected.connect(_on_ability_reward_selected)
+
 	player.died.connect(_on_player_died)
+
 	load_room(starting_room)
 
 
-# PICK ROOMS
-func pick_next_rooms():
+# ABILITY PICKED -> actually unlock it
+func _on_ability_reward_selected(id: String):
+	print("Ability rewarded: ", id)
 
-	current_choices.clear()
+	if id == "":
+		return
 
-	var pool = room_database.rooms.duplicate()
-
-	for i in choices_per_pick:
-		if pool.is_empty():
-			break
-
-		var index = randi() % pool.size()
-		current_choices.append(pool[index])
-		pool.remove_at(index)
+	player.unlock_ability(id)
 
 
+# ROOM PICKED
 func _on_room_selected(room_data : RoomData):
 	load_room(room_data.scene)
 
-# LOAD CHOSEN ROOM
+
+# LOAD ROOM
 func load_room(room_scene : PackedScene):
 	if current_room:
 		current_room.queue_free()
 
 	current_room = room_scene.instantiate()
 	add_child(current_room)
-	
+
 	player.current_room = current_room
 
 	# move player to spawn
 	var spawn = current_room.get_node("Spawn")
 	player.global_position = spawn.global_position
 
-	# disconnect previous exit signal
+	# disconnect previous exit
 	if current_exit:
-		current_exit.player_entered.disconnect(Callable(self, "_on_exit_entered"))
+		current_exit.player_entered.disconnect(
+			Callable(self, "_on_exit_entered")
+		)
 
-	# set new exit
+	# connect new exit
 	current_exit = current_room.get_node("Exit")
-	current_exit.player_entered.connect(Callable(self, "_on_exit_entered"))
+	current_exit.player_entered.connect(
+		Callable(self, "_on_exit_entered")
+	)
 
-	# reset single-trigger flag
 	exit_used = false
 
 
-
-
+# EXIT -> open reward UI
 func _on_exit_entered():
 	if exit_used:
-		return  # only trigger once per room
+		return
 
 	exit_used = true
-	pick_next_rooms()
-	picker.show_choices(current_choices)
 
+	level_rewards_ui.open_ui(room_database)
+
+
+# RESPAWN
 func respawn_player(player_node):
 	var spawn = current_room.get_node("Spawn")
 	player_node.global_position = spawn.global_position
-
 	player_node.is_dead = false
 
+
+# GAME OVER
 func _on_player_died() -> void:
 	game_over.show()
-	
+
+
+# RESTART
 func restart_game():
 	game_over.hide()
-	player.reset_stats() 
+	player.reset_stats()
 	load_room(starting_room)

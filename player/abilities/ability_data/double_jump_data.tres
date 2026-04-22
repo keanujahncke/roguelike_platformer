@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://d0gjfwtt475qm"]
+
+[ext_resource type="Texture2D" uid="uid://1p1mqvmvely3" path="res://assets/upgrade jump.png" id="1_f6htp"]
+[ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="2_lokre"]
+
+[resource]
+script = ExtResource("2_lokre")
+id = "double_jump"
+card_art = ExtResource("1_f6htp")
+metadata/_custom_type_script = "uid://eb86v03dhajv"

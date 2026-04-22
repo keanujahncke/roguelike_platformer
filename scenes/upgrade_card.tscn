@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://codpjsbh30r3x"]
+
+[ext_resource type="Texture2D" uid="uid://bk14llci83chc" path="res://assets/upgradecardjump.png" id="1_62kwj"]
+[ext_resource type="Script" uid="uid://bsjfcqigbavl6" path="res://scenes/upgrade_card.gd" id="1_ew4bf"]
+
+[node name="UpgradeCard" type="Button" unique_id=553604109]
+anchors_preset = -1
+anchor_left = 0.017
+anchor_top = 0.043
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.584002
+offset_top = -27.864
+offset_right = -1112.0
+offset_bottom = -592.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+script = ExtResource("1_ew4bf")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1279956417]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.0
+offset_top = -4.0
+offset_right = 10.0
+offset_bottom = 4.0
+mouse_filter = 2
+texture = ExtResource("1_62kwj")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

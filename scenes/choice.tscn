@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://b8nck1jtetqks"]
 
-[ext_resource type="Script" uid="uid://i2j6sgd4eew4" path="res://roguelike_platformer/scripts/room_choice.gd" id="1_ohi1q"]
+[ext_resource type="Script" uid="uid://i2j6sgd4eew4" path="res://scripts/room_choice.gd" id="1_ohi1q"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1yc7t"]
-load_path = "res://.godot/imported/placeholder_tiles.png-f3e33d495aa413627ed19fc0c8a2bdef.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7aovw"]
 atlas = SubResource("CompressedTexture2D_1yc7t")
 region = Rect2(48, 0, 16, 16)
 
-[node name="RoomChoice" type="Control" unique_id=1402156080]
+[node name="Choice" type="Control" unique_id=1402156080]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_ohi1q")
@@ -17,12 +16,15 @@ script = ExtResource("1_ohi1q")
 [node name="TextureRect" type="TextureRect" parent="." unique_id=207736041]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
-offset_right = 32.0
-offset_bottom = 32.0
+offset_left = -64.0
+offset_top = -64.0
+scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_7aovw")
 expand_mode = 1
 
 [node name="Button" type="Button" parent="." unique_id=95930896]
 layout_mode = 0
+offset_left = -64.0
+offset_top = -64.0
 offset_right = 64.0
 offset_bottom = 64.0
