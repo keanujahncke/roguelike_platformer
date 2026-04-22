@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bvhwimkd3lngn"]
+
+[ext_resource type="Script" uid="uid://c2yb6yqcxa6l" path="res://scripts/exit.gd" id="1_uyw7u"]
+[ext_resource type="Texture2D" uid="uid://bllmfuunc5f7l" path="res://assets/exitdoor.png" id="2_l5n14"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5vuv"]
+size = Vector2(18, 28.5)
+
+[node name="Exit" type="Area2D" unique_id=2118638246 groups=["exits"]]
+scale = Vector2(2, 2)
+collision_layer = 0
+script = ExtResource("1_uyw7u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1504108777]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_v5vuv")
+
+[node name="Area2D" type="Sprite2D" parent="." unique_id=2036443528]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_l5n14")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

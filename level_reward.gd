@@ -27,11 +27,15 @@ func _ready():
 	next_button.pressed.connect(_on_next_pressed)
 
 func open_ui(db: RoomDatabase):
+	if visible: # Safety gate
+		return
+		
+	print("UI OPEN CALLED")
 	stored_db = db
 	selected_id = ""
 
 	show()
-	get_tree().paused = true
+	get_tree().paused = true # Pauses the physics engine
 
 	reward_section.show()
 	level_section.hide()
@@ -94,7 +98,6 @@ func _setup_levels():
 func _on_level_clicked(res: RoomData):
 	room_selected.emit(res)
 	hide()
-	get_tree().paused = false
 
 func _clear_container(c):
 	for child in c.get_children():

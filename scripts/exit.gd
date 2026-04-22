@@ -1,10 +1,7 @@
 extends Area2D
 
-signal player_entered
-
-func _on_body_entered(body):
-	if body.is_in_group("player"):
-		call_deferred("_emit_player_entered")
-
-func _emit_player_entered():
-	player_entered.emit()
+# We don't need a custom signal here if we use the built-in one
+func _ready():
+	add_to_group("exits")
+	monitoring = true
+	monitorable = true
