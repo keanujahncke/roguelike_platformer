@@ -18,7 +18,7 @@ var abilities: Array = []
 # JUMP
 @export var jump_velocity := -300.0
 @export var gravity := 1000.0
-@export var fall_gravity := 1500.0
+@export var fall_gravity := 1000.0
 @export var jump_peak_gravity := 600.0
 
 # FORGIVENESS

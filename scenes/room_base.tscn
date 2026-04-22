@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bvf4yujudul0b" path="res://assets/Dungeon Tile Set.png" id="3_32tnm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5vuv"]
-size = Vector2(18, 29)
+size = Vector2(18, 28.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uj0n8"]
 texture = ExtResource("3_32tnm")
@@ -335,8 +335,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_88gup")
 sources/1 = SubResource("TileSetAtlasSource_32tnm")
 
-[sub_resource type="TileMapPattern" id="TileMapPattern_32tnm"]
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_040nk"]
 tile_data = PackedInt32Array(0, 720896, 7, 65536, 786432, 5, 131072, 786432, 2, 196608, 786432, 3, 262144, 786432, 1, 327680, 851968, 3, 1, 786432, 4, 65537, 655360, 6, 131073, 851968, 3, 196609, 786432, 6, 262145, 786432, 4, 327681, 786432, 1, 2, 786432, 6, 65538, 851968, 3, 131074, 655360, 6, 196610, 720896, 5, 262146, 720896, 7, 327682, 786432, 7, 3, 786432, 1, 65539, 786432, 1, 131075, 786432, 6, 196611, 851968, 1, 262147, 786432, 4, 327683, 786432, 5, 4, 786432, 4, 65540, 786432, 7, 131076, 851968, 1, 196612, 851968, 3, 262148, 786432, 6, 327684, 655360, 6, 5, 720896, 7, 65541, 786432, 5, 131077, 786432, 2, 196613, 786432, 3, 262149, 786432, 1, 327685, 851968, 3)
 
@@ -484,10 +482,9 @@ texture = ExtResource("3_32tnm")
 
 [sub_resource type="TileSet" id="TileSet_4lwt4"]
 sources/0 = SubResource("TileSetAtlasSource_mwcw8")
-pattern_0 = SubResource("TileMapPattern_32tnm")
-pattern_1 = SubResource("TileMapPattern_040nk")
-pattern_2 = SubResource("TileMapPattern_uj0n8")
-pattern_3 = SubResource("TileMapPattern_mwcw8")
+pattern_0 = SubResource("TileMapPattern_040nk")
+pattern_1 = SubResource("TileMapPattern_uj0n8")
+pattern_2 = SubResource("TileMapPattern_mwcw8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4lwt4"]
 texture = ExtResource("3_32tnm")
@@ -668,3 +665,5 @@ tile_set = SubResource("TileSet_rcwiv")
 [node name="DecorationLayerFront" type="TileMapLayer" parent="." unique_id=48038365]
 z_index = -3
 tile_set = SubResource("TileSet_rcwiv")
+
+[connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]

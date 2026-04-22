@@ -8,3 +8,7 @@ func _on_body_entered(body):
 
 func _emit_player_entered():
 	player_entered.emit()
+
+
+func _on_exit_2_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

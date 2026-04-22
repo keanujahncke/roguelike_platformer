@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://drmvqxwweftdh"]
+
+[ext_resource type="PackedScene" uid="uid://dqke7uhukavk0" path="res://rooms/room_scenes/double_jump_room_01.tscn" id="1_202b5"]
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_dj1gg"]
+
+[resource]
+script = ExtResource("1_dj1gg")
+scene = ExtResource("1_202b5")
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"

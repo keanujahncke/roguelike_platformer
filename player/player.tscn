@@ -1041,9 +1041,7 @@ shape = SubResource("RectangleShape2D_i3pqv")
 position = Vector2(-3, -2)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_g5jhy")
-animation = &"doublejump"
-frame = 14
-frame_progress = 0.73106396
+animation = &"fall"
 speed_scale = 2.0
 
 [node name="Abilities" type="Node" parent="." unique_id=581730385]
