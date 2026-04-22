@@ -27,7 +27,7 @@ func ability_process(player, _delta):
 		player.play_anim("double_jump")
 
 		# small hover before launch
-		player.velocity.y = 0
+		player.velocity.y = 0.2
 
 		await player.get_tree().create_timer(0.08).timeout
 
