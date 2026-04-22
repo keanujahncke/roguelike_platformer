@@ -11,14 +11,14 @@ var is_dead := false
 var abilities: Array = []
 
 # MOVEMENT
-@export var move_speed := 220.0
+@export var move_speed := 175.0
 @export var acceleration := 1400.0
 @export var friction := 1800.0
 
 # JUMP
 @export var jump_velocity := -300.0
-@export var gravity := 1200.0
-@export var fall_gravity := 2000.0
+@export var gravity := 1000.0
+@export var fall_gravity := 1500.0
 @export var jump_peak_gravity := 600.0
 
 # FORGIVENESS
