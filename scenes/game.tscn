@@ -24,7 +24,7 @@ room_database = ExtResource("3_wo7d7")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1763733998]
 offset = Vector2(0, -35)
-zoom = Vector2(2, 2)
+zoom = Vector2(1.75, 1.75)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=228265798]
 

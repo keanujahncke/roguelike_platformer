@@ -241,6 +241,13 @@ func reset_stats():
 	velocity = Vector2.ZERO
 	set_physics_process(true)
 	anim.play("idle")
+	
+	if abilities_root:
+		for ability in abilities_root.get_children():
+			if "unlocked" in ability:
+				ability.unlocked = false
+				
+	print("STATS RESET: Player revived and abilities locked.")
 
 func unlock_ability(name: String):
 	match name:
