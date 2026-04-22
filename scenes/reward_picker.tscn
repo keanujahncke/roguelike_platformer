@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cpeumwgmatlyh"]
 
-[ext_resource type="Script" uid="uid://3nrrlgd6j4lf" path="res://scenes/reward_picker.gd" id="1_oecmx"]
+[ext_resource type="Script" uid="uid://3nrrlgd6j4lf" path="res://scripts/reward_picker.gd" id="1_oecmx"]
 [ext_resource type="PackedScene" uid="uid://codpjsbh30r3x" path="res://scenes/upgrade_card.tscn" id="2_h31ri"]
 [ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="3_34xxx"]
 [ext_resource type="Resource" uid="uid://d0gjfwtt475qm" path="res://player/abilities/ability_data/double_jump_data.tres" id="4_34xxx"]

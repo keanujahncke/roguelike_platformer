@@ -13,7 +13,6 @@ config_version=5
 config/name="roguelike_platformer"
 run/main_scene="uid://n2ohq57w3ju"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
 
 [display]
 

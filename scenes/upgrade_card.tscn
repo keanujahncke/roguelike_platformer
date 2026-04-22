@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://codpjsbh30r3x"]
 
 [ext_resource type="Texture2D" uid="uid://bk14llci83chc" path="res://assets/upgradecardjump.png" id="1_62kwj"]
-[ext_resource type="Script" uid="uid://bsjfcqigbavl6" path="res://scenes/upgrade_card.gd" id="1_ew4bf"]
+[ext_resource type="Script" uid="uid://bsjfcqigbavl6" path="res://scripts/upgrade_card.gd" id="1_ew4bf"]
 
 [node name="UpgradeCard" type="Button" unique_id=553604109]
 anchors_preset = -1

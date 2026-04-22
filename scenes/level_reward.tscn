@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bwm4ym3xm4kcc"]
 
-[ext_resource type="Script" uid="uid://cns5uk4ucmk3l" path="res://level_reward.gd" id="1_g3irf"]
+[ext_resource type="Script" uid="uid://cns5uk4ucmk3l" path="res://scripts/level_reward.gd" id="1_g3irf"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="2_gibuo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_g3irf"]
