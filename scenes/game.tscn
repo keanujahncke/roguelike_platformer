@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="9_vtaks"]
 [ext_resource type="Resource" uid="uid://bor87w5jkm81m" path="res://player/abilities/ability_data/dash_data.tres" id="10_dinhu"]
 [ext_resource type="Resource" uid="uid://d0gjfwtt475qm" path="res://player/abilities/ability_data/double_jump_data.tres" id="10_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://cfremxn7gbkoc" path="res://pause_menu/pause_menu.tscn" id="12_dinhu"]
 [ext_resource type="Resource" uid="uid://pgw54aoe863w" path="res://player/abilities/ability_data/wall_jump_data.tres" id="12_kvuet"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p57ef"]
@@ -87,6 +88,8 @@ text = "Restart"
 [node name="LevelReward" parent="CanvasLayer" unique_id=2064351492 instance=ExtResource("8_gee14")]
 card_template = ExtResource("5_gv0uq")
 available_abilities = Array[ExtResource("9_vtaks")]([ExtResource("10_dinhu"), ExtResource("10_kvpfn"), ExtResource("12_kvuet")])
+
+[node name="PauseMenu" parent="." unique_id=926336203 instance=ExtResource("12_dinhu")]
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="pressed" from="CanvasLayer/GameOver/HBoxContainer/Button" to="." method="_on_button_pressed"]

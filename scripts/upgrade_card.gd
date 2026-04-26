@@ -10,4 +10,6 @@ func setup(data: AbilityData):
 	texture_display.texture = data.card_art
 
 func _on_pressed():
+	messages.save_requested.emit()
 	selected.emit(ability_id)
+	

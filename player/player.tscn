@@ -1062,11 +1062,9 @@ metadata/_custom_type_script = "uid://crnhhtk5fexa6"
 
 [node name="DoubleJumpAbility" type="Node" parent="Abilities" unique_id=685511709]
 script = ExtResource("12_ebec5")
-metadata/_custom_type_script = "uid://3xcx8y8iiojw"
 
 [node name="WallJumpAbility" type="Node" parent="Abilities" unique_id=731123515]
 script = ExtResource("10_d2wvv")
-metadata/_custom_type_script = "uid://6i5q48eawy5b"
 
 [node name="GlideAbility" type="Node" parent="Abilities" unique_id=1756042482]
 script = ExtResource("15_c35mf")

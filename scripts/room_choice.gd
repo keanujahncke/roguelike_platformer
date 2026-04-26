@@ -20,4 +20,5 @@ func setup(incoming_data):
 
 func _pressed():
 	# Emit the whole resource back to the UI manager
+	messages.save_requested.emit()
 	selected.emit(data)
