@@ -53,6 +53,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Load Game"
 
+[node name="QuitGameButton" type="Button" parent="Control/MainMenu" unique_id=447272607]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
 [node name="NewGameMenu" type="VBoxContainer" parent="Control" unique_id=641456959]
 unique_name_in_owner = true
 visible = false

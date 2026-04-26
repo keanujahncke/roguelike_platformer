@@ -4,7 +4,6 @@ extends CanvasLayer
 
 @onready var resume_game_button = %ResumeGameButton
 @onready var main_menu_game_button = %MainMenuGameButton
-@onready var quit_game_button = %QuitGameButton
 
 func _ready() -> void:
 	pause_menu.hide()
@@ -12,7 +11,6 @@ func _ready() -> void:
 	
 	resume_game_button.pressed.connect(_on_resume_pressed)
 	main_menu_game_button.pressed.connect(_on_main_menu_pressed)
-	quit_game_button.pressed.connect(_on_quit_pressed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"): # esc
@@ -37,7 +35,3 @@ func _on_main_menu_pressed() -> void:
 	save_manager.save_game()
 	get_tree().paused = false 
 	get_tree().change_scene_to_file("res://title_screen/title_screen.tscn")
-
-func _on_quit_pressed() -> void:
-	save_manager.save_game()
-	get_tree().quit()

@@ -6,6 +6,7 @@ extends CanvasLayer
 
 @onready var new_game_button = %NewGameButton
 @onready var load_game_button = %LoadGameButton
+@onready var quit_game_button: Button = %QuitGameButton
 
 @onready var new_slot_01 = %NewSlot01
 @onready var new_slot_02 = %NewSlot02
@@ -18,6 +19,8 @@ extends CanvasLayer
 func _ready() -> void:
 	new_game_button.pressed.connect(show_new_game_menu)
 	load_game_button.pressed.connect(show_load_game_menu)
+	quit_game_button.pressed.connect(_on_quit_pressed)
+
 	
 	new_slot_01.pressed.connect(_on_new_game_pressed.bind(0))
 	new_slot_02.pressed.connect(_on_new_game_pressed.bind(1))
@@ -66,6 +69,11 @@ func _on_new_game_pressed(slot: int) -> void:
 func _on_load_game_pressed(slot: int) -> void:
 	save_manager.current_slot = slot
 	start_game()
+	
+func _on_quit_pressed() -> void:
+	save_manager.save_game()
+	get_tree().quit()
 
 func start_game() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	
