@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cuqub7rmdc4mr"
+path="res://.godot/imported/Jump24 (1).wav-eff5002244d7c7ccb3a3e3441690ffca.sample"
+
+[deps]
+
+source_file="res://assets/audio/Jump24 (1).wav"
+dest_files=["res://.godot/imported/Jump24 (1).wav-eff5002244d7c7ccb3a3e3441690ffca.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
