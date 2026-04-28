@@ -7,6 +7,9 @@ var is_dead := false
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var abilities_root = $Abilities
+@onready var death_sfx: AudioStreamPlayer2D = $DeathSFX
+@onready var revive_sfx: AudioStreamPlayer2D = $ReviveSFX
+@onready var run_sfx: AudioStreamPlayer2D = $RunSFX
 
 var abilities: Array = []
 
@@ -39,6 +42,12 @@ var is_doing_double_jump := false
 
 @export var max_health := 5
 var health := 5
+
+var run_timer := 0.0
+@export var step_interval := 0.43
+
+var run_start_delay_timer := 0.0
+@export var run_start_delay := 0.175
 
 
 
@@ -112,7 +121,29 @@ func _physics_process(delta):
 	check_hazards()
 
 	if is_dead:
+		if run_sfx.playing:
+			run_sfx.stop()
 		return
+	
+	var is_running_for_sfx = abs(velocity.x) > 1.0 and input_axis != 0.0 and is_on_floor()
+	
+	if is_running_for_sfx:
+		# count up how long we've been running
+		run_start_delay_timer += delta
+		
+		# only start foosteps after delay
+		if run_start_delay_timer >= run_start_delay:
+			run_timer -= delta
+			if run_timer <= 0.0:
+				run_sfx.pitch_scale = randf_range(0.9, 1.05)
+				run_sfx.play()
+				run_timer = step_interval
+	else:
+		# reset everything when not running
+		run_start_delay_timer = 0.0
+		run_timer = 0.0
+		if run_sfx.playing:
+			run_sfx.stop()
 
 	anim.flip_h = facing < 0
 
@@ -236,6 +267,7 @@ func take_damage(amount: int):
 	is_dead = true
 	velocity = Vector2.ZERO
 
+	death_sfx.play() #
 	anim.play("death")
 	await anim.animation_finished
 
@@ -247,6 +279,7 @@ func take_damage(amount: int):
 	global_position = spawn.global_position
 	velocity = Vector2.ZERO
 
+	revive_sfx.play() #
 	anim.play("revive")
 	await anim.animation_finished
 
