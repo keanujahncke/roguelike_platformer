@@ -111,6 +111,9 @@ func _physics_process(delta):
 
 	check_hazards()
 
+	if is_dead:
+		return
+
 	anim.flip_h = facing < 0
 
 	update_animation(input_axis, delta)
@@ -224,16 +227,31 @@ func check_hazards():
 			return
 			
 func take_damage(amount: int):
+	if is_dead:
+		return
+
 	health -= amount
 	print("Hearts left: ", health)
 
+	is_dead = true
+	velocity = Vector2.ZERO
+
+	anim.play("death")
+	await anim.animation_finished
+
 	if health <= 0:
-		is_dead = true
-		died.emit() 
-	else:
-		var spawn = current_room.get_node("Spawn")
-		global_position = spawn.global_position
-		velocity = Vector2.ZERO
+		died.emit()
+		return
+
+	var spawn = current_room.get_node("Spawn")
+	global_position = spawn.global_position
+	velocity = Vector2.ZERO
+
+	anim.play("revive")
+	await anim.animation_finished
+
+	is_dead = false
+	anim.play("idle")
 
 func reset_stats():
 	is_dead = false
