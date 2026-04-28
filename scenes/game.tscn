@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://d0gjfwtt475qm" path="res://player/abilities/ability_data/double_jump_data.tres" id="10_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://cfremxn7gbkoc" path="res://pause_menu/pause_menu.tscn" id="12_dinhu"]
 [ext_resource type="Resource" uid="uid://pgw54aoe863w" path="res://player/abilities/ability_data/wall_jump_data.tres" id="12_kvuet"]
+[ext_resource type="AudioStream" uid="uid://dxkdlsc1hu2tm" path="res://assets/audio/dungeontrack.wav" id="13_kvuet"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p57ef"]
 font_size = 100
@@ -90,6 +91,11 @@ card_template = ExtResource("5_gv0uq")
 available_abilities = Array[ExtResource("9_vtaks")]([ExtResource("10_dinhu"), ExtResource("10_kvpfn"), ExtResource("12_kvuet")])
 
 [node name="PauseMenu" parent="." unique_id=926336203 instance=ExtResource("12_dinhu")]
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1400540542]
+stream = ExtResource("13_kvuet")
+volume_db = -18.064
+autoplay = true
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="pressed" from="CanvasLayer/GameOver/HBoxContainer/Button" to="." method="_on_button_pressed"]
