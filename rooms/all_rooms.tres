@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://crbf0rwihbllo" path="res://rooms/room_data/hybrid_room_01.tres" id="2_5pux4"]
 [ext_resource type="Resource" uid="uid://drmvqxwweftdh" path="res://rooms/room_data/double_jump_room_01.tres" id="2_mxgu1"]
 [ext_resource type="Script" uid="uid://c7tyxjnhcnlh0" path="res://scripts/room_database.gd" id="2_yqhpg"]
-[ext_resource type="Resource" uid="uid://bfl6ivjbvqx3n" path="res://rooms/room_data/double_jump_room_02.tres" id="6_5pux4"]
+[ext_resource type="Resource" path="res://rooms/room_data/double_jump_room_02.tres" id="6_5pux4"]
 [ext_resource type="Resource" uid="uid://oggv7c8r1key" path="res://rooms/room_data/platforms_room_01.tres" id="7_c65sq"]
 
 [resource]

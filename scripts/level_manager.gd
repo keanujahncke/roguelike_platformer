@@ -15,19 +15,25 @@ var exit_used := false
 @onready var heartsContainer = $CanvasLayer2/health_bar
 
 func _ready():
+	apply_starting_upgrades()
+	save_data.clear_selected_starting_abilities()
 	game_over.hide()
 	level_rewards_ui.hide()
-	heartsContainer.setMaxHearts(5)
+	heartsContainer.setMaxHearts(player.max_health)
 
 	# UI connections
 	if not level_rewards_ui.room_selected.is_connected(_on_room_selected):
 		level_rewards_ui.room_selected.connect(_on_room_selected)
 	if not level_rewards_ui.ability_selected.is_connected(_on_ability_reward_selected):
 		level_rewards_ui.ability_selected.connect(_on_ability_reward_selected)
-
+	
+	player.health_changed.connect(_on_player_health_changed)
 	player.died.connect(_on_player_died)
 	load_room(starting_room)
 
+func apply_starting_upgrades():
+	for id in save_data.get_selected_starting_abilities():
+		player.unlock_ability(id)
 
 # ABILITY PICKED -> actually unlock it
 func _on_ability_reward_selected(id: String):
@@ -96,6 +102,9 @@ func respawn_player(player_node):
 	player_node.is_dead = false
 
 
+func _on_player_health_changed(new_health: int):
+	heartsContainer.updateHealth(new_health)
+
 # GAME OVER
 func _on_player_died() -> void:
 	game_over.show()
@@ -105,6 +114,6 @@ func _on_player_died() -> void:
 func restart_game():
 	game_over.hide()
 	player.reset_stats()
-	load_room(starting_room)
+	get_tree().change_scene_to_file("res://title_screen/title_screen.tscn")
 	
 	

@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cfremxn7gbkoc" path="res://pause_menu/pause_menu.tscn" id="12_dinhu"]
 [ext_resource type="Resource" uid="uid://pgw54aoe863w" path="res://player/abilities/ability_data/wall_jump_data.tres" id="12_kvuet"]
 [ext_resource type="AudioStream" uid="uid://dxkdlsc1hu2tm" path="res://assets/audio/dungeontrack.wav" id="13_kvuet"]
-[ext_resource type="PackedScene" uid="uid://bq62es6xdgoei" path="res://scenes/health_bar.tscn" id="14_trtic"]
+[ext_resource type="PackedScene" path="res://scenes/health_bar.tscn" id="14_trtic"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p57ef"]
 font_size = 100
@@ -89,7 +89,7 @@ text = "Restart"
 
 [node name="LevelReward" parent="CanvasLayer" unique_id=2064351492 instance=ExtResource("8_gee14")]
 card_template = ExtResource("5_gv0uq")
-available_abilities = Array[ExtResource("9_vtaks")]([ExtResource("10_dinhu"), ExtResource("10_kvpfn"), ExtResource("12_kvuet")])
+available_abilities = Array[ExtResource("9_vtaks")]([ExtResource("10_dinhu"), ExtResource("10_kvpfn"), ExtResource("12_kvuet"), null])
 
 [node name="PauseMenu" parent="." unique_id=926336203 instance=ExtResource("12_dinhu")]
 

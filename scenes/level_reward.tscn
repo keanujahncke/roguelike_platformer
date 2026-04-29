@@ -37,6 +37,13 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 40
 
+[node name="Energy" type="Label" parent="CenterContainer/VBoxContainer/RewardSection" unique_id=1881292008]
+layout_mode = 2
+text = "+1  Energy
+"
+label_settings = SubResource("LabelSettings_g3irf")
+horizontal_alignment = 1
+
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/RewardSection" unique_id=514285052]
 layout_mode = 2
 text = "CHOOSE AN UPGRADE

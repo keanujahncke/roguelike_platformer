@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 
 messages="*uid://nqrns0pfeibg"
 save_manager="*uid://1ldb8x86q4su"
+save_data="*uid://qx0ek6pciyr8"
 
 [display]
 

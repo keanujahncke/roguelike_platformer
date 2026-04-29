@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal died
+signal health_changed(new_health)
 
 var current_room: Node2D
 var is_dead := false
@@ -44,7 +45,7 @@ var is_doing_double_jump := false
 @export var stop_min_run_time := 0.2
 
 @export var max_health := 5
-var health := 5
+var health : int = 5
 
 var run_timer := 0.0
 @export var step_interval := 0.43
@@ -287,7 +288,9 @@ func take_damage(amount: int):
 		return
 
 	health -= amount
+	health = max(0, health)
 	print("Hearts left: ", health)
+	health_changed.emit(health)
 
 	is_dead = true
 	velocity = Vector2.ZERO
