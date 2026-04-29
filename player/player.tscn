@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cjeqh1n74156h" path="res://assets/Spritesheets/run.png" id="6_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://bcg8v0svayo21" path="res://assets/Spritesheets/stop.png" id="7_d2wvv"]
 [ext_resource type="Script" uid="uid://bgt4getng8cht" path="res://player/abilities/ability_scripts/DashAbility.gd" id="9_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://cipqslnhpgqp2" path="res://assets/Spritesheets/wallslide.png" id="10_bjvpn"]
 [ext_resource type="Script" uid="uid://ljvup0yps8es" path="res://player/abilities/ability_scripts/WallJumpAbility.gd" id="10_d2wvv"]
 [ext_resource type="Script" uid="uid://caelmmfkwoula" path="res://player/abilities/ability_scripts/DirectionalDashAbility.gd" id="11_tqiix"]
 [ext_resource type="Script" uid="uid://crnhhtk5fexa6" path="res://player/abilities/ability_scripts/PhaseDashAbility.gd" id="12_e7oew"]
@@ -577,6 +578,34 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("7_d2wvv")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7qer"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4c7l"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knn7v"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pqkx"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw77l"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rptt4"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7pn3"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(192, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_g5jhy"]
 animations = [{
 "frames": [{
@@ -1044,6 +1073,32 @@ animations = [{
 "loop": true,
 "name": &"stop",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7qer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4c7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knn7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pqkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw77l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rptt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7pn3")
+}],
+"loop": true,
+"name": &"wall_slide",
+"speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1122822699 groups=["player"]]
@@ -1059,7 +1114,8 @@ shape = SubResource("RectangleShape2D_i3pqv")
 position = Vector2(-3, -2)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_g5jhy")
-animation = &"death"
+animation = &"wall_slide"
+frame_progress = 0.7213904
 speed_scale = 2.0
 
 [node name="Abilities" type="Node" parent="." unique_id=581730385]
