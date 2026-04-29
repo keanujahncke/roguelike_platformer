@@ -98,9 +98,7 @@ stream = ExtResource("13_kvuet")
 volume_db = -18.064
 autoplay = true
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1563169944]
-
-[node name="health_bar" parent="CanvasLayer2" unique_id=1797831083 instance=ExtResource("14_trtic")]
+[node name="HealthBar" parent="." unique_id=1217746307 instance=ExtResource("14_trtic")]
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="pressed" from="CanvasLayer/GameOver/HBoxContainer/Button" to="." method="_on_button_pressed"]

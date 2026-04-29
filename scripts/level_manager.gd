@@ -12,10 +12,12 @@ var current_exit : Area2D
 
 var exit_used := false
 
+@onready var heartsContainer = $CanvasLayer2/health_bar
 
 func _ready():
 	game_over.hide()
 	level_rewards_ui.hide()
+	heartsContainer.setMaxHearts(5)
 
 	# UI connections
 	if not level_rewards_ui.room_selected.is_connected(_on_room_selected):
@@ -104,3 +106,5 @@ func restart_game():
 	game_over.hide()
 	player.reset_stats()
 	load_room(starting_room)
+	
+	

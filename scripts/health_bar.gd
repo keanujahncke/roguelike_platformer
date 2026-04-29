@@ -1,6 +1,6 @@
-extends CanvasLayer
+extends HBoxContainer
 
-@onready var HealthBar = preload("res://health_bar.tscn")
+@onready var HealthBar = preload("res://scenes/health_bar.tscn")
 
 func setMaxHearts(max: int):
 	for i in range(max):
