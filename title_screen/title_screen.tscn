@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://cja4ghbssps7f"]
 
 [ext_resource type="Script" uid="uid://bkr0a26h6xq1y" path="res://title_screen/title_screen.gd" id="1_g2mvh"]
+[ext_resource type="Texture2D" uid="uid://cyikb2fmdx6gb" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/3 Item Holder/1.png" id="2_2dq6q"]
 [ext_resource type="Script" uid="uid://cfsq4qfwmg04g" path="res://title_screen/loadout_menu.gd" id="2_dxpbd"]
+[ext_resource type="Texture2D" uid="uid://732bmuhonbs4" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/4 Notification/2.png" id="3_vbjqi"]
+[ext_resource type="Texture2D" uid="uid://cx8t6xy0aaolm" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/6 Player HUD/1.png" id="5_0m3ch"]
 
 [node name="TitleScreen" type="CanvasLayer" unique_id=926336203]
 layer = 5
@@ -22,74 +25,118 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.0011889, 1)
 color = Color(0.2159017, 0.21590173, 0.2159017, 1)
 
 [node name="MainMenu" type="VBoxContainer" parent="Control" unique_id=1606639054]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -124.0
-offset_top = -25.0
-offset_right = 124.0
-offset_bottom = 25.0
+offset_left = -300.0
+offset_top = -163.5
+offset_right = 300.0
+offset_bottom = 163.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Control/MainMenu" unique_id=416120490]
 layout_mode = 2
-text = "(Game Title)"
+theme_override_font_sizes/font_size = 60
+text = "Game Name"
 horizontal_alignment = 1
 
 [node name="NewGameButton" type="Button" parent="Control/MainMenu" unique_id=1432040080]
 unique_name_in_owner = true
 layout_mode = 2
-text = "New Game"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_hover_color = Color(5.390644e-06, 0.6086596, 0.7662297, 1)
+theme_override_font_sizes/font_size = 25
+text = "Start Run!"
+icon = ExtResource("2_2dq6q")
+flat = true
+icon_alignment = 1
 
 [node name="QuitGameButton" type="Button" parent="Control/MainMenu" unique_id=447272607]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_font_sizes/font_size = 25
 text = "Quit"
+icon = ExtResource("2_2dq6q")
+flat = true
+icon_alignment = 1
 
 [node name="NewGameMenu" type="VBoxContainer" parent="Control" unique_id=641456959]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -124.0
-offset_top = -25.0
-offset_right = 124.0
-offset_bottom = 25.0
+anchors_preset = -1
+anchor_left = 0.351
+anchor_top = 0.238
+anchor_right = 0.351
+anchor_bottom = 0.238
+offset_left = 47.64798
+offset_top = 144.776
+offset_right = 295.64798
+offset_bottom = 194.776
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = -25
 
 [node name="Label" type="Label" parent="Control/NewGameMenu" unique_id=104282457]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "Select a new slot"
 horizontal_alignment = 1
 
 [node name="NewSlot00" type="Button" parent="Control/NewGameMenu" unique_id=1696049807]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_font_sizes/font_size = 20
 text = "New Slot 00"
+icon = ExtResource("3_vbjqi")
+flat = true
+icon_alignment = 1
 
-[node name="NewSlot01" type="Button" parent="Control/NewGameMenu" unique_id=1687322591]
+[node name="NewSlot01" type="Button" parent="Control/NewGameMenu" unique_id=792314523]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_font_sizes/font_size = 20
 text = "New Slot 01"
+icon = ExtResource("3_vbjqi")
+flat = true
+icon_alignment = 1
 
-[node name="NewSlot02" type="Button" parent="Control/NewGameMenu" unique_id=2130832245]
+[node name="NewSlot02" type="Button" parent="Control/NewGameMenu" unique_id=1019744891]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_font_sizes/font_size = 20
 text = "New Slot 02"
+icon = ExtResource("3_vbjqi")
+flat = true
+icon_alignment = 1
 
 [node name="LoadoutMenu" type="VBoxContainer" parent="Control" unique_id=1829919683]
 unique_name_in_owner = true
@@ -100,16 +147,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -124.0
-offset_top = -25.0
-offset_right = 124.0
-offset_bottom = 25.0
+offset_left = -124.00012
+offset_top = -95.00008
+offset_right = 124.00012
+offset_bottom = 95.00008
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_dxpbd")
 
+[node name="Sprite2D" type="Sprite2D" parent="Control/LoadoutMenu" unique_id=1397862333]
+position = Vector2(128, 71.5)
+scale = Vector2(1.7494334, 2.2581248)
+texture = ExtResource("5_0m3ch")
+
 [node name="Label" type="Label" parent="Control/LoadoutMenu" unique_id=986019543]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.5882353, 0, 0, 1)
 text = "Select Starting Upgrades"
 horizontal_alignment = 1
 
@@ -124,26 +177,47 @@ theme_override_constants/separation = -1
 
 [node name="Label" type="Label" parent="Control/LoadoutMenu/ColumnLabels/Upgrades" unique_id=449586071]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.60784316, 0.7647059, 1)
 text = "Upgrades"
 horizontal_alignment = 1
 
 [node name="DoubleJumpBox" type="CheckBox" parent="Control/LoadoutMenu/ColumnLabels/Upgrades" unique_id=1239980334]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5882353, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5891461, 1.8410012e-06, 5.2943824e-07, 1)
 text = "Double Jump"
 alignment = 1
 
 [node name="WallJumpBox" type="CheckBox" parent="Control/LoadoutMenu/ColumnLabels/Upgrades" unique_id=1975035266]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5882353, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5882353, 0, 0, 1)
 text = "Wall Jump"
 alignment = 1
 
 [node name="DashBox" type="CheckBox" parent="Control/LoadoutMenu/ColumnLabels/Upgrades" unique_id=745658387]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5882353, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5882353, 0, 0, 1)
 text = "Dash"
 alignment = 1
 
 [node name="GlideBox" type="CheckBox" parent="Control/LoadoutMenu/ColumnLabels/Upgrades" unique_id=2013111161]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.5882353, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5882353, 0, 0, 1)
 text = "Glide"
 alignment = 1
 
@@ -153,32 +227,52 @@ theme_override_constants/separation = 7
 
 [node name="Label" type="Label" parent="Control/LoadoutMenu/ColumnLabels/Costs" unique_id=418256545]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.8509804, 0.68235296, 0.11764706, 1)
 text = "Cost"
 
 [node name="DoubleJumpCost" type="Label" parent="Control/LoadoutMenu/ColumnLabels/Costs" unique_id=1084832560]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "3"
 horizontal_alignment = 1
 
 [node name="WallJumpCost" type="Label" parent="Control/LoadoutMenu/ColumnLabels/Costs" unique_id=1563920898]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "3"
 horizontal_alignment = 1
 
 [node name="DashCost" type="Label" parent="Control/LoadoutMenu/ColumnLabels/Costs" unique_id=433273870]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "3"
 horizontal_alignment = 1
 
 [node name="GlideCost" type="Label" parent="Control/LoadoutMenu/ColumnLabels/Costs" unique_id=2094845252]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "3"
 horizontal_alignment = 1
 
 [node name="StartRun" type="Button" parent="Control/LoadoutMenu" unique_id=2070610989]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
 text = "Start Run"
+flat = true
+icon_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/LoadoutMenu" unique_id=1511495546]
+layout_direction = 4
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.5528551, 0.00024171264, 0.55958754, 1)
+text = "Press ESC to exit
+"
 
 [connection signal="toggled" from="Control/LoadoutMenu/ColumnLabels/Upgrades/DoubleJumpBox" to="Control/LoadoutMenu" method="_on_box_toggled"]
 [connection signal="toggled" from="Control/LoadoutMenu/ColumnLabels/Upgrades/WallJumpBox" to="Control/LoadoutMenu" method="_on_box_toggled"]

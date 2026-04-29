@@ -14,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://pgw54aoe863w" path="res://player/abilities/ability_data/glide_data.tres" id="12_ir15t"]
 [ext_resource type="Resource" uid="uid://c012xdw7v11y0" path="res://player/abilities/ability_data/wall_jump_data.tres" id="12_kvuet"]
 [ext_resource type="AudioStream" uid="uid://dxkdlsc1hu2tm" path="res://assets/audio/dungeontrack.wav" id="13_kvuet"]
-[ext_resource type="PackedScene" path="res://scenes/health_bar.tscn" id="14_trtic"]
+[ext_resource type="PackedScene" uid="uid://bq62es6xdgoei" path="res://scenes/heart_container.tscn" id="16_ca42v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p57ef"]
 font_size = 100
@@ -99,9 +99,9 @@ stream = ExtResource("13_kvuet")
 volume_db = -18.064
 autoplay = true
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1563169944]
+[node name="HeartUI" type="CanvasLayer" parent="." unique_id=1563169944]
 
-[node name="health_bar" parent="CanvasLayer2" unique_id=1797831083 instance=ExtResource("14_trtic")]
+[node name="heartContainer" parent="HeartUI" unique_id=1797831083 instance=ExtResource("16_ca42v")]
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="pressed" from="CanvasLayer/GameOver/HBoxContainer/Button" to="." method="_on_button_pressed"]

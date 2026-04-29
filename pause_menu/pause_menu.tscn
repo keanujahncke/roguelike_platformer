@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cfremxn7gbkoc"]
 
 [ext_resource type="Script" uid="uid://l1htylol2kkd" path="res://pause_menu/pause_menu.gd" id="1_5hbt6"]
+[ext_resource type="Texture2D" uid="uid://cyikb2fmdx6gb" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/3 Item Holder/1.png" id="2_rd7dy"]
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=926336203]
 process_mode = 3
@@ -40,17 +41,28 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="PauseMenu/PauseMenuButtons" unique_id=416120490]
-layout_mode = 2
-text = "(Game Title)"
-horizontal_alignment = 1
-
 [node name="ResumeGameButton" type="Button" parent="PauseMenu/PauseMenuButtons" unique_id=1432040080]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_font_sizes/font_size = 25
 text = "Resume"
+icon = ExtResource("2_rd7dy")
+flat = true
+icon_alignment = 1
 
 [node name="MainMenuGameButton" type="Button" parent="PauseMenu/PauseMenuButtons" unique_id=1134812099]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_font_sizes/font_size = 25
 text = "Main Menu"
+icon = ExtResource("2_rd7dy")
+flat = true
+icon_alignment = 1

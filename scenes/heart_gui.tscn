@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://desqiplxjf0o7"]
 
 [ext_resource type="Texture2D" uid="uid://bleaj5icjblje" path="res://assets/GUI/All 16x16 Health Heart Sets/16x16 Health Heart Blue.png" id="1_1xhc3"]
+[ext_resource type="Script" uid="uid://da6jav5hk6bnc" path="res://scripts/heart_gui.gd" id="1_x0egl"]
 
 [node name="HeartGUI" type="Panel" unique_id=367854330]
 self_modulate = Color(1, 1, 1, 0)
-offset_right = 45.0
-offset_bottom = 40.0
+custom_minimum_size = Vector2(39, 35)
+offset_right = 39.0
+offset_bottom = 35.0
+script = ExtResource("1_x0egl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2018580645]
+position = Vector2(-6, -6)
 scale = Vector2(3, 3)
 texture = ExtResource("1_1xhc3")
 centered = false

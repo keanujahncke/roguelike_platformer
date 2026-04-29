@@ -12,7 +12,7 @@ var current_exit : Area2D
 
 var exit_used := false
 
-@onready var heartsContainer = $CanvasLayer2/health_bar
+@onready var heartContainer = $HeartUI/heartContainer
 
 func _ready():
 	run_manager.start_new_run()
@@ -20,7 +20,7 @@ func _ready():
 	save_data.clear_selected_starting_abilities()
 	game_over.hide()
 	level_rewards_ui.hide()
-	heartsContainer.setMaxHearts(player.max_health)
+	heartContainer.setMaxHearts(player.max_health)
 
 	# UI connections
 	if not level_rewards_ui.room_selected.is_connected(_on_room_selected):
@@ -104,7 +104,7 @@ func respawn_player(player_node):
 
 
 func _on_player_health_changed(new_health: int):
-	heartsContainer.updateHealth(new_health)
+	heartContainer.updateHealth(new_health)
 
 # GAME OVER
 func _on_player_died() -> void:

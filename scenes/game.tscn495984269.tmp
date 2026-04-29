@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://n2ohq57w3ju"]
+
+[ext_resource type="Script" uid="uid://ck3gm8r2dqkhv" path="res://scripts/level_manager.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://0ql3da7v7y7y" path="res://player/player.tscn" id="2_feb5d"]
+[ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_wo7d7"]
+[ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="5_gv0uq"]
+[ext_resource type="PackedScene" uid="uid://b7wwu7ep80n3i" path="res://rooms/room_scenes/starting_room.tscn" id="6_iotsf"]
+[ext_resource type="Script" uid="uid://dhdhyr4j3myj4" path="res://scripts/game_over.gd" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://bwm4ym3xm4kcc" path="res://scenes/level_reward.tscn" id="8_gee14"]
+[ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="9_vtaks"]
+[ext_resource type="Resource" uid="uid://bor87w5jkm81m" path="res://player/abilities/ability_data/dash_data.tres" id="10_dinhu"]
+[ext_resource type="Resource" uid="uid://d0gjfwtt475qm" path="res://player/abilities/ability_data/double_jump_data.tres" id="10_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://cfremxn7gbkoc" path="res://pause_menu/pause_menu.tscn" id="12_dinhu"]
+[ext_resource type="Resource" uid="uid://pgw54aoe863w" path="res://player/abilities/ability_data/glide_data.tres" id="12_ir15t"]
+[ext_resource type="Resource" uid="uid://c012xdw7v11y0" path="res://player/abilities/ability_data/wall_jump_data.tres" id="12_kvuet"]
+[ext_resource type="AudioStream" uid="uid://dxkdlsc1hu2tm" path="res://assets/audio/dungeontrack.wav" id="13_kvuet"]
+[ext_resource type="Script" uid="uid://cjs1ioxvj0i3o" path="res://scripts/heartContainer.gd" id="15_ir15t"]
+[ext_resource type="PackedScene" uid="uid://bq62es6xdgoei" path="res://scenes/heart_container.tscn" id="16_ca42v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p57ef"]
+font_size = 100
+
+[node name="Game" type="Node2D" unique_id=1310302999]
+script = ExtResource("1_e2o6t")
+starting_room = ExtResource("6_iotsf")
+room_database = ExtResource("3_wo7d7")
+
+[node name="Player" parent="." unique_id=1122822699 instance=ExtResource("2_feb5d")]
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1763733998]
+offset = Vector2(0, -35)
+zoom = Vector2(1.75, 1.75)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=228265798]
+
+[node name="GameOver" type="Control" parent="CanvasLayer" unique_id=404120307]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_u5sy4")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/GameOver" unique_id=697706828]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOver" unique_id=1277839116]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_p57ef")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GameOver" unique_id=1396976003]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 91.0
+offset_right = 50.0
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/GameOver/HBoxContainer" unique_id=168265635]
+process_mode = 3
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Restart"
+
+[node name="LevelReward" parent="CanvasLayer" unique_id=2064351492 instance=ExtResource("8_gee14")]
+card_template = ExtResource("5_gv0uq")
+available_abilities = Array[ExtResource("9_vtaks")]([ExtResource("10_dinhu"), ExtResource("10_kvpfn"), ExtResource("12_kvuet"), ExtResource("12_ir15t")])
+
+[node name="PauseMenu" parent="." unique_id=926336203 instance=ExtResource("12_dinhu")]
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1400540542]
+stream = ExtResource("13_kvuet")
+volume_db = -18.064
+autoplay = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1563169944]
+script = ExtResource("15_ir15t")
+
+[node name="heartContainer" parent="CanvasLayer2" unique_id=1797831083 instance=ExtResource("16_ca42v")]
+
+[connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="pressed" from="CanvasLayer/GameOver/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/HBoxContainer/Button" to="CanvasLayer/GameOver" method="_on_button_pressed"]
