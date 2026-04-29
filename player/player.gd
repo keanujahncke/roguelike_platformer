@@ -195,7 +195,12 @@ func update_animation(input_axis: float, delta: float):
 
 	# wall slide priority
 	if has_node("Abilities/WallJumpAbility"):
-		if $Abilities/WallJumpAbility.is_wall_sliding:
+		var wall_jump = $"Abilities/WallJumpAbility"
+		
+		if wall_jump.is_wall_sliding \
+		and is_on_wall() \
+		and not is_on_floor() \
+		and velocity.y > 0:
 			play_anim("wall_slide")
 			return
 

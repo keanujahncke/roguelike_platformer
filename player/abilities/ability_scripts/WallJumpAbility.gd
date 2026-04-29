@@ -30,10 +30,13 @@ func ability_process(player, delta):
 		last_wall_normal = player.get_wall_normal()
 
 		# Wall slide / hang
-		if player.velocity.y > 0:
+		if player.velocity.y > 0 and Input.get_axis("move_left", "move_right") != 0:
 			is_wall_sliding = true
 			player.velocity.y = min(player.velocity.y, wall_slide_speed)
+		else:
+			is_wall_sliding = false
 	else:
+		is_wall_sliding = false
 		wall_jump_grace_timer = max(wall_jump_grace_timer - delta, 0.0)
 
 	# Wall jump with grace window
