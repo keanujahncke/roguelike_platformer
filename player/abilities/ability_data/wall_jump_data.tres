@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://pgw54aoe863w"]
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://c012xdw7v11y0"]
 
-[ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="1_apyap"]
-[ext_resource type="Texture2D" uid="uid://b0ba6bu3k4rip" path="res://assets/upgrade glide.png" id="1_iyjrl"]
+[ext_resource type="Texture2D" uid="uid://c22b46ctjbriu" path="res://assets/upgrade walljump.png" id="1_6pcdq"]
+[ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="2_jm5ob"]
 
 [resource]
-script = ExtResource("1_apyap")
-id = "glide"
-card_art = ExtResource("1_iyjrl")
+script = ExtResource("2_jm5ob")
+id = "wall_jump"
+card_art = ExtResource("1_6pcdq")
 metadata/_custom_type_script = "uid://eb86v03dhajv"
