@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btonu4ekyh2jo"
-path="res://.godot/imported/hybrid_room_01.png-bea505f56641fb7988c23f06453bd0ba.ctex"
+uid="uid://xta3ggncev5d"
+path="res://.godot/imported/icon.png-b6a7fb2db36edd3d95dc42f1dc8c1c5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rooms/room_images/hybrid_room_01.png"
-dest_files=["res://.godot/imported/hybrid_room_01.png-bea505f56641fb7988c23f06453bd0ba.ctex"]
+source_file="res://assets/icon.png"
+dest_files=["res://.godot/imported/icon.png-b6a7fb2db36edd3d95dc42f1dc8c1c5d.ctex"]
 
 [params]
 
