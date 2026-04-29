@@ -609,7 +609,7 @@ region = Rect2(192, 0, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_g5jhy"]
 animations = [{
 "frames": [{
-"duration": 0.3,
+"duration": 0.15,
 "texture": SubResource("AtlasTexture_smehm")
 }, {
 "duration": 0.3,
@@ -874,7 +874,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.3,
+"duration": 0.15,
 "texture": SubResource("AtlasTexture_qk6i7")
 }, {
 "duration": 0.3,
@@ -1114,8 +1114,7 @@ shape = SubResource("RectangleShape2D_i3pqv")
 position = Vector2(-3, -2)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_g5jhy")
-animation = &"wall_slide"
-frame_progress = 0.7213904
+animation = &"death"
 speed_scale = 2.0
 
 [node name="Abilities" type="Node" parent="." unique_id=581730385]
