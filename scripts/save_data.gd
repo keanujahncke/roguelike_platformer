@@ -18,10 +18,8 @@ var data = {
 
 
 func _ready():
-	#load_save()
 	if not DirAccess.dir_exists_absolute(SAVE_FOLDER):
 		DirAccess.make_dir_recursive_absolute(SAVE_FOLDER)
-
 
 # ==================================================
 # SAVE / LOAD
@@ -51,8 +49,6 @@ func load_save() -> bool:
 		var parsed = JSON.parse_string(text)
 		
 		if typeof(parsed) == TYPE_DICTIONARY:
-			# DO NOT DO: data = parsed
-			# DO THIS INSTEAD:
 			data.clear()
 			for key in parsed:
 				data[key] = parsed[key]

@@ -8,4 +8,5 @@
 script = ExtResource("1_1vgvl")
 scene = ExtResource("2_nfu4e")
 preview = ExtResource("1_nxioc")
+required_abilities = ["double_jump"]
 metadata/_custom_type_script = "uid://6kicdo0hg3ia"

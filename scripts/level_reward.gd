@@ -13,18 +13,15 @@ signal room_selected(room_data: RoomData)
 
 @onready var reward_section = $CenterContainer/VBoxContainer/RewardSection
 @onready var reward_container = $CenterContainer/VBoxContainer/RewardSection/HBoxContainer
-# next_button is no longer needed for the flow, but you can keep the @onready if you don't want to delete the node yet
 
 @onready var level_section = $CenterContainer/VBoxContainer/LevelSection
 @onready var level_container = $CenterContainer/VBoxContainer/LevelSection/HBoxContainer
 
 var stored_db: RoomDatabase
-# selected_id is effectively local now, but keeping it as a class var is fine
 
 func _ready():
 	hide()
 	process_mode = PROCESS_MODE_ALWAYS
-	# Removed next_button connection
 
 func open_ui(db: RoomDatabase):
 	if visible: 
@@ -44,7 +41,7 @@ func _setup_abilities():
 	var pool = available_abilities.duplicate()
 	pool.shuffle()
 
-	for res in pool.slice(0, 3):
+	for res in pool.slice(0, 2):
 		var card = card_template.instantiate()
 		reward_container.add_child(card)
 		card.setup(res)
@@ -55,34 +52,56 @@ func _setup_abilities():
 
 # --- REFACTORED CLICK LOGIC ---
 func _on_ability_clicked(res: AbilityData):
-	# 1. Save the fact that we saw/unlocked it
 	save_data.unlock_seen_ability(res.id)
 	save_data.add_energy(1)
 	print("Max Energy increased! New Max: ", save_data.get_max_energy())
 	
-	# 2. Tell the Game manager to apply the ability
+	run_manager.add_ability(res.id)
 	ability_selected.emit(res.id)
-
-	# 3. Transition UI immediately
+	
 	reward_section.hide()
 	level_section.show()
-
-	# 4. Show the levels
+	
 	_setup_levels()
 
 func _setup_levels():
+	
 	_clear_container(level_container)
-	var pool = stored_db.rooms.duplicate()
-	pool.shuffle()
-
-	for res in pool.slice(0, rooms_to_show):
+	
+	var current_abilities = run_manager.get_abilities()
+	var valid_rooms: Array[RoomData] = []
+	
+	for room in stored_db.rooms:
+		if _player_can_complete_room(room, current_abilities):
+			valid_rooms.append(room)
+			
+	valid_rooms.shuffle()
+	
+	for res in valid_rooms.slice(0, rooms_to_show):
 		var card = card_template.instantiate()
 		level_container.add_child(card)
 		card.setup(res)
 		card.selected.connect(_on_level_clicked)
 
-	if level_container.get_child_count() > 0:
-		level_container.get_child(0).button.grab_focus()
+func _player_can_complete_room(room: RoomData, player_abilities: Array) -> bool:
+	if room.required_abilities.is_empty():
+		return true
+		
+	for requirement in room.required_abilities:
+		if requirement is Array:
+			var has_one_of_group = false
+			for sub_id in requirement:
+				if player_abilities.has(sub_id):
+					has_one_of_group = true
+					break
+			if not has_one_of_group:
+				return false
+		else:
+			if not player_abilities.has(requirement):
+				return false
+				
+	return true
+
 
 func _on_level_clicked(res: RoomData):
 	room_selected.emit(res)

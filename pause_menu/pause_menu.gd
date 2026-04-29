@@ -32,6 +32,5 @@ func _on_resume_pressed() -> void:
 	hide_pause_menu()
 
 func _on_main_menu_pressed() -> void:
-	save_manager.save_game()
 	get_tree().paused = false 
 	get_tree().change_scene_to_file("res://title_screen/title_screen.tscn")

@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://bflnr6wkduq13"]
 
-[ext_resource type="Texture2D" uid="uid://e4i4h4c1wyx8" path="res://roguelike_platformer/rooms/room_images/wall_jump_room_01.png" id="1_4aoab"]
-[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://roguelike_platformer/scripts/room_data.gd" id="1_ssv22"]
-[ext_resource type="PackedScene" uid="uid://cf8uib5lyxtd0" path="res://roguelike_platformer/rooms/room_scenes/wall_jump_room_01.tscn" id="2_oxp5t"]
+[ext_resource type="Texture2D" uid="uid://e4i4h4c1wyx8" path="res://rooms/room_images/wall_jump_room_01.png" id="1_4aoab"]
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_ssv22"]
+[ext_resource type="PackedScene" uid="uid://cf8uib5lyxtd0" path="res://rooms/room_scenes/wall_jump_room_01.tscn" id="2_oxp5t"]
 
 [resource]
 script = ExtResource("1_ssv22")
 scene = ExtResource("2_oxp5t")
 preview = ExtResource("1_4aoab")
+required_abilities = ["wall_jump"]
 metadata/_custom_type_script = "uid://6kicdo0hg3ia"

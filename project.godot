@@ -17,8 +17,8 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 [autoload]
 
 messages="*uid://nqrns0pfeibg"
-save_manager="*uid://1ldb8x86q4su"
 save_data="*uid://qx0ek6pciyr8"
+run_manager="*uid://byx0gwh268knv"
 
 [display]
 

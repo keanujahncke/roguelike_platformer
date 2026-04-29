@@ -15,6 +15,7 @@ var exit_used := false
 @onready var heartsContainer = $CanvasLayer2/health_bar
 
 func _ready():
+	run_manager.start_new_run()
 	apply_starting_upgrades()
 	save_data.clear_selected_starting_abilities()
 	game_over.hide()
