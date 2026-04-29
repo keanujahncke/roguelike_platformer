@@ -10,6 +10,9 @@ var is_dead := false
 @onready var death_sfx: AudioStreamPlayer2D = $DeathSFX
 @onready var revive_sfx: AudioStreamPlayer2D = $ReviveSFX
 @onready var run_sfx: AudioStreamPlayer2D = $RunSFX
+@onready var jump_sfx: AudioStreamPlayer2D = $JumpSFX
+@onready var land_sfx: AudioStreamPlayer2D = $LandSFX
+@onready var double_jump_sfx: AudioStreamPlayer2D = $DoubleJumpSFX
 
 var abilities: Array = []
 
@@ -49,6 +52,10 @@ var run_timer := 0.0
 var run_start_delay_timer := 0.0
 @export var run_start_delay := 0.175
 
+var was_on_floor := false
+
+var fall_timer := 0.0
+@export var min_fall_time_for_land_sfx := 0.30
 
 
 func _ready():
@@ -89,6 +96,7 @@ func _physics_process(delta):
 	# jump
 	if jump_buffer_timer > 0 and coyote_timer > 0:
 		velocity.y = jump_velocity
+		jump_sfx.play()
 		jump_buffer_timer = 0
 		coyote_timer = 0
 
@@ -116,7 +124,14 @@ func _physics_process(delta):
 		if ability.has_method("ability_process"):
 			ability.ability_process(self, delta)
 
+	if not is_on_floor() and velocity.y > 0:
+		fall_timer += delta
+
 	move_and_slide()
+	
+	if is_on_floor() and not was_on_floor and fall_timer >= min_fall_time_for_land_sfx:
+		land_sfx.play()
+		fall_timer = 0.0
 
 	check_hazards()
 
@@ -148,6 +163,11 @@ func _physics_process(delta):
 	anim.flip_h = facing < 0
 
 	update_animation(input_axis, delta)
+	
+	if is_on_floor():
+		fall_timer = 0.0
+	
+	was_on_floor = is_on_floor()
 
 
 func is_dash_active() -> bool:
@@ -175,7 +195,12 @@ func update_animation(input_axis: float, delta: float):
 
 	# wall slide priority
 	if has_node("Abilities/WallJumpAbility"):
-		if $Abilities/WallJumpAbility.is_wall_sliding:
+		var wall_jump = $"Abilities/WallJumpAbility"
+		
+		if wall_jump.is_wall_sliding \
+		and is_on_wall() \
+		and not is_on_floor() \
+		and velocity.y > 0:
 			play_anim("wall_slide")
 			return
 

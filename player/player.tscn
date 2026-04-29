@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cjeqh1n74156h" path="res://assets/Spritesheets/run.png" id="6_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://bcg8v0svayo21" path="res://assets/Spritesheets/stop.png" id="7_d2wvv"]
 [ext_resource type="Script" uid="uid://bgt4getng8cht" path="res://player/abilities/ability_scripts/DashAbility.gd" id="9_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://cipqslnhpgqp2" path="res://assets/Spritesheets/wallslide.png" id="10_bjvpn"]
 [ext_resource type="Script" uid="uid://ljvup0yps8es" path="res://player/abilities/ability_scripts/WallJumpAbility.gd" id="10_d2wvv"]
 [ext_resource type="Script" uid="uid://caelmmfkwoula" path="res://player/abilities/ability_scripts/DirectionalDashAbility.gd" id="11_tqiix"]
 [ext_resource type="Script" uid="uid://crnhhtk5fexa6" path="res://player/abilities/ability_scripts/PhaseDashAbility.gd" id="12_e7oew"]
@@ -17,7 +18,10 @@
 [ext_resource type="Script" uid="uid://bqqcadpr3v8nt" path="res://player/abilities/ability_scripts/GlideAbility.gd" id="15_c35mf"]
 [ext_resource type="AudioStream" uid="uid://dvh08ioce6kf8" path="res://assets/audio/death.wav" id="16_tqiix"]
 [ext_resource type="AudioStream" uid="uid://ic1nro21ae08" path="res://assets/audio/revive.wav" id="17_e7oew"]
-[ext_resource type="AudioStream" uid="uid://ckym7wip7crga" path="res://assets/audio/dungeonrun.wav" id="18_e7oew"]
+[ext_resource type="AudioStream" uid="uid://3h6jmjtostg" path="res://assets/audio/Random72.wav" id="18_x7c3f"]
+[ext_resource type="AudioStream" uid="uid://dc76cq35xryq3" path="res://assets/audio/Jump25.wav" id="19_bjvpn"]
+[ext_resource type="AudioStream" uid="uid://bpxbiilfup6ef" path="res://assets/audio/Hit.wav" id="20_s7qer"]
+[ext_resource type="AudioStream" uid="uid://cu88mkcb8eprf" path="res://assets/audio/doublejump.wav" id="20_x7c3f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
 size = Vector2(15, 25)
@@ -574,6 +578,34 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("7_d2wvv")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7qer"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4c7l"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knn7v"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pqkx"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw77l"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rptt4"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7pn3"]
+atlas = ExtResource("10_bjvpn")
+region = Rect2(192, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_g5jhy"]
 animations = [{
 "frames": [{
@@ -1041,6 +1073,32 @@ animations = [{
 "loop": true,
 "name": &"stop",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7qer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4c7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knn7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pqkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw77l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rptt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7pn3")
+}],
+"loop": true,
+"name": &"wall_slide",
+"speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1122822699 groups=["player"]]
@@ -1056,7 +1114,8 @@ shape = SubResource("RectangleShape2D_i3pqv")
 position = Vector2(-3, -2)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_g5jhy")
-animation = &"death"
+animation = &"wall_slide"
+frame_progress = 0.7213904
 speed_scale = 2.0
 
 [node name="Abilities" type="Node" parent="." unique_id=581730385]
@@ -1091,4 +1150,13 @@ stream = ExtResource("17_e7oew")
 pitch_scale = 1.25
 
 [node name="RunSFX" type="AudioStreamPlayer2D" parent="." unique_id=2106320762]
-stream = ExtResource("18_e7oew")
+stream = ExtResource("18_x7c3f")
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="." unique_id=1588614483]
+stream = ExtResource("19_bjvpn")
+
+[node name="LandSFX" type="AudioStreamPlayer2D" parent="." unique_id=1646500959]
+stream = ExtResource("20_s7qer")
+
+[node name="DoubleJumpSFX" type="AudioStreamPlayer2D" parent="." unique_id=298858511]
+stream = ExtResource("20_x7c3f")
