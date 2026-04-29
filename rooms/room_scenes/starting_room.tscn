@@ -107,8 +107,10 @@ texture = ExtResource("3_5d0iq")
 3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7.0052624, 8, -8, 8, -3.1472921, -8, -3.0457659)
 5:9/0 = 0
 7:9/0 = 0
+7:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:9/0 = 0
 9:9/0 = 0
+9:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.5395756, -8, 8, 2.3381634, 8, -8)
 10:9/0 = 0
 11:9/0 = 0
 12:9/0 = 0
@@ -326,7 +328,7 @@ sources/0 = SubResource("TileSetAtlasSource_j3uj6")
 
 [node name="RoomBase" unique_id=2127497181 instance=ExtResource("1_chkj8")]
 
-[node name="Exit" parent="." index="1" unique_id=763921746]
+[node name="Exit" parent="." index="1" unique_id=2118638246]
 position = Vector2(1258, -32)
 
 [node name="GroundMap" parent="." index="2" unique_id=477515611]

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://bfl6ivjbvqx3n"]
+
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_1vgvl"]
+[ext_resource type="Texture2D" uid="uid://cvmy1oi7jdhkt" path="res://rooms/room_images/double_jump_room_02.png" id="1_nxioc"]
+[ext_resource type="PackedScene" uid="uid://dg4ogswlf8cwy" path="res://rooms/room_scenes/double_jump_room_02.tscn" id="2_nfu4e"]
+
+[resource]
+script = ExtResource("1_1vgvl")
+scene = ExtResource("2_nfu4e")
+preview = ExtResource("1_nxioc")
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
