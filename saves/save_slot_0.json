@@ -1,8 +1,0 @@
-{
-	"max_energy": 5.0,
-	"seen_abilities": [
-		"double_jump",
-		"wall_jump"
-	],
-	"selected_starting_abilities": []
-}

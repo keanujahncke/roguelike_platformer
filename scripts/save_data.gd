@@ -2,7 +2,7 @@ extends Node
 
 var current_slot := -1
 
-const SAVE_FOLDER := "res://saves/"
+const SAVE_FOLDER := "user://saves/"
 
 
 func get_save_path() -> String:
