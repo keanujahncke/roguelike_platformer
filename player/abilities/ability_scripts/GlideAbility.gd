@@ -17,7 +17,7 @@ func ability_process(player, delta):
 	if player.is_on_floor():
 		return
 
-	if Input.is_action_pressed("move_up") and player.velocity.y > 0:
+	if Input.is_action_pressed("glide") and player.velocity.y > 0:
 		is_gliding = true
 
 		player.velocity.y += glide_gravity * delta

@@ -13,7 +13,7 @@ func _ready() -> void:
 	main_menu_game_button.pressed.connect(_on_main_menu_pressed)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"): # esc
+	if event.is_action_pressed("pause"): # esc
 		if not pause_menu.visible:
 			show_pause_menu()
 		else:
