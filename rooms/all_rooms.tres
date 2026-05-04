@@ -1,14 +1,56 @@
 [gd_resource type="Resource" script_class="RoomDatabase" format=3 uid="uid://c4jifodginq5u"]
 
 [ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_3s7hy"]
-[ext_resource type="Resource" uid="uid://crbf0rwihbllo" path="res://rooms/room_data/hybrid_room_01.tres" id="2_5pux4"]
-[ext_resource type="Resource" uid="uid://drmvqxwweftdh" path="res://rooms/room_data/double_jump_room_01.tres" id="2_mxgu1"]
+[ext_resource type="Texture2D" uid="uid://otuwcqj58xre" path="res://rooms/room_images/double_jump_room.png" id="2_11c3t"]
 [ext_resource type="Script" uid="uid://c7tyxjnhcnlh0" path="res://scripts/room_database.gd" id="2_yqhpg"]
-[ext_resource type="Resource" uid="uid://bfl6ivjbvqx3n" path="res://rooms/room_data/double_jump_room_02.tres" id="6_5pux4"]
-[ext_resource type="Resource" uid="uid://oggv7c8r1key" path="res://rooms/room_data/platforms_room_01.tres" id="7_c65sq"]
-[ext_resource type="Resource" uid="uid://bflnr6wkduq13" path="res://rooms/room_data/wall_jump_room_01.tres" id="9_3sxxt"]
+[ext_resource type="PackedScene" uid="uid://dqke7uhukavk0" path="res://rooms/room_scenes/double_jump_room_01.tscn" id="3_by1va"]
+[ext_resource type="Texture2D" uid="uid://cvmy1oi7jdhkt" path="res://rooms/room_images/double_jump_room_02.png" id="4_qha1v"]
+[ext_resource type="PackedScene" uid="uid://dg4ogswlf8cwy" path="res://rooms/room_scenes/double_jump_room_02.tscn" id="5_22dh7"]
+[ext_resource type="Texture2D" uid="uid://btonu4ekyh2jo" path="res://rooms/room_images/hybrid_room_01.png" id="6_gxp3f"]
+[ext_resource type="PackedScene" uid="uid://c0o4fyr5m58tx" path="res://rooms/room_scenes/hybrid_room_01.tscn" id="7_06l4k"]
+[ext_resource type="Texture2D" uid="uid://d0ceyai4q7xj0" path="res://rooms/room_images/platforms_room_01.png" id="8_dqg7y"]
+[ext_resource type="PackedScene" uid="uid://dty1uiyg7a6me" path="res://rooms/room_scenes/platforms_room_01.tscn" id="9_qfdwg"]
+[ext_resource type="Texture2D" uid="uid://e4i4h4c1wyx8" path="res://rooms/room_images/wall_jump_room_01.png" id="10_hi0u5"]
+[ext_resource type="PackedScene" uid="uid://cf8uib5lyxtd0" path="res://rooms/room_scenes/wall_jump_room_01.tscn" id="11_a4wxt"]
+[ext_resource type="Resource" uid="uid://cuy8kyo4qjae2" path="res://rooms/room_data/standard_room_01.tres" id="12_11c3t"]
+[ext_resource type="Resource" uid="uid://dfvpp50073l66" path="res://rooms/room_data/precision_room_01.tres" id="13_p26sd"]
+
+[sub_resource type="Resource" id="Resource_d1nu1"]
+script = ExtResource("1_3s7hy")
+scene = ExtResource("3_by1va")
+preview = ExtResource("2_11c3t")
+required_abilities = [["wall_jump", "double_jump"]]
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
+
+[sub_resource type="Resource" id="Resource_rc3kg"]
+script = ExtResource("1_3s7hy")
+scene = ExtResource("5_22dh7")
+preview = ExtResource("4_qha1v")
+required_abilities = ["double_jump"]
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
+
+[sub_resource type="Resource" id="Resource_0cnjv"]
+script = ExtResource("1_3s7hy")
+scene = ExtResource("7_06l4k")
+preview = ExtResource("6_gxp3f")
+required_abilities = ["wall_jump", ["dash", "double_jump", "glide"]]
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
+
+[sub_resource type="Resource" id="Resource_ficom"]
+script = ExtResource("1_3s7hy")
+scene = ExtResource("9_qfdwg")
+preview = ExtResource("8_dqg7y")
+required_abilities = ["wall_jump"]
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
+
+[sub_resource type="Resource" id="Resource_7dfag"]
+script = ExtResource("1_3s7hy")
+scene = ExtResource("11_a4wxt")
+preview = ExtResource("10_hi0u5")
+required_abilities = ["wall_jump", ["double_jump", "dash", "glide"]]
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
 
 [resource]
 script = ExtResource("2_yqhpg")
-rooms = Array[ExtResource("1_3s7hy")]([ExtResource("2_mxgu1"), ExtResource("6_5pux4"), ExtResource("2_5pux4"), ExtResource("7_c65sq"), ExtResource("9_3sxxt")])
+rooms = Array[ExtResource("1_3s7hy")]([SubResource("Resource_d1nu1"), SubResource("Resource_rc3kg"), SubResource("Resource_0cnjv"), SubResource("Resource_ficom"), SubResource("Resource_7dfag"), ExtResource("12_11c3t"), ExtResource("13_p26sd")])
 metadata/_custom_type_script = "uid://c7tyxjnhcnlh0"
