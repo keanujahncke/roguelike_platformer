@@ -70,16 +70,36 @@ func _apply_missing_defaults():
 		data["selected_starting_abilities"] = []
 
 
-func reset_save():
+
+func clear_slot(slot: int) -> void:
+	var path = SAVE_FOLDER + "save_slot_%d.json" % slot
+
+	if FileAccess.file_exists(path):
+		var err = DirAccess.remove_absolute(path)
+		if err == OK:
+			print("Deleted slot ", slot)
+		else:
+			printerr("Failed to delete slot ", slot)
+	else:
+		print("Slot already empty: ", slot)
+
+	# If you're currently on this slot, reset memory
+	if current_slot == slot:
+		current_slot = -1
+		_reset_runtime_data()
+
+
+func _reset_runtime_data():
 	data = {
 		"max_energy": 1,
 		"seen_abilities": [],
 		"selected_starting_abilities": []
 	}
 
+func reset_save():
+	_reset_runtime_data()
 	save()
-
-
+	
 # ==================================================
 # META HELPERS
 # ==================================================
