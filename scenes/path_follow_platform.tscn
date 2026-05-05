@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dcidg7hicqn3a"]
+
+[ext_resource type="Texture2D" uid="uid://27607oiimi5q" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Book Desk/7.png" id="1_j0gwo"]
+[ext_resource type="Script" uid="uid://bdvo2xw3j17eo" path="res://scripts/path_follow_platform.gd" id="1_m4khm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4khm"]
+size = Vector2(767, 411.9851)
+
+[node name="path_follow_platform" type="AnimatableBody2D" unique_id=1927359469]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_m4khm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=884155339]
+position = Vector2(0, -1.9073486e-06)
+scale = Vector2(0.267, 0.196)
+texture = ExtResource("1_j0gwo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=496031610]
+position = Vector2(0, -1.9073486e-06)
+scale = Vector2(0.2669999, 0.2669999)
+shape = SubResource("RectangleShape2D_m4khm")

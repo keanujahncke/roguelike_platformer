@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b47ut10xqonq3"]
+
+[ext_resource type="PackedScene" uid="uid://dcidg7hicqn3a" path="res://scenes/path_follow_platform.tscn" id="1_ycdkm"]
+
+[sub_resource type="Curve2D" id="Curve2D_cnkj7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -64, 0, 0, 0, 0, 0, -64)
+}
+point_count = 3
+
+[sub_resource type="GDScript" id="GDScript_ycdkm"]
+script/source = "extends Path2D
+"
+
+[node name="platform_path" type="Path2D" unique_id=1510864010]
+curve = SubResource("Curve2D_cnkj7")
+script = SubResource("GDScript_ycdkm")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=649679004]
+rotates = false
+loop = false
+
+[node name="path_follow_platform" parent="PathFollow2D" unique_id=1927359469 instance=ExtResource("1_ycdkm")]
+position = Vector2(4.7683716e-07, -7.6293945e-06)
+sync_to_physics = false
