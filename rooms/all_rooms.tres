@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://cuy8kyo4qjae2" path="res://rooms/room_data/standard_room_01.tres" id="12_11c3t"]
 [ext_resource type="Resource" uid="uid://dfvpp50073l66" path="res://rooms/room_data/precision_room_01.tres" id="13_p26sd"]
 [ext_resource type="Resource" uid="uid://cbwin0jmf2jjv" path="res://rooms/room_data/forest_room_1.tres" id="14_by1va"]
+[ext_resource type="Resource" uid="uid://b55u1adohwp3f" path="res://rooms/room_data/sky_room_1.tres" id="15_qha1v"]
 
 [sub_resource type="Resource" id="Resource_d1nu1"]
 script = ExtResource("1_3s7hy")
@@ -53,5 +54,5 @@ metadata/_custom_type_script = "uid://6kicdo0hg3ia"
 
 [resource]
 script = ExtResource("2_yqhpg")
-rooms = Array[ExtResource("1_3s7hy")]([SubResource("Resource_d1nu1"), SubResource("Resource_rc3kg"), SubResource("Resource_0cnjv"), SubResource("Resource_ficom"), SubResource("Resource_7dfag"), ExtResource("12_11c3t"), ExtResource("13_p26sd"), ExtResource("14_by1va")])
+rooms = Array[ExtResource("1_3s7hy")]([SubResource("Resource_d1nu1"), SubResource("Resource_rc3kg"), SubResource("Resource_0cnjv"), SubResource("Resource_ficom"), SubResource("Resource_7dfag"), ExtResource("12_11c3t"), ExtResource("13_p26sd"), ExtResource("14_by1va"), ExtResource("15_qha1v")])
 metadata/_custom_type_script = "uid://c7tyxjnhcnlh0"

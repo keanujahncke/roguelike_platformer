@@ -1332,7 +1332,6 @@ tile_map_data = PackedByteArray("AAD6//v/AQAKAAIAAAD6//z/AQAKAAMAAAD6//3/AQAKAAQ
 tile_set = SubResource("TileSet_kxbwu")
 
 [node name="Parallax2D" type="Parallax2D" parent="." index="7" unique_id=365841425]
-visible = false
 texture_repeat = 2
 scroll_scale = Vector2(0.55, 1)
 scroll_offset = Vector2(0, 400)
@@ -1356,7 +1355,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 2940, 178)
 
 [node name="Parallax2D2" type="Parallax2D" parent="." index="8" unique_id=164589663]
-visible = false
 texture_repeat = 2
 scroll_scale = Vector2(0.25, 1)
 scroll_offset = Vector2(0, 380)
@@ -1374,7 +1372,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 294, 178)
 
 [node name="Parallax2D3" type="Parallax2D" parent="." index="9" unique_id=1382791215]
-visible = false
 texture_repeat = 2
 scroll_scale = Vector2(0.75, 1)
 scroll_offset = Vector2(0, 400)
