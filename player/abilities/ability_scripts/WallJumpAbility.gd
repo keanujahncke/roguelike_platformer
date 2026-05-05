@@ -49,3 +49,6 @@ func ability_process(player, delta):
 		player.velocity.y = wall_jump_y
 		player.velocity.x = last_wall_normal.x * wall_jump_x
 		wall_jump_grace_timer = 0.0
+
+		if player.jump_sfx:
+			player.jump_sfx.play()

@@ -42,6 +42,10 @@ var is_stopping := false
 var run_time := 0.0
 var is_doing_double_jump := false
 
+# GLIDE ANIMATION STATE
+var was_gliding := false
+var glide_startup_done := false
+
 @export var stop_min_run_time := 0.2
 
 @export var max_health := 5
@@ -147,7 +151,7 @@ func _physics_process(delta):
 		# count up how long we've been running
 		run_start_delay_timer += delta
 		
-		# only start foosteps after delay
+		# only start footsteps after delay
 		if run_start_delay_timer >= run_start_delay:
 			run_timer -= delta
 			if run_timer <= 0.0:
@@ -207,9 +211,30 @@ func update_animation(input_axis: float, delta: float):
 
 	# glide priority
 	if has_node("Abilities/GlideAbility"):
-		if $Abilities/GlideAbility.is_gliding:
-			play_anim("glide")
-			return
+		var glide_ability = $Abilities/GlideAbility
+
+		if glide_ability.is_gliding:
+			# First frame of entering glide
+			if not was_gliding:
+				was_gliding = true
+				glide_startup_done = false
+				anim.play("glide_startup")
+				return
+
+			# Let glide_startup finish without being overridden
+			if anim.animation == "glide_startup":
+				if anim.is_playing():
+					return
+				else:
+					glide_startup_done = true
+
+			# After startup ends, play looping glide
+			if glide_startup_done:
+				play_anim("glide")
+				return
+		else:
+			was_gliding = false
+			glide_startup_done = false
 
 	# air states
 	if not is_on_floor():
@@ -283,6 +308,7 @@ func check_hazards():
 			take_damage(1)
 			return
 			
+
 func take_damage(amount: int):
 	if is_dead:
 		return
@@ -295,7 +321,7 @@ func take_damage(amount: int):
 	is_dead = true
 	velocity = Vector2.ZERO
 
-	death_sfx.play() #
+	death_sfx.play()
 	anim.play("death")
 	await anim.animation_finished
 
@@ -307,12 +333,13 @@ func take_damage(amount: int):
 	global_position = spawn.global_position
 	velocity = Vector2.ZERO
 
-	revive_sfx.play() #
+	revive_sfx.play()
 	anim.play("revive")
 	await anim.animation_finished
 
 	is_dead = false
 	anim.play("idle")
+
 
 func reset_stats():
 	is_dead = false
@@ -327,6 +354,7 @@ func reset_stats():
 				ability.unlocked = false
 				
 	print("STATS RESET: Player revived and abilities locked.")
+
 
 func unlock_ability(name: String):
 	match name:
