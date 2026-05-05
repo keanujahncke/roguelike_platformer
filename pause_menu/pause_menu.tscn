@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://l1htylol2kkd" path="res://pause_menu/pause_menu.gd" id="1_5hbt6"]
 [ext_resource type="Texture2D" uid="uid://cyikb2fmdx6gb" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/3 Item Holder/1.png" id="2_rd7dy"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rd7dy"]
+
 [node name="PauseMenu" type="CanvasLayer" unique_id=926336203]
 process_mode = 3
 layer = 5
@@ -49,6 +51,7 @@ theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rd7dy")
 text = "Resume"
 icon = ExtResource("2_rd7dy")
 flat = true
@@ -62,6 +65,7 @@ theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rd7dy")
 text = "Main Menu"
 icon = ExtResource("2_rd7dy")
 flat = true

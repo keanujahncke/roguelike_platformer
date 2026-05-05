@@ -6,6 +6,20 @@
 [ext_resource type="Texture2D" uid="uid://732bmuhonbs4" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/4 Notification/2.png" id="3_vbjqi"]
 [ext_resource type="Texture2D" uid="uid://cx8t6xy0aaolm" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/6 Player HUD/1.png" id="5_0m3ch"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0m3ch"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fk0fn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oqrgu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fv0o7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1oos5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jabur"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fh6ay"]
+
 [node name="TitleScreen" type="CanvasLayer" unique_id=926336203]
 layer = 5
 script = ExtResource("1_g2mvh")
@@ -58,6 +72,7 @@ theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_hover_color = Color(5.390644e-06, 0.6086596, 0.7662297, 1)
 theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0m3ch")
 text = "Start Run!"
 icon = ExtResource("2_2dq6q")
 flat = true
@@ -71,6 +86,7 @@ theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fk0fn")
 text = "Quit"
 icon = ExtResource("2_2dq6q")
 flat = true
@@ -107,6 +123,7 @@ theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oqrgu")
 text = "New Slot 00"
 icon = ExtResource("3_vbjqi")
 flat = true
@@ -120,6 +137,7 @@ theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fv0o7")
 text = "New Slot 01"
 icon = ExtResource("3_vbjqi")
 flat = true
@@ -133,6 +151,7 @@ theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1oos5")
 text = "New Slot 02"
 icon = ExtResource("3_vbjqi")
 flat = true
@@ -188,6 +207,7 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.5882353, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.5891461, 1.8410012e-06, 5.2943824e-07, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jabur")
 text = "Double Jump"
 alignment = 1
 
@@ -198,6 +218,7 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.5882353, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.5882353, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jabur")
 text = "Wall Jump"
 alignment = 1
 
@@ -208,6 +229,7 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.5882353, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.5882353, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jabur")
 text = "Dash"
 alignment = 1
 
@@ -218,6 +240,7 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.5882353, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.5882353, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jabur")
 text = "Glide"
 alignment = 1
 
@@ -261,6 +284,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
 theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fh6ay")
 text = "Start Run"
 flat = true
 icon_alignment = 1
