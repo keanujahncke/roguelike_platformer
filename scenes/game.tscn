@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ck3gm8r2dqkhv" path="res://scripts/level_manager.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://0ql3da7v7y7y" path="res://player/player.tscn" id="2_feb5d"]
 [ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_wo7d7"]
+[ext_resource type="AudioStream" uid="uid://cn56443l5ygfa" path="res://assets/audio/foresttrack1.1.wav" id="5_ca42v"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="5_gv0uq"]
 [ext_resource type="PackedScene" uid="uid://b7wwu7ep80n3i" path="res://rooms/room_scenes/starting_room.tscn" id="6_iotsf"]
 [ext_resource type="Script" uid="uid://dhdhyr4j3myj4" path="res://scripts/game_over.gd" id="7_u5sy4"]
@@ -23,6 +24,8 @@ font_size = 100
 script = ExtResource("1_e2o6t")
 starting_room = ExtResource("6_iotsf")
 room_database = ExtResource("3_wo7d7")
+dungeon_music = ExtResource("13_kvuet")
+forest_music = ExtResource("5_ca42v")
 
 [node name="Player" parent="." unique_id=1122822699 instance=ExtResource("2_feb5d")]
 
@@ -95,7 +98,6 @@ available_abilities = Array[ExtResource("9_vtaks")]([ExtResource("10_dinhu"), Ex
 [node name="PauseMenu" parent="." unique_id=926336203 instance=ExtResource("12_dinhu")]
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1400540542]
-stream = ExtResource("13_kvuet")
 volume_db = -18.064
 autoplay = true
 
