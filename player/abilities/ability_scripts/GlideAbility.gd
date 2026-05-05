@@ -1,8 +1,8 @@
 extends Ability
 class_name GlideAbility
 
-@export var glide_fall_speed := 70.0
-@export var glide_gravity := 150.0
+@export var glide_fall_speed := 50.0
+@export var glide_gravity := 100.0
 
 var is_gliding := false
 
