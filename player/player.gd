@@ -49,7 +49,7 @@ var glide_startup_done := false
 @export var stop_min_run_time := 0.2
 
 @export var max_health := 5
-var health : int = 5
+var health: int = 5
 
 var run_timer := 0.0
 @export var step_interval := 0.43
@@ -109,7 +109,7 @@ func _physics_process(delta):
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= 0.5
 
-	# movement (NO slide / NO momentum interference)
+	# movement
 	if not is_dash_active():
 		if input_axis != 0:
 			velocity.x = move_toward(
@@ -133,7 +133,7 @@ func _physics_process(delta):
 		fall_timer += delta
 
 	move_and_slide()
-	
+
 	if is_on_floor() and not was_on_floor and fall_timer >= min_fall_time_for_land_sfx:
 		land_sfx.play()
 		fall_timer = 0.0
@@ -144,14 +144,12 @@ func _physics_process(delta):
 		if run_sfx.playing:
 			run_sfx.stop()
 		return
-	
+
 	var is_running_for_sfx = abs(velocity.x) > 1.0 and input_axis != 0.0 and is_on_floor()
-	
+
 	if is_running_for_sfx:
-		# count up how long we've been running
 		run_start_delay_timer += delta
-		
-		# only start footsteps after delay
+
 		if run_start_delay_timer >= run_start_delay:
 			run_timer -= delta
 			if run_timer <= 0.0:
@@ -159,7 +157,6 @@ func _physics_process(delta):
 				run_sfx.play()
 				run_timer = step_interval
 	else:
-		# reset everything when not running
 		run_start_delay_timer = 0.0
 		run_timer = 0.0
 		if run_sfx.playing:
@@ -168,10 +165,10 @@ func _physics_process(delta):
 	anim.flip_h = facing < 0
 
 	update_animation(input_axis, delta)
-	
+
 	if is_on_floor():
 		fall_timer = 0.0
-	
+
 	was_on_floor = is_on_floor()
 
 
@@ -184,36 +181,35 @@ func is_dash_active() -> bool:
 func update_animation(input_axis: float, delta: float):
 	var is_running: bool = abs(velocity.x) > 1.0 and input_axis != 0.0
 
+	if is_running and is_on_floor():
+		run_time += delta
+
+	# Dash has highest movement-animation priority.
+	if is_dash_active():
+		play_anim("dash")
+		return
+
+	# Double jump priority.
+	# This stays above glide so holding glide does not skip the double jump animation.
 	if is_doing_double_jump:
+		was_gliding = false
+		glide_startup_done = false
+
 		if anim.animation == "double_jump" and anim.is_playing():
 			return
 		else:
 			is_doing_double_jump = false
 
-	if is_running and is_on_floor():
-		run_time += delta
-
-	# dash priority
-	if is_dash_active():
-		play_anim("dash")
-		return
-
-	# wall slide priority
-	if has_node("Abilities/WallJumpAbility"):
-		var wall_jump = $"Abilities/WallJumpAbility"
-		
-		if wall_jump.is_wall_sliding \
-		and is_on_wall() \
-		and not is_on_floor() \
-		and velocity.y > 0:
-			play_anim("wall_slide")
-			return
-
-	# glide priority
+	# Glide priority.
+	# This is below double jump, but above wall slide and normal fall.
+	# So the order becomes:
+	# double_jump animation -> glide_startup -> glide
 	if has_node("Abilities/GlideAbility"):
 		var glide_ability = $Abilities/GlideAbility
 
 		if glide_ability.is_gliding:
+			is_stopping = false
+
 			# First frame of entering glide
 			if not was_gliding:
 				was_gliding = true
@@ -236,7 +232,19 @@ func update_animation(input_axis: float, delta: float):
 			was_gliding = false
 			glide_startup_done = false
 
-	# air states
+	# Wall slide priority.
+	# This is below glide so glide can take over once glide conditions are met.
+	if has_node("Abilities/WallJumpAbility"):
+		var wall_jump = $"Abilities/WallJumpAbility"
+
+		if wall_jump.is_wall_sliding \
+		and is_on_wall() \
+		and not is_on_floor() \
+		and velocity.y > 0:
+			play_anim("wall_slide")
+			return
+
+	# Air states
 	if not is_on_floor():
 		is_stopping = false
 
@@ -248,7 +256,7 @@ func update_animation(input_axis: float, delta: float):
 		was_running = is_running
 		return
 
-	# stop animation
+	# Stop animation
 	if (
 		was_running
 		and input_axis == 0.0
@@ -295,7 +303,7 @@ func die_and_respawn():
 func check_hazards():
 	if is_dead:
 		return
-	
+
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 
@@ -307,7 +315,7 @@ func check_hazards():
 		if collider and collider.is_in_group("hazard"):
 			take_damage(1)
 			return
-			
+
 
 func take_damage(amount: int):
 	if is_dead:
@@ -347,12 +355,12 @@ func reset_stats():
 	velocity = Vector2.ZERO
 	set_physics_process(true)
 	anim.play("idle")
-	
+
 	if abilities_root:
 		for ability in abilities_root.get_children():
 			if "unlocked" in ability:
 				ability.unlocked = false
-				
+
 	print("STATS RESET: Player revived and abilities locked.")
 
 
