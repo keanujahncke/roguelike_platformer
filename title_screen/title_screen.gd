@@ -7,9 +7,14 @@ extends CanvasLayer
 @onready var new_game_button = %NewGameButton
 @onready var quit_game_button: Button = %QuitGameButton
 
-@onready var new_slot_00 = %NewSlot00
-@onready var new_slot_01 = %NewSlot01
-@onready var new_slot_02 = %NewSlot02
+@onready var slot_00_load = %NewGameMenu/SlotsContainer/Slot00.get_node("LoadButton")
+@onready var slot_00_delete = %NewGameMenu/SlotsContainer/Slot00.get_node("DeleteButton")
+
+@onready var slot_01_load = %NewGameMenu/SlotsContainer/Slot01.get_node("LoadButton")
+@onready var slot_01_delete = %NewGameMenu/SlotsContainer/Slot01.get_node("DeleteButton")
+
+@onready var slot_02_load = %NewGameMenu/SlotsContainer/Slot02.get_node("LoadButton")
+@onready var slot_02_delete = %NewGameMenu/SlotsContainer/Slot02.get_node("DeleteButton")
 
 @onready var start_run_button = %StartRun
 
@@ -18,11 +23,17 @@ func _ready() -> void:
 	new_game_button.pressed.connect(show_new_game_menu)
 	quit_game_button.pressed.connect(_on_quit_pressed)
 
-	new_slot_00.pressed.connect(_on_new_game_pressed.bind(0))
-	new_slot_01.pressed.connect(_on_new_game_pressed.bind(1))
-	new_slot_02.pressed.connect(_on_new_game_pressed.bind(2))
+	# LOAD buttons
+	slot_00_load.pressed.connect(_on_new_game_pressed.bind(0))
+	slot_01_load.pressed.connect(_on_new_game_pressed.bind(1))
+	slot_02_load.pressed.connect(_on_new_game_pressed.bind(2))
 
-	#start_run_button.pressed.connect(_on_start_run_pressed)
+	# DELETE buttons
+	slot_00_delete.pressed.connect(_on_delete_pressed.bind(0))
+	slot_01_delete.pressed.connect(_on_delete_pressed.bind(1))
+	slot_02_delete.pressed.connect(_on_delete_pressed.bind(2))
+
+	start_run_button.pressed.connect(_on_start_run_pressed)
 
 	if save_data.current_slot != -1: 
 		save_data.load_save()
@@ -55,7 +66,7 @@ func show_new_game_menu() -> void:
 	new_game_menu.visible = true
 	loadout_menu.visible = false
 
-	new_slot_01.grab_focus()
+	slot_00_load.grab_focus()
 
 
 func show_loadout_menu() -> void:
@@ -87,6 +98,11 @@ func _on_new_game_pressed(slot: int) -> void:
 		show_loadout_menu()
 	else:
 		printerr("Failed to load slot ", slot)
+
+
+func _on_delete_pressed(slot: int) -> void:
+	print("Deleting slot ", slot)
+	save_data.clear_slot(slot)
 
 
 # ==================================================

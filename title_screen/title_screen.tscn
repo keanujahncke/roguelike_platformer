@@ -3,18 +3,11 @@
 [ext_resource type="Script" uid="uid://bkr0a26h6xq1y" path="res://title_screen/title_screen.gd" id="1_g2mvh"]
 [ext_resource type="Texture2D" uid="uid://cyikb2fmdx6gb" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/3 Item Holder/1.png" id="2_2dq6q"]
 [ext_resource type="Script" uid="uid://cfsq4qfwmg04g" path="res://title_screen/loadout_menu.gd" id="2_dxpbd"]
-[ext_resource type="Texture2D" uid="uid://732bmuhonbs4" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/4 Notification/2.png" id="3_vbjqi"]
 [ext_resource type="Texture2D" uid="uid://cx8t6xy0aaolm" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/6 Player HUD/1.png" id="5_0m3ch"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0m3ch"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fk0fn"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oqrgu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fv0o7"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1oos5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jabur"]
 
@@ -107,55 +100,64 @@ offset_right = 295.64798
 offset_bottom = 194.776
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = -25
+theme_override_constants/separation = 25
 
 [node name="Label" type="Label" parent="Control/NewGameMenu" unique_id=104282457]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Select a new slot"
+text = "Select a slot"
 horizontal_alignment = 1
 
-[node name="NewSlot00" type="Button" parent="Control/NewGameMenu" unique_id=1696049807]
-unique_name_in_owner = true
+[node name="SlotsContainer" type="VBoxContainer" parent="Control/NewGameMenu" unique_id=821012170]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = SubResource("StyleBoxEmpty_oqrgu")
-text = "New Slot 00"
-icon = ExtResource("3_vbjqi")
-flat = true
-icon_alignment = 1
 
-[node name="NewSlot01" type="Button" parent="Control/NewGameMenu" unique_id=792314523]
-unique_name_in_owner = true
+[node name="Slot00" type="HBoxContainer" parent="Control/NewGameMenu/SlotsContainer" unique_id=1281655621]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = SubResource("StyleBoxEmpty_fv0o7")
-text = "New Slot 01"
-icon = ExtResource("3_vbjqi")
-flat = true
-icon_alignment = 1
+alignment = 1
 
-[node name="NewSlot02" type="Button" parent="Control/NewGameMenu" unique_id=1019744891]
-unique_name_in_owner = true
+[node name="Label" type="Label" parent="Control/NewGameMenu/SlotsContainer/Slot00" unique_id=463940145]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1oos5")
-text = "New Slot 02"
-icon = ExtResource("3_vbjqi")
-flat = true
-icon_alignment = 1
+text = "Slot 00"
+
+[node name="LoadButton" type="Button" parent="Control/NewGameMenu/SlotsContainer/Slot00" unique_id=1776043594]
+layout_mode = 2
+text = "   Load   "
+
+[node name="DeleteButton" type="Button" parent="Control/NewGameMenu/SlotsContainer/Slot00" unique_id=542314165]
+layout_mode = 2
+text = "Delete"
+
+[node name="Slot01" type="HBoxContainer" parent="Control/NewGameMenu/SlotsContainer" unique_id=748848241]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/NewGameMenu/SlotsContainer/Slot01" unique_id=135998999]
+layout_mode = 2
+text = "Slot 01"
+
+[node name="LoadButton" type="Button" parent="Control/NewGameMenu/SlotsContainer/Slot01" unique_id=1291094971]
+layout_mode = 2
+text = "   Load   "
+
+[node name="DeleteButton" type="Button" parent="Control/NewGameMenu/SlotsContainer/Slot01" unique_id=365794510]
+layout_mode = 2
+text = "Delete"
+
+[node name="Slot02" type="HBoxContainer" parent="Control/NewGameMenu/SlotsContainer" unique_id=790068677]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/NewGameMenu/SlotsContainer/Slot02" unique_id=765899870]
+layout_mode = 2
+text = "Slot 02"
+
+[node name="LoadButton" type="Button" parent="Control/NewGameMenu/SlotsContainer/Slot02" unique_id=1378025501]
+layout_mode = 2
+text = "   Load   "
+
+[node name="DeleteButton" type="Button" parent="Control/NewGameMenu/SlotsContainer/Slot02" unique_id=1125434490]
+layout_mode = 2
+text = "Delete"
 
 [node name="LoadoutMenu" type="VBoxContainer" parent="Control" unique_id=1829919683]
 unique_name_in_owner = true
