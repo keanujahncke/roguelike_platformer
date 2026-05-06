@@ -190,13 +190,18 @@ scroll_offset = Vector2(0, 0)
 scroll_offset = Vector2(0, 0)
 
 [node name="FrontLayerLight" parent="Parallax2D3" index="0" unique_id=326142762]
-position = Vector2(676.00006, -156)
+z_index = -30
+position = Vector2(690, -126.750015)
+scale = Vector2(1.1938776, 1.452247)
 
 [node name="Parallax2D4" parent="." index="10" unique_id=1070048750]
 scroll_offset = Vector2(0, 0)
 
 [node name="FullBackground" parent="Parallax2D5" parent_id_path=PackedInt32Array(1329277239) index="0" unique_id=1805915804]
 position = Vector2(326.00006, -359)
+
+[node name="Sprite2D" parent="Parallax2D5" parent_id_path=PackedInt32Array(1329277239) index="1" unique_id=1248703803]
+position = Vector2(795.99994, -434)
 
 [node name="Parallax2D6" parent="." index="12" unique_id=1519790038]
 scroll_offset = Vector2(0, 0)

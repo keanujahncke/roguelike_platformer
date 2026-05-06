@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://q86c7hfcjyoy" path="res://assets/Pixel Woods Asset Pack/Backgrounds/BG_1/Lights 2.png" id="7_p5qp3"]
 [ext_resource type="Texture2D" uid="uid://cinggtqpwoev2" path="res://assets/middle.png" id="9_6rnjf"]
 [ext_resource type="Texture2D" uid="uid://cq4nwwmd4d7ja" path="res://assets/foregroundforest.png" id="10_6rnjf"]
+[ext_resource type="Texture2D" uid="uid://ch2nk7cg6q4n1" path="res://assets/sunny.png" id="10_c3pxq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6ik44"]
 texture = ExtResource("2_ydjg0")
@@ -1375,8 +1376,8 @@ repeat_times = 10
 
 [node name="FrontLayerLight" type="Sprite2D" parent="Parallax2D3" index="0" unique_id=326142762]
 z_index = 10
-position = Vector2(671, -106)
-scale = Vector2(1.1938776, 1.7528089)
+position = Vector2(671, -292.5)
+scale = Vector2(1.1938776, 3.8483143)
 texture = ExtResource("3_bcbyu")
 region_enabled = true
 region_rect = Rect2(0, 0, 294, 178)
@@ -1415,6 +1416,10 @@ region_enabled = true
 region_rect = Rect2(0, 89, 67, 151.07)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D5" index="1" unique_id=1248703803]
+z_index = -300
+position = Vector2(898.50006, -43.99997)
+scale = Vector2(8.178125, 13.01087)
+texture = ExtResource("10_c3pxq")
 
 [node name="Parallax2D6" type="Parallax2D" parent="." index="12" unique_id=1519790038]
 z_index = 110

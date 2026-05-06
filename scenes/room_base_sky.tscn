@@ -1495,16 +1495,22 @@ tile_map_data = PackedByteArray()
 tile_set = SubResource("TileSet_eew41")
 
 [node name="Parallax2D" parent="." index="7" unique_id=365841425]
+scroll_scale = Vector2(0.25, 1)
 scroll_offset = Vector2(0, 480)
+repeat_size = Vector2(783.985, 0)
 
 [node name="FrontLayer" parent="Parallax2D" index="0" unique_id=353806906]
+position = Vector2(835.5625, -93)
+scale = Vector2(2.6560373, 3.5051224)
 texture = ExtResource("6_e7e4s")
 
 [node name="Parallax2D2" parent="." index="8" unique_id=164589663]
+scroll_scale = Vector2(0.1, 1)
 scroll_offset = Vector2(0, 457)
 
 [node name="BackLayer" parent="Parallax2D2" index="0" unique_id=524875021]
-position = Vector2(886.99994, -132)
+position = Vector2(975, -117)
+scale = Vector2(2.1748514, 1.6313202)
 texture = ExtResource("7_y1tmu")
 
 [node name="Parallax2D3" parent="." index="9" unique_id=1382791215]
