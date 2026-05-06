@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://2fy7mkj0i4tm" path="res://scenes/bird_hazard.tscn" id="5_m08hm"]
 [ext_resource type="PackedScene" uid="uid://c6eqkfswfve8j" path="res://scenes/single_use_platform.tscn" id="6_2ovk4"]
 [ext_resource type="Script" uid="uid://b76nog1jin2xb" path="res://rooms/room_scenes/death_zone.gd" id="7_rhnpu"]
+[ext_resource type="PackedScene" uid="uid://dvxs3bgsmt2dd" path="res://scenes/collectible.tscn" id="8_evma3"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_040nk"]
 tile_data = PackedInt32Array(0, 720896, 7, 65536, 786432, 5, 131072, 786432, 2, 196608, 786432, 3, 262144, 786432, 1, 327680, 851968, 3, 1, 786432, 4, 65537, 655360, 6, 131073, 851968, 3, 196609, 786432, 6, 262145, 786432, 4, 327681, 786432, 1, 2, 786432, 6, 65538, 851968, 3, 131074, 655360, 6, 196610, 720896, 5, 262146, 720896, 7, 327682, 786432, 7, 3, 786432, 1, 65539, 786432, 1, 131075, 786432, 6, 196611, 851968, 1, 262147, 786432, 4, 327683, 786432, 5, 4, 786432, 4, 65540, 786432, 7, 131076, 851968, 1, 196612, 851968, 3, 262148, 786432, 6, 327684, 655360, 6, 5, 720896, 7, 65541, 786432, 5, 131077, 786432, 2, 196613, 786432, 3, 262149, 786432, 1, 327685, 851968, 3)
@@ -1370,11 +1371,14 @@ position = Vector2(1696.9999, -182)
 position = Vector2(1775, -339)
 
 [node name="DeathZone" type="Area2D" parent="." index="22" unique_id=1106194917]
-position = Vector2(-4, 137)
+position = Vector2(-11, 187)
 script = ExtResource("7_rhnpu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" index="0" unique_id=563031119]
-position = Vector2(3, 11)
+position = Vector2(11, 6)
 shape = SubResource("WorldBoundaryShape2D_2ovk4")
+
+[node name="Collectible" parent="." index="23" unique_id=2013095035 instance=ExtResource("8_evma3")]
+id = "sky_01"
 
 [connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_body_entered"]
