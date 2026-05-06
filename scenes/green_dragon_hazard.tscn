@@ -3,18 +3,17 @@
 [ext_resource type="Script" uid="uid://cx2xjakte36kj" path="res://scripts/green_dragon_hazard.gd" id="1_okqch"]
 [ext_resource type="Texture2D" uid="uid://drf6w036wnwwv" path="res://assets/greendragonasset.png" id="2_axrtk"]
 
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cb60e"]
-size = Vector2(70.5, 68)
+size = Vector2(78.25, 100)
 
 [node name="GreenDragonHazard" type="Area2D" unique_id=1960679563]
 script = ExtResource("1_okqch")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1425974014]
-position = Vector2(14, -37)
-scale = Vector2(1.52, 1.33)
+position = Vector2(18.499998, -42.25)
+scale = Vector2(1.61, 1.4350001)
 texture = ExtResource("2_axrtk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=78606667]
-position = Vector2(15, -31)
+position = Vector2(18.875, -47)
 shape = SubResource("RectangleShape2D_cb60e")
