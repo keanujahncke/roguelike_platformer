@@ -1335,7 +1335,7 @@ visible = true
 [node name="Sprite2D" parent="." index="13" unique_id=1995723819]
 visible = true
 z_index = -300
-position = Vector2(2781, 1249.9999)
+position = Vector2(2854, 1199)
 scale = Vector2(51.237503, 34.505436)
 
 [node name="fullfrontlayer" type="TileMapLayer" parent="." index="14" unique_id=1515082670]
@@ -1370,10 +1370,11 @@ position = Vector2(1696.9999, -182)
 position = Vector2(1775, -339)
 
 [node name="DeathZone" type="Area2D" parent="." index="22" unique_id=1106194917]
-position = Vector2(2, 71)
+position = Vector2(-4, 137)
 script = ExtResource("7_rhnpu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" index="0" unique_id=563031119]
+position = Vector2(3, 11)
 shape = SubResource("WorldBoundaryShape2D_2ovk4")
 
 [connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_body_entered"]

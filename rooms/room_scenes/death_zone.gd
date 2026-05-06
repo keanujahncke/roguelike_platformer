@@ -1,12 +1,13 @@
 extends Area2D
 
+@export var damage := 1
+
+
 func _ready():
 	body_entered.connect(_on_body_entered)
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		_handle_player_death()
 
-func _handle_player_death():
-	if get_tree():
-		get_tree().reload_current_scene()
+func _on_body_entered(body):
+	if body.is_in_group("player"):
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
