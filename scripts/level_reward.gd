@@ -41,16 +41,31 @@ func _setup_abilities():
 	var pool = available_abilities.duplicate()
 	pool.shuffle()
 
+	var buttons = []
+
 	for res in pool.slice(0, 2):
 		var card = card_template.instantiate()
 		reward_container.add_child(card)
 		card.setup(res)
 		card.selected.connect(_on_ability_clicked)
+		
+		buttons.append(card.button)
 
-	if reward_container.get_child_count() > 0:
-		reward_container.get_child(0).button.grab_focus()
+	for i in range(buttons.size()):
+		var btn = buttons[i]
 
-# --- REFACTORED CLICK LOGIC ---
+		if i > 0:
+			btn.focus_neighbor_left = buttons[i - 1].get_path()
+		if i < buttons.size() - 1:
+			btn.focus_neighbor_right = buttons[i + 1].get_path()
+
+	if buttons.size() > 1:
+		buttons[0].focus_neighbor_left = buttons[-1].get_path()
+		buttons[-1].focus_neighbor_right = buttons[0].get_path()
+
+	if buttons.size() > 0:
+		buttons[0].grab_focus()
+
 func _on_ability_clicked(res: AbilityData):
 	save_data.unlock_seen_ability(res.id)
 	save_data.add_energy(1)
@@ -77,11 +92,30 @@ func _setup_levels():
 			
 	valid_rooms.shuffle()
 	
+	var buttons = []
+
 	for res in valid_rooms.slice(0, rooms_to_show):
 		var card = card_template.instantiate()
 		level_container.add_child(card)
 		card.setup(res)
 		card.selected.connect(_on_level_clicked)
+		
+		buttons.append(card.button)
+
+	for i in range(buttons.size()):
+		var btn = buttons[i]
+
+		if i > 0:
+			btn.focus_neighbor_left = buttons[i - 1].get_path()
+		if i < buttons.size() - 1:
+			btn.focus_neighbor_right = buttons[i + 1].get_path()
+
+	if buttons.size() > 1:
+		buttons[0].focus_neighbor_left = buttons[-1].get_path()
+		buttons[-1].focus_neighbor_right = buttons[0].get_path()
+
+	if buttons.size() > 0:
+		buttons[0].grab_focus()
 
 func _player_can_complete_room(room: RoomData, player_abilities: Array) -> bool:
 	if room.required_abilities.is_empty():
