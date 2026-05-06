@@ -1379,6 +1379,7 @@ position = Vector2(11, 6)
 shape = SubResource("WorldBoundaryShape2D_2ovk4")
 
 [node name="Collectible" parent="." index="23" unique_id=2013095035 instance=ExtResource("8_evma3")]
+position = Vector2(1331, 97)
 id = "sky_01"
 
 [connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_body_entered"]
