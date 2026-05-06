@@ -8,14 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dg4ogswlf8cwy" path="res://rooms/room_scenes/double_jump_room_02.tscn" id="5_22dh7"]
 [ext_resource type="Texture2D" uid="uid://btonu4ekyh2jo" path="res://rooms/room_images/hybrid_room_01.png" id="6_gxp3f"]
 [ext_resource type="PackedScene" uid="uid://c0o4fyr5m58tx" path="res://rooms/room_scenes/hybrid_room_01.tscn" id="7_06l4k"]
-[ext_resource type="Texture2D" uid="uid://d0ceyai4q7xj0" path="res://rooms/room_images/platforms_room_01.png" id="8_dqg7y"]
-[ext_resource type="PackedScene" uid="uid://dty1uiyg7a6me" path="res://rooms/room_scenes/platforms_room_01.tscn" id="9_qfdwg"]
-[ext_resource type="Texture2D" uid="uid://e4i4h4c1wyx8" path="res://rooms/room_images/wall_jump_room_01.png" id="10_hi0u5"]
-[ext_resource type="PackedScene" uid="uid://cf8uib5lyxtd0" path="res://rooms/room_scenes/wall_jump_room_01.tscn" id="11_a4wxt"]
-[ext_resource type="Resource" uid="uid://cuy8kyo4qjae2" path="res://rooms/room_data/standard_room_01.tres" id="12_11c3t"]
-[ext_resource type="Resource" uid="uid://dfvpp50073l66" path="res://rooms/room_data/precision_room_01.tres" id="13_p26sd"]
-[ext_resource type="Resource" uid="uid://cbwin0jmf2jjv" path="res://rooms/room_data/forest_room_1.tres" id="14_by1va"]
-[ext_resource type="Resource" uid="uid://b55u1adohwp3f" path="res://rooms/room_data/sky_room_1.tres" id="15_qha1v"]
+[ext_resource type="Resource" uid="uid://bvqes6gsphksd" path="res://rooms/room_data/forest_room_01.tres" id="8_8bjt5"]
+[ext_resource type="Resource" uid="uid://bg18huxx8kppx" path="res://rooms/room_data/sky_room_01.tres" id="9_8bjt5"]
 
 [sub_resource type="Resource" id="Resource_d1nu1"]
 script = ExtResource("1_3s7hy")
@@ -38,21 +32,7 @@ preview = ExtResource("6_gxp3f")
 required_abilities = ["wall_jump", ["dash", "double_jump", "glide"]]
 metadata/_custom_type_script = "uid://6kicdo0hg3ia"
 
-[sub_resource type="Resource" id="Resource_ficom"]
-script = ExtResource("1_3s7hy")
-scene = ExtResource("9_qfdwg")
-preview = ExtResource("8_dqg7y")
-required_abilities = ["wall_jump"]
-metadata/_custom_type_script = "uid://6kicdo0hg3ia"
-
-[sub_resource type="Resource" id="Resource_7dfag"]
-script = ExtResource("1_3s7hy")
-scene = ExtResource("11_a4wxt")
-preview = ExtResource("10_hi0u5")
-required_abilities = ["wall_jump", ["double_jump", "dash", "glide"]]
-metadata/_custom_type_script = "uid://6kicdo0hg3ia"
-
 [resource]
 script = ExtResource("2_yqhpg")
-rooms = Array[ExtResource("1_3s7hy")]([SubResource("Resource_d1nu1"), SubResource("Resource_rc3kg"), SubResource("Resource_0cnjv"), SubResource("Resource_ficom"), SubResource("Resource_7dfag"), ExtResource("12_11c3t"), ExtResource("13_p26sd"), ExtResource("14_by1va"), ExtResource("15_qha1v")])
+rooms = Array[ExtResource("1_3s7hy")]([SubResource("Resource_d1nu1"), SubResource("Resource_rc3kg"), SubResource("Resource_0cnjv"), ExtResource("9_8bjt5"), ExtResource("8_8bjt5")])
 metadata/_custom_type_script = "uid://c7tyxjnhcnlh0"

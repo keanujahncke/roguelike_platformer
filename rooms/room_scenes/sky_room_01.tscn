@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://byuw70nd7p0dt"]
+
+[ext_resource type="PackedScene" uid="uid://b4bwviyai4wqa" path="res://scenes/room_base_sky.tscn" id="1_seets"]
+
+[node name="RoomBase" unique_id=2127497181 instance=ExtResource("1_seets")]
+
+[node name="Parallax2D" parent="." index="7" unique_id=365841425]
+scroll_scale = Vector2(0.25, 1)
+
+[node name="FrontLayer" parent="Parallax2D" index="0" unique_id=353806906]
+position = Vector2(804, -420.99997)
+
+[node name="Parallax2D2" parent="." index="8" unique_id=164589663]
+scroll_scale = Vector2(0.1, 1)
+
+[node name="BackLayer" parent="Parallax2D2" index="0" unique_id=524875021]
+position = Vector2(959.99994, -423)
+
+[node name="Parallax2D5" parent="." index="11" unique_id=1329277239]
+scroll_scale = Vector2(1, 1)
+
+[node name="Sprite2D" parent="Parallax2D5" index="1" unique_id=1248703803]
+position = Vector2(968, -456.62503)
+scale = Vector2(1.6843749, 4.66712)
+
+[node name="Parallax2D6" parent="." index="12" unique_id=1519790038]
+visible = true
+
+[node name="Sprite2D" parent="." index="13" unique_id=1995723819]
+position = Vector2(866.74994, -48.000008)
+scale = Vector2(7.310937, 5.978261)

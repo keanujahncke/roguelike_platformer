@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://bg18huxx8kppx"]
+
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_pjxgs"]
+[ext_resource type="Texture2D" uid="uid://cclecl0sq6cl6" path="res://assets/bg3.png" id="1_pnmk5"]
+[ext_resource type="PackedScene" uid="uid://byuw70nd7p0dt" path="res://rooms/room_scenes/sky_room_01.tscn" id="1_wiccw"]
+
+[resource]
+script = ExtResource("1_pjxgs")
+scene = ExtResource("1_wiccw")
+preview = ExtResource("1_pnmk5")
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
