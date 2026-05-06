@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://b8gwg34quvh1b"]
 
-[ext_resource type="Script" uid="uid://ckiglesedn3ku" path="res://scenes/mushroom_hazard.gd" id="1_8366y"]
+[ext_resource type="Script" uid="uid://ckiglesedn3ku" path="res://scripts/mushroom_hazard.gd" id="1_8366y"]
 [ext_resource type="Texture2D" uid="uid://cfeddh4col4h7" path="res://assets/Monsters_14.png" id="2_wcn80"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tdsd5"]
 radius = 8.246211

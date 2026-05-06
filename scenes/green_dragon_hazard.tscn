@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://ta8pfe2kawtd"]
 
-[ext_resource type="Script" uid="uid://cx2xjakte36kj" path="res://scenes/green_dragon_hazard.gd" id="1_okqch"]
+[ext_resource type="Script" uid="uid://cx2xjakte36kj" path="res://scripts/green_dragon_hazard.gd" id="1_okqch"]
 [ext_resource type="Texture2D" uid="uid://drf6w036wnwwv" path="res://assets/greendragonasset.png" id="2_axrtk"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cb60e"]
 size = Vector2(70.5, 68)

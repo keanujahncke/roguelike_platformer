@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://d01dcy24xd2nh"]
 
-[ext_resource type="Script" uid="uid://btfj2cvled2mw" path="res://scenes/snake_hazard.gd" id="1_5qs3w"]
+[ext_resource type="Script" uid="uid://btfj2cvled2mw" path="res://scripts/snake_hazard.gd" id="1_5qs3w"]
 [ext_resource type="Texture2D" uid="uid://c5qdgejpgos6e" path="res://assets/Monsters_19.png" id="2_5daio"]
+
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5qs3w"]
 radius = 6.0

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bp1an824b1jrr"]
 
-[ext_resource type="Script" uid="uid://coealum13f8sf" path="res://scenes/spider_hazard.gd" id="1_kd3i1"]
+[ext_resource type="Script" uid="uid://coealum13f8sf" path="res://scripts/spider_hazard.gd" id="1_kd3i1"]
 [ext_resource type="Texture2D" uid="uid://c1kjbgq1odkt8" path="res://assets/Monsters_8.png" id="2_2luj1"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_krp16"]
 radius = 6.0827627
