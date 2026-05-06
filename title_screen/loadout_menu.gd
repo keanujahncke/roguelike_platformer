@@ -1,13 +1,13 @@
 extends Control
 
-@onready var title_label = $Label
+@onready var title_label = %Label
 
-@onready var double_jump_box = $ColumnLabels/Upgrades/DoubleJumpBox
-@onready var wall_jump_box = $ColumnLabels/Upgrades/WallJumpBox
-@onready var dash_box = $ColumnLabels/Upgrades/DashBox
-@onready var glide_box = $ColumnLabels/Upgrades/GlideBox
+@onready var double_jump_box = %DoubleJumpBox
+@onready var wall_jump_box = %WallJumpBox
+@onready var dash_box = %DashBox
+@onready var glide_box = %GlideBox
 
-@onready var start_run = $StartRun
+@onready var start_run = %StartRun
 
 var costs = {
 	"DoubleJumpBox": 3,
@@ -21,7 +21,7 @@ func _ready():
 	start_run.pressed.connect(_on_start_run_pressed)
 	setup_boxes()
 	update_energy_label()
-
+	
 func refresh():
 	# 1. Update the checkboxes based on the NEW save data
 	setup_boxes()
@@ -45,7 +45,6 @@ func setup_boxes():
 	_setup_box(dash_box, "dash")
 	_setup_box(glide_box, "glide")
 
-
 func _setup_box(box: CheckBox, id: String):
 	if save_data.has_seen_ability(id):
 		box.disabled = false
@@ -53,7 +52,6 @@ func _setup_box(box: CheckBox, id: String):
 	else:
 		box.disabled = true
 		box.modulate = Color(0.5, 0.5, 0.5)
-
 
 # ==================================================
 # CHECKBOX SIGNAL
@@ -79,20 +77,18 @@ func get_total_cost() -> int:
 	var total = 0
 
 	for box_name in costs.keys():
-		var box = get_node("ColumnLabels/Upgrades/" + box_name)
+		var box = get_node("%" + box_name)
 
 		if box.button_pressed:
 			total += costs[box_name]
 
 	return total
 
-
 func update_energy_label():
-	title_label.text = "Choose Starting Upgrades   Energy %d / %d" % [
+	title_label.text = "Choose Starting Upgrades  Energy %d / %d" % [
 		get_total_cost(),
 		save_data.get_max_energy()
 	]
-
 
 # ==================================================
 # START RUN
