@@ -5,21 +5,27 @@ extends CanvasLayer
 @onready var loadout_menu = %LoadoutMenu
 
 @onready var new_game_button = %NewGameButton
-@onready var quit_game_button: Button = %QuitGameButton
+@onready var quit_game_button = %QuitGameButton
 
-@onready var slot_00_load = %NewGameMenu/SlotsContainer/Slot00.get_node("LoadButton")
-@onready var slot_00_delete = %NewGameMenu/SlotsContainer/Slot00.get_node("DeleteButton")
+@onready var slot_00_load = %slot_00_load
+@onready var slot_00_delete = %slot_00_delete
 
-@onready var slot_01_load = %NewGameMenu/SlotsContainer/Slot01.get_node("LoadButton")
-@onready var slot_01_delete = %NewGameMenu/SlotsContainer/Slot01.get_node("DeleteButton")
 
-@onready var slot_02_load = %NewGameMenu/SlotsContainer/Slot02.get_node("LoadButton")
-@onready var slot_02_delete = %NewGameMenu/SlotsContainer/Slot02.get_node("DeleteButton")
+@onready var slot_01_load = %slot_01_load
+@onready var slot_01_delete = %slot_01_delete
+
+@onready var slot_02_load = %slot_02_load
+@onready var slot_02_delete = %slot_02_delete
 
 @onready var start_run_button = %StartRun
+@onready var pointer = %Pointer
+
 
 
 func _ready() -> void:
+	# Hides Pointer
+	pointer.visible = false
+	
 	new_game_button.pressed.connect(show_new_game_menu)
 	quit_game_button.pressed.connect(_on_quit_pressed)
 
@@ -41,6 +47,27 @@ func _ready() -> void:
 		show_loadout_menu()
 	else:
 		show_main_menu()
+		
+func _process(_delta: float) -> void:
+	var focused_node = get_viewport().gui_get_focus_owner()
+	
+	if focused_node != null and focused_node.is_visible_in_tree():
+		pointer.visible = true
+		var target_pos = focused_node.global_position
+		var x_offset = -50 # Default distance
+	
+		if "slot" in focused_node.name.to_lower() or "slot" in focused_node.get_parent().name.to_lower():
+			x_offset = -120 # Push it further left for the Slot menu
+		elif focused_node is CheckBox:
+			x_offset = -40
+
+		var y_offset = focused_node.size.y / 2
+		pointer.global_position = target_pos + Vector2(x_offset, y_offset)
+		
+		# Bobbing animation
+		pointer.global_position.x += sin(Time.get_ticks_msec() * 0.01) * 5
+	else:
+		pointer.visible = false
 
 
 func _unhandled_input(event: InputEvent) -> void:

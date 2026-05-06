@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://l1htylol2kkd" path="res://pause_menu/pause_menu.gd" id="1_5hbt6"]
 [ext_resource type="Texture2D" uid="uid://cyikb2fmdx6gb" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/3 Item Holder/1.png" id="2_rd7dy"]
+[ext_resource type="Texture2D" uid="uid://b511nr0i60m71" path="res://assets/cursor.png" id="3_uwtdo"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rd7dy"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwtdo"]
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=926336203]
 process_mode = 3
@@ -46,12 +47,14 @@ grow_vertical = 2
 [node name="ResumeGameButton" type="Button" parent="PauseMenu/PauseMenuButtons" unique_id=1432040080]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_focus_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_hover_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_outline_color = Color(0, 0.30588236, 0.36862746, 1)
 theme_override_font_sizes/font_size = 25
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rd7dy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uwtdo")
 text = "Resume"
 icon = ExtResource("2_rd7dy")
 flat = true
@@ -60,13 +63,20 @@ icon_alignment = 1
 [node name="MainMenuGameButton" type="Button" parent="PauseMenu/PauseMenuButtons" unique_id=1134812099]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7647059, 1)
-theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7647059, 1)
+theme_override_colors/font_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_focus_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_hover_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0.50980395, 0.6117647, 1)
+theme_override_colors/font_outline_color = Color(0, 0.30588236, 0.36862746, 1)
 theme_override_font_sizes/font_size = 25
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rd7dy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uwtdo")
 text = "Main Menu"
 icon = ExtResource("2_rd7dy")
 flat = true
 icon_alignment = 1
+
+[node name="Pointer" type="Sprite2D" parent="." unique_id=1266346045]
+visible = false
+texture = ExtResource("3_uwtdo")
+hframes = 4
