@@ -88,7 +88,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.0011889, 1)
-color = Color(0.2159017, 0.21590173, 0.2159017, 1)
+color = Color(0.085079186, 0.15019315, 0.27016392, 1)
 
 [node name="MainMenuContainer" type="VBoxContainer" parent="MainMenu" unique_id=1606639054]
 layout_mode = 1
@@ -107,9 +107,13 @@ theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="MainMenu/MainMenuContainer" unique_id=416120490]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4627451)
+theme_override_constants/shadow_offset_x = 9
+theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 60
-text = "Game Name"
+text = "Chronicles of Descending"
 horizontal_alignment = 1
+uppercase = true
 
 [node name="NewGameButton" type="Button" parent="MainMenu/MainMenuContainer" unique_id=1432040080]
 unique_name_in_owner = true
@@ -155,6 +159,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="NewGameMenu" unique_id=611293623]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08627451, 0.14901961, 0.27058825, 1)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="NewGameMenu" unique_id=700224789]
 layout_mode = 1
@@ -335,6 +348,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_dxpbd")
+
+[node name="ColorRect" type="ColorRect" parent="LoadoutMenu" unique_id=427259479]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08627451, 0.14901961, 0.27058825, 1)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="LoadoutMenu" unique_id=1890030099]
 layout_mode = 1
