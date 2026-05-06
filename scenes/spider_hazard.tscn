@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bp1an824b1jrr"]
+
+[ext_resource type="Script" uid="uid://coealum13f8sf" path="res://scenes/spider_hazard.gd" id="1_kd3i1"]
+[ext_resource type="Texture2D" uid="uid://c1kjbgq1odkt8" path="res://assets/Monsters_8.png" id="2_2luj1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_krp16"]
+radius = 6.0827627
+
+[node name="SpiderHazard" type="Area2D" unique_id=1413757237]
+script = ExtResource("1_kd3i1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1501121966]
+position = Vector2(-2, -1.0000038)
+scale = Vector2(0.1796875, 0.18749999)
+texture = ExtResource("2_2luj1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=596543803]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_krp16")

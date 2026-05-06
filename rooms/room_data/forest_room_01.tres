@@ -8,4 +8,5 @@
 script = ExtResource("2_lbeku")
 scene = ExtResource("1_l58tk")
 preview = ExtResource("1_lbeku")
+required_abilities = ["dash", ["double_jump", "wall_jump"]]
 metadata/_custom_type_script = "uid://6kicdo0hg3ia"

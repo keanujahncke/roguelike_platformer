@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d01dcy24xd2nh"]
+
+[ext_resource type="Script" uid="uid://btfj2cvled2mw" path="res://scenes/snake_hazard.gd" id="1_5qs3w"]
+[ext_resource type="Texture2D" uid="uid://c5qdgejpgos6e" path="res://assets/Monsters_19.png" id="2_5daio"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5qs3w"]
+radius = 6.0
+height = 24.0
+
+[node name="SnakeHazard" type="Area2D" unique_id=1111096827]
+script = ExtResource("1_5qs3w")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=431395675]
+position = Vector2(0, 1)
+scale = Vector2(0.18310547, 0.27404794)
+texture = ExtResource("2_5daio")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1486657301]
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_5qs3w")
