@@ -13,6 +13,7 @@ extends Node2D
 
 @onready var player = $Player
 @onready var game_over = $CanvasLayer/GameOver
+@onready var restart_button = $CanvasLayer/GameOver/HBoxContainer/Button
 @onready var level_rewards_ui = $CanvasLayer/LevelReward
 @onready var music: AudioStreamPlayer = $Music
 @onready var heartContainer = $HeartUI/heartContainer
@@ -186,6 +187,7 @@ func _on_player_health_changed(new_health: int):
 # GAME OVER
 func _on_player_died() -> void:
 	game_over.show()
+	restart_button.grab_focus()
 
 
 # RESTART

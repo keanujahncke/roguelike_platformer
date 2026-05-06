@@ -38,7 +38,13 @@ func open_ui(db: RoomDatabase):
 
 func _setup_abilities():
 	_clear_container(reward_container)
-	var pool = available_abilities.duplicate()
+	var current_abilities = run_manager.get_abilities()
+
+	var pool = []
+	for ability in available_abilities:
+		if not current_abilities.has(ability.id):
+			pool.append(ability)
+
 	pool.shuffle()
 
 	var buttons = []

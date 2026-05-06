@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b8gwg34quvh1b" path="res://scenes/mushroom_hazard.tscn" id="7_weias"]
 [ext_resource type="Script" uid="uid://bklylay6if7p0" path="res://scripts/deathbox_bottom.gd" id="8_uttuv"]
 [ext_resource type="Script" uid="uid://cetm0ffpiaqfx" path="res://scripts/deathbox_left.gd" id="9_vvxsh"]
+[ext_resource type="PackedScene" uid="uid://dvxs3bgsmt2dd" path="res://scenes/collectible.tscn" id="10_vvxsh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pb4og"]
 texture = ExtResource("2_4o1cg")
@@ -1511,7 +1512,7 @@ move_distance = 23.0
 
 [node name="SnakeHazard4" parent="." index="19" unique_id=39698149 instance=ExtResource("4_pb4og")]
 position = Vector2(1947, -356)
-speed = 75.0
+speed = 60.0
 move_distance = 50.0
 
 [node name="SnakeHazard5" parent="." index="20" unique_id=1464021441 instance=ExtResource("4_pb4og")]
@@ -1544,3 +1545,7 @@ script = ExtResource("9_vvxsh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Deathbox Left" index="0" unique_id=1923465981]
 position = Vector2(-126, -133)
 shape = SubResource("RectangleShape2D_uttuv")
+
+[node name="Collectible" parent="." index="27" unique_id=2013095035 instance=ExtResource("10_vvxsh")]
+position = Vector2(1988, -496)
+id = "forest_01"
