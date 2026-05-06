@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b8gwg34quvh1b"]
+
+[ext_resource type="Script" uid="uid://ckiglesedn3ku" path="res://scenes/mushroom_hazard.gd" id="1_8366y"]
+[ext_resource type="Texture2D" uid="uid://cfeddh4col4h7" path="res://assets/Monsters_14.png" id="2_wcn80"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdsd5"]
+radius = 8.246211
+
+[node name="MushroomHazard" type="Area2D" unique_id=405827029]
+script = ExtResource("1_8366y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1911623168]
+position = Vector2(-5.000001, 1)
+scale = Vector2(0.23828128, 0.2304688)
+texture = ExtResource("2_wcn80")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=92693315]
+position = Vector2(-4, 1)
+shape = SubResource("CircleShape2D_tdsd5")
