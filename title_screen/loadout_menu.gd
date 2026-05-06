@@ -19,6 +19,10 @@ var costs = {
 
 func _ready():
 	start_run.pressed.connect(_on_start_run_pressed)
+	double_jump_box.toggled.connect(_on_box_toggled)
+	wall_jump_box.toggled.connect(_on_box_toggled)
+	dash_box.toggled.connect(_on_box_toggled)
+	glide_box.toggled.connect(_on_box_toggled)
 	setup_boxes()
 	update_energy_label()
 	
