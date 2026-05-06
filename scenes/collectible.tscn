@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dvxs3bgsmt2dd"]
+
+[ext_resource type="Script" uid="uid://dyi2kl3l2vtie" path="res://scripts/collectible.gd" id="1_1pg6c"]
+[ext_resource type="Texture2D" uid="uid://cbehs1lea7qga" path="res://assets/floppydisk.png" id="1_bkg8t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2x07"]
+size = Vector2(81, 77)
+
+[node name="Collectible" type="Area2D" unique_id=2013095035 groups=["collectibles"]]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_1pg6c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=764813765]
+texture = ExtResource("1_bkg8t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1476678783]
+position = Vector2(-0.5, 10.5)
+shape = SubResource("RectangleShape2D_k2x07")

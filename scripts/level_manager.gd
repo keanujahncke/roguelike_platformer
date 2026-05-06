@@ -41,6 +41,9 @@ func _ready():
 	player.died.connect(_on_player_died)
 
 	load_room(starting_room)
+	
+	for c in get_tree().get_nodes_in_group("collectibles"):
+		c.collected.connect(_on_collectible_collected)
 
 
 func apply_starting_upgrades():
@@ -100,7 +103,6 @@ func play_music_for_room(room_scene: PackedScene):
 	print("MUSIC: Now playing ", track_name, " track at ", next_volume_db, " dB.")
 
 
-# ABILITY PICKED -> actually unlock it
 func _on_ability_reward_selected(id: String):
 	print("Ability rewarded: ", id)
 
@@ -108,6 +110,12 @@ func _on_ability_reward_selected(id: String):
 		return
 
 	player.unlock_ability(id)
+
+
+func _on_collectible_collected(id: String, value: int):
+	if not save_data.has_collected(id):
+		save_data.mark_collected(id)
+		save_data.add_energy(value)
 
 
 func _on_room_selected(room_data : RoomData):
@@ -125,7 +133,6 @@ func load_room(room_scene : PackedScene):
 	add_child(current_room)
 	player.current_room = current_room
 
-	# Position player
 	var spawn = current_room.get_node("Spawn")
 	player.global_position = spawn.global_position
 	player.velocity = Vector2.ZERO

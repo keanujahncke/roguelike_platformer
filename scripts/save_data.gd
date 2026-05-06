@@ -13,7 +13,8 @@ func get_save_path() -> String:
 var data = {
 	"max_energy": 1,
 	"seen_abilities": [],
-	"selected_starting_abilities": []
+	"selected_starting_abilities": [],
+	"collected_ids": []
 }
 
 
@@ -68,6 +69,9 @@ func _apply_missing_defaults():
 
 	if not data.has("selected_starting_abilities"):
 		data["selected_starting_abilities"] = []
+	
+	if not data.has("collected_ids"):
+		data["collected_ids"] = []
 
 
 
@@ -93,7 +97,8 @@ func _reset_runtime_data():
 	data = {
 		"max_energy": 1,
 		"seen_abilities": [],
-		"selected_starting_abilities": []
+		"selected_starting_abilities": [],
+		"collected_ids": []
 	}
 
 func reset_save():
@@ -139,3 +144,16 @@ func get_selected_starting_abilities() -> Array:
 func clear_selected_starting_abilities():
 	data["selected_starting_abilities"] = []
 	save()
+
+func get_collected_ids() -> Array:
+	return data["collected_ids"]
+
+
+func has_collected(id: String) -> bool:
+	return data["collected_ids"].has(id)
+
+
+func mark_collected(id: String):
+	if not data["collected_ids"].has(id):
+		data["collected_ids"].append(id)
+		save()
