@@ -1376,8 +1376,8 @@ repeat_times = 10
 
 [node name="FrontLayerLight" type="Sprite2D" parent="Parallax2D3" index="0" unique_id=326142762]
 z_index = 10
-position = Vector2(671, -292.5)
-scale = Vector2(1.1938776, 3.8483143)
+position = Vector2(671, -108)
+scale = Vector2(1.1938776, 1.7752807)
 texture = ExtResource("3_bcbyu")
 region_enabled = true
 region_rect = Rect2(0, 0, 294, 178)
