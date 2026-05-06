@@ -81,7 +81,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="MainMenu" unique_id=1691411443]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -345,6 +344,7 @@ text = " Delete "
 
 [node name="LoadoutMenu" type="Control" parent="." unique_id=145278214]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
