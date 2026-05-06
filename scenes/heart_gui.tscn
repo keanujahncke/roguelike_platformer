@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://desqiplxjf0o7"]
 
-[ext_resource type="Texture2D" uid="uid://bleaj5icjblje" path="res://assets/GUI/All 16x16 Health Heart Sets/16x16 Health Heart Blue.png" id="1_1xhc3"]
+[ext_resource type="Texture2D" uid="uid://bleaj5icjblje" path="res://assets/GUI/16x16 Health Heart Blue.png" id="1_1xhc3"]
 [ext_resource type="Script" uid="uid://da6jav5hk6bnc" path="res://scripts/heart_gui.gd" id="1_x0egl"]
 
 [node name="HeartGUI" type="Panel" unique_id=367854330]

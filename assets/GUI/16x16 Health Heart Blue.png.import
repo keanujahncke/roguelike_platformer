@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1p3r4jcgj6k6"
-path="res://.godot/imported/16x16 Heart Health Black Horizontal.png-0197bd4db241a4ba478c4f49d9f1258a.ctex"
+uid="uid://bleaj5icjblje"
+path="res://.godot/imported/16x16 Health Heart Blue.png-39fdae06b5a3910857000c54031127e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GUI/All 16x16 Health Heart Sets/Horizontal Half heart sets/16x16 Heart Health Black Horizontal.png"
-dest_files=["res://.godot/imported/16x16 Heart Health Black Horizontal.png-0197bd4db241a4ba478c4f49d9f1258a.ctex"]
+source_file="res://assets/GUI/16x16 Health Heart Blue.png"
+dest_files=["res://.godot/imported/16x16 Health Heart Blue.png-39fdae06b5a3910857000c54031127e5.ctex"]
 
 [params]
 
