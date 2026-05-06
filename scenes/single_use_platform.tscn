@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6eqkfswfve8j"]
 
 [ext_resource type="Script" uid="uid://wvsmmmocjlcr" path="res://scripts/single_use_platform.gd" id="1_7u7l7"]
-[ext_resource type="Texture2D" uid="uid://dtvuxgbl04cof" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Book Desk/6.png" id="1_yrwos"]
+[ext_resource type="Texture2D" uid="uid://31p01iqpr0nx" path="res://assets/bg_cloud_E.png" id="2_7u7l7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7u7l7"]
 size = Vector2(229.85336, 563)
@@ -13,8 +13,9 @@ scale = Vector2(0.07589862, 0.07589862)
 script = ExtResource("1_7u7l7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1201966477]
-scale = Vector2(0.5984009, 0.3839995)
-texture = ExtResource("1_yrwos")
+position = Vector2(52.70189, -92.22829)
+scale = Vector2(13.044404, 9.336715)
+texture = ExtResource("2_7u7l7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=279174442]
 position = Vector2(-0.5, 0.5)
@@ -30,6 +31,7 @@ shape = SubResource("RectangleShape2D_yrwos")
 debug_color = Color(0.7957965, 2.6183128e-05, 0.57226896, 0.41960785)
 
 [node name="Timer" type="Timer" parent="." unique_id=7808817]
+wait_time = 1.25
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

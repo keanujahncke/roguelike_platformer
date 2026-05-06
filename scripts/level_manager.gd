@@ -9,7 +9,7 @@ extends Node2D
 
 @export var dungeon_music_db := -15.0
 @export var forest_music_db := -20.0
-@export var sky_music_db := 0.0
+@export var sky_music_db := -15.0
 
 @onready var player = $Player
 @onready var game_over = $CanvasLayer/GameOver
