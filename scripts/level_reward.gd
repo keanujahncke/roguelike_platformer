@@ -51,7 +51,6 @@ func _setup_abilities():
 		
 		buttons.append(card.button)
 
-	# Set focus neighbors
 	for i in range(buttons.size()):
 		var btn = buttons[i]
 
@@ -60,16 +59,13 @@ func _setup_abilities():
 		if i < buttons.size() - 1:
 			btn.focus_neighbor_right = buttons[i + 1].get_path()
 
-	# Optional: wrap around (feels better on controller)
 	if buttons.size() > 1:
 		buttons[0].focus_neighbor_left = buttons[-1].get_path()
 		buttons[-1].focus_neighbor_right = buttons[0].get_path()
 
-	# Set initial focus
 	if buttons.size() > 0:
 		buttons[0].grab_focus()
 
-# --- REFACTORED CLICK LOGIC ---
 func _on_ability_clicked(res: AbilityData):
 	save_data.unlock_seen_ability(res.id)
 	save_data.add_energy(1)
@@ -106,7 +102,6 @@ func _setup_levels():
 		
 		buttons.append(card.button)
 
-	# --- Set focus neighbors ---
 	for i in range(buttons.size()):
 		var btn = buttons[i]
 
@@ -115,12 +110,10 @@ func _setup_levels():
 		if i < buttons.size() - 1:
 			btn.focus_neighbor_right = buttons[i + 1].get_path()
 
-	# Optional wrap-around (nice for controller feel)
 	if buttons.size() > 1:
 		buttons[0].focus_neighbor_left = buttons[-1].get_path()
 		buttons[-1].focus_neighbor_right = buttons[0].get_path()
 
-	# --- Initial focus ---
 	if buttons.size() > 0:
 		buttons[0].grab_focus()
 
