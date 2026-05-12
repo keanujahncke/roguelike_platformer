@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bboayh17xrwuo"]
+
+[ext_resource type="Script" uid="uid://ds3f70lakwwb6" path="res://map/map_generator.gd" id="1_hgrid"]
+
+[node name="Map" type="Control" unique_id=67554772]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=138228007]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2119917361]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=707263876]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1172939826]
+layout_mode = 2
+
+[node name="MapGenerator" type="Node" parent="." unique_id=1838421192]
+script = ExtResource("1_hgrid")
