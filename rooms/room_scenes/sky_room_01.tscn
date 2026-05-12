@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://byuw70nd7p0dt"]
 
-[ext_resource type="PackedScene" uid="uid://b4bwviyai4wqa" path="res://scenes/room_base_sky.tscn" id="1_seets"]
+[ext_resource type="PackedScene" uid="uid://b4bwviyai4wqa" path="res://scenes/doNOTdelete_sky.tscn" id="1_seets"]
 [ext_resource type="Texture2D" uid="uid://bvf4yujudul0b" path="res://assets/Dungeon Tile Set.png" id="2_h2kjj"]
 [ext_resource type="Texture2D" uid="uid://dvxxkgjw2bem3" path="res://assets/Pixel Woods Asset Pack/Tileset/Pixel_Woods_Tileset.png" id="3_m08hm"]
 [ext_resource type="Texture2D" uid="uid://c3sqx134fyfyv" path="res://assets/Platformer - desert/Tileset/00Atlas.png" id="4_2ovk4"]
@@ -1306,6 +1306,7 @@ tile_set = SubResource("TileSet_7k0xe")
 [node name="Parallax2D" parent="." index="7" unique_id=365841425]
 scroll_scale = Vector2(0.25, 0.5)
 scroll_offset = Vector2(0, 693.285)
+repeat_times = 15
 
 [node name="FrontLayer" parent="Parallax2D" index="0" unique_id=353806906]
 position = Vector2(800.5625, -420.99997)
@@ -1314,9 +1315,11 @@ scale = Vector2(2.669643, 3.144216)
 [node name="Parallax2D2" parent="." index="8" unique_id=164589663]
 scroll_scale = Vector2(0.1, 0.5)
 scroll_offset = Vector2(0, 672.515)
+repeat_times = 31
 
 [node name="BackLayer" parent="Parallax2D2" index="0" unique_id=524875021]
-position = Vector2(959.99994, -423)
+position = Vector2(883.3515, -436.015)
+scale = Vector2(2.696269, 2.7359552)
 
 [node name="FrontLayerLight" parent="Parallax2D3" parent_id_path=PackedInt32Array(1382791215) index="0" unique_id=326142762]
 position = Vector2(671, -106)
@@ -1325,6 +1328,7 @@ scale = Vector2(1.1938776, 1.7528089)
 [node name="Parallax2D5" parent="." index="11" unique_id=1329277239]
 scroll_scale = Vector2(1, 0.5)
 scroll_offset = Vector2(0, 389.555)
+repeat_times = 62
 
 [node name="Sprite2D" parent="Parallax2D5" index="1" unique_id=1248703803]
 position = Vector2(1191.25, -153)

@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cgybee6vc1p8m"]
 
-[ext_resource type="PackedScene" uid="uid://dnwb0v406adg0" path="res://scenes/room_base_forest.tscn" id="1_uyggk"]
+[ext_resource type="PackedScene" uid="uid://dnwb0v406adg0" path="res://scenes/doNOTdelete_forest.tscn" id="1_uyggk"]
 [ext_resource type="Texture2D" uid="uid://dvxxkgjw2bem3" path="res://assets/Pixel Woods Asset Pack/Tileset/Pixel_Woods_Tileset.png" id="2_4o1cg"]
 [ext_resource type="Texture2D" uid="uid://bvf4yujudul0b" path="res://assets/Dungeon Tile Set.png" id="3_4o1cg"]
 [ext_resource type="PackedScene" uid="uid://d01dcy24xd2nh" path="res://scenes/snake_hazard.tscn" id="4_pb4og"]
@@ -1507,8 +1507,8 @@ pause_time = 1.0
 
 [node name="SpiderHazard2" parent="." index="18" unique_id=878291441 instance=ExtResource("5_ekl72")]
 position = Vector2(1137, -184)
-speed = 160.0
-move_distance = 23.0
+move_distance = 20.0
+pause_time = 1.0
 
 [node name="SnakeHazard4" parent="." index="19" unique_id=39698149 instance=ExtResource("4_pb4og")]
 position = Vector2(1947, -356)
