@@ -9,6 +9,7 @@ size = Vector2(81, 77)
 [node name="Collectible" type="Area2D" unique_id=2013095035 groups=["collectibles"]]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_1pg6c")
+value = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=764813765]
 texture = ExtResource("1_bkg8t")

@@ -67,8 +67,6 @@ func _ready():
 	get_tree().paused = true
 	map_ui.open_map()
 	
-	for c in get_tree().get_nodes_in_group("collectibles"):
-		c.collected.connect(_on_collectible_collected)
 
 
 # --- UPDATED SELECTION LOGIC ---
@@ -214,6 +212,8 @@ func load_room(room_scene : PackedScene):
 	play_music_for_room(room_scene)
 	await get_tree().create_timer(0.5).timeout
 	exit_used = false
+	for c in get_tree().get_nodes_in_group("collectibles"):
+		c.collected.connect(_on_collectible_collected)
 
 func restart_game():
 	run_manager.start_new_run()
@@ -263,3 +263,4 @@ func _on_collectible_collected(id: String, value: int):
 	if not save_data.has_collected(id):
 		save_data.mark_collected(id)
 		save_data.add_energy(value)
+		print("Collectible %s collected. Adding %s energy" % [id, value])

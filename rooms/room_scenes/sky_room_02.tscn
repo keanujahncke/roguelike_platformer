@@ -64,6 +64,7 @@ fly_distance = 600.0
 [node name="Collectible" parent="." index="25" unique_id=2013095035]
 visible = true
 position = Vector2(2294, -130)
+id = "sky_02"
 
 [node name="Platforms" type="Node" parent="." index="26" unique_id=939705973]
 

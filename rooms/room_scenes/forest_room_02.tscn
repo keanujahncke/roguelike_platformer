@@ -102,3 +102,4 @@ position = Vector2(1484, -486)
 [node name="Collectible" parent="." index="32" unique_id=2013095035]
 visible = true
 position = Vector2(472, -210)
+id = "forest_02"
