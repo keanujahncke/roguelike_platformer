@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://bnbmu8id2s1q3" path="res://scripts/boss_fake_death_trigger.gd" id="10_6wbvr"]
 [ext_resource type="Texture2D" uid="uid://dlrlgalheuph0" path="res://assets/Spritesheets/sword.png" id="10_kr2de"]
 [ext_resource type="PackedScene" uid="uid://bklkly5qjuxak" path="res://scenes/SwordSlashEffect.tscn" id="11_mc58d"]
-[ext_resource type="PackedScene" uid="uid://0ql3da7v7y7y" path="res://player/player.tscn" id="13_ys6to"]
 [ext_resource type="Texture2D" uid="uid://c50fn0x1xblar" path="res://assets/boss parallax/bg3.png" id="14_ys6to"]
 [ext_resource type="Texture2D" uid="uid://m61i8vq8bhkd" path="res://assets/boss parallax/bg_stars.png" id="15_ur6or"]
 
@@ -1033,15 +1032,13 @@ shape = SubResource("RectangleShape2D_uk836")
 [node name="Destination3" type="Marker2D" parent="AreaManipulator/ChunkMoves/CM3" unique_id=1878436458]
 position = Vector2(-76, -53)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2834305]
-position = Vector2(7, -266)
-
-[node name="BossFakeDeathTrigger" type="Area2D" parent="." unique_id=1831566765 node_paths=PackedStringArray("boss", "slash_target")]
+[node name="BossFakeDeathTrigger" type="Area2D" parent="." unique_id=1831566765 node_paths=PackedStringArray("boss", "slash_target", "boss_camera_target")]
 position = Vector2(0, -2)
 script = ExtResource("10_6wbvr")
 boss = NodePath("../Boss")
 sword_slash_scene = ExtResource("11_mc58d")
 slash_target = NodePath("../Boss")
+boss_camera_target = NodePath("../BossCameraTarget")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BossFakeDeathTrigger" unique_id=1384054150]
 position = Vector2(142.75, -428.00003)
@@ -1051,9 +1048,6 @@ sprite_frames = SubResource("SpriteFrames_d62dt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossFakeDeathTrigger" unique_id=445086455]
 position = Vector2(144, -422)
 shape = SubResource("RectangleShape2D_n55xu")
-
-[node name="Player" parent="BossFakeDeathTrigger" unique_id=1122822699 instance=ExtResource("13_ys6to")]
-position = Vector2(101, -436)
 
 [node name="ParallaxSky" type="Parallax2D" parent="." unique_id=167453243]
 
@@ -1081,3 +1075,6 @@ scroll_offset = Vector2(50, 144)
 scroll_offset = Vector2(65, 105)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxMtFar" unique_id=372843819]
+
+[node name="BossCameraTarget" type="Marker2D" parent="." unique_id=450588477]
+position = Vector2(124, -127)
