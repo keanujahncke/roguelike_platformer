@@ -5,11 +5,11 @@ extends Node
 const X_DIST := 32
 const Y_DIST := 32
 const PLACEMENT_RANDOMNESS := 5
-const FLOORS := 15
-const MAP_WIDTH :=7
-const PATHS := 6
+const FLOORS := 10
+const MAP_WIDTH :=5
+const PATHS := 5
 const LEVEL_NODE_WEIGHT := 10.0
-const UPGRADE_NODE_WEIGHT := 2.5
+const UPGRADE_NODE_WEIGHT := 4.0
 const HEAL_NODE_WEIGHT := 4.0
 
 var random_room_type_weights = {
@@ -147,6 +147,10 @@ func _setup_room_types() -> void:
 		if room.next_rooms.size() > 0:
 			room.type = MapNode.Type.LEVEL
 	
+	for room: MapNode in map_data[1]:
+		if room.next_rooms.size() > 0:
+			room.type = MapNode.Type.UPGRADE
+	
 	for room: MapNode in map_data[FLOORS / 2]:
 		if room.next_rooms.size() > 0:
 			room.type = MapNode.Type.UPGRADE
@@ -193,6 +197,7 @@ func _room_has_parent_of_type(room: MapNode, type: MapNode.Type) -> bool:
 		var parent_candidate := map_data[room.row - 1][room.column - 1] as MapNode
 		if parent_candidate.next_rooms.has(room):
 			parents.append(parent_candidate)
+			
 	
 	if room.row > 0:
 		var parent_candidate := map_data[room.row - 1][room.column] as MapNode

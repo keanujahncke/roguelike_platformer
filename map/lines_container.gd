@@ -1,7 +1,7 @@
 extends Node2D
 
 func _draw() -> void:
-	var parent = get_parent() # This should be your Map node
+	var parent = get_parent().get_parent().get_parent() # This should be your Map node
 	if not "map_data" in parent: return
 	
 	var line_color = Color(1, 1, 1, 0.4) 
