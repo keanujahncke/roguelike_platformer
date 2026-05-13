@@ -5,12 +5,14 @@ var map_data: Array[Array] = [] # Stores generated floors [cite: 23]
 var current_map_node: MapNode = null # Tracks player position [cite: 23]
 var completed_nodes: Array[MapNode] = [] # Tracks progress [cite: 23]
 var next_room_to_load: PackedScene = null # The room selected from map [cite: 24]
+var visited_room_paths: Array[String] = []
 
 func start_new_run():
 	current_run_abilities = save_data.get_selected_starting_abilities().duplicate() 
 	map_data = [] 
 	current_map_node = null
 	completed_nodes = []
+	visited_room_paths.clear()
 	next_room_to_load = null
 	print("Run Started! Initial Abilities: ", current_run_abilities)
 

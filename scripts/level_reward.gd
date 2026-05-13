@@ -62,7 +62,7 @@ func _setup_abilities():
 			reward_choices.append(reward)
 
 	if reward_choices.is_empty():
-		_close_ui()
+		_close_ui.call_deferred()
 		return
 
 	var buttons = []

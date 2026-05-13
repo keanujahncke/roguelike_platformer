@@ -4,8 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://0ql3da7v7y7y" path="res://player/player.tscn" id="2_feb5d"]
 [ext_resource type="Resource" uid="uid://bjwkla2xyglfp" path="res://rooms/room_data/boss_room.tres" id="3_ir15t"]
 [ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_wo7d7"]
+[ext_resource type="AudioStream" uid="uid://dxkdlsc1hu2tm" path="res://assets/audio/dungeontrack.wav" id="4_1kice"]
+[ext_resource type="AudioStream" uid="uid://cn56443l5ygfa" path="res://assets/audio/foresttrack1.1.wav" id="5_5newe"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="5_gv0uq"]
+[ext_resource type="AudioStream" uid="uid://y3m1ha6edvsu" path="res://assets/audio/skytrack1.wav" id="6_37s47"]
+[ext_resource type="AudioStream" uid="uid://c6limdgyiaqtg" path="res://assets/audio/bossintro.wav" id="7_bt5mj"]
 [ext_resource type="Script" uid="uid://dhdhyr4j3myj4" path="res://scripts/game_over.gd" id="7_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://bdsx8y2i388k6" path="res://assets/audio/bossloop.wav" id="8_e1j6l"]
 [ext_resource type="PackedScene" uid="uid://bwm4ym3xm4kcc" path="res://scenes/level_reward.tscn" id="8_gee14"]
 [ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="9_vtaks"]
 [ext_resource type="Resource" uid="uid://bor87w5jkm81m" path="res://player/abilities/ability_data/dash_data.tres" id="10_dinhu"]
@@ -23,6 +28,11 @@ font_size = 100
 script = ExtResource("1_e2o6t")
 room_database = ExtResource("3_wo7d7")
 boss_room = ExtResource("3_ir15t")
+dungeon_music = ExtResource("4_1kice")
+forest_music = ExtResource("5_5newe")
+sky_music = ExtResource("6_37s47")
+boss_intro_music = ExtResource("7_bt5mj")
+boss_loop_music = ExtResource("8_e1j6l")
 
 [node name="Player" parent="." unique_id=1122822699 instance=ExtResource("2_feb5d")]
 

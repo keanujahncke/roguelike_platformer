@@ -33,6 +33,7 @@ var waiting_for_boss_loop := false
 
 
 func _ready():
+	run_manager.start_new_run()
 	if run_manager.map_data.is_empty():
 		var gen = MapGenerator.new()
 		run_manager.map_data = gen.generate_map()
@@ -92,28 +93,54 @@ func _handle_boss_node(node):
 		
 func _handle_level_node(_node: MapNode):
 	var current_abilities = run_manager.get_abilities()
-	var valid_rooms: Array[RoomData] = []
 	
-	# Filter rooms based on player abilities
-	for rd in room_database.rooms:
-		if _player_can_complete_room(rd, run_manager.current_run_abilities):
-			valid_rooms.append(rd)
+	# 1. Start with the full list
+	var all_rooms = room_database.rooms
+	var ability_filtered: Array[RoomData] = []
+	var final_valid_rooms: Array[RoomData] = []
 	
-	# --- NEW: PRINTING AVAILABLE ROOMS ---
-	if not valid_rooms.is_empty():
-		print("--- Available Rooms for Selection ---")
-		for room in valid_rooms:
-			# Assuming your RoomData has a 'resource_name' or 'name' property
-			var room_name = room.resource_path.get_file().get_basename()
-			print("- ", room_name)
+	print("\n--- [ROOM SELECTION START] ---")
+	print("Total rooms in Database: ", all_rooms.size())
+	
+	# 2. Filter by Ability
+	for rd in all_rooms:
+		if _player_can_complete_room(rd, current_abilities):
+			ability_filtered.append(rd)
+		else:
+			var r_name = rd.resource_path.get_file().get_basename()
+			print("  [X] Removed (Missing Ability): ", r_name)
+
+	print("Rooms passing ability check: ", ability_filtered.size())
+
+	# 3. Filter by Visited Status
+	for rd in ability_filtered:
+		# Use the Resource object itself or rd.resource_path depending on how you store it
+		if not run_manager.visited_room_paths.has(rd.scene.resource_path):
+			final_valid_rooms.append(rd)
+		else:
+			var r_name = rd.resource_path.get_file().get_basename()
+			print("  [X] Removed (Already Visited): ", r_name)
+
+	print("Final Pool Size: ", final_valid_rooms.size())
+	print("-------------------------------")
+
+	# 4. Selection and Loading
+	if not final_valid_rooms.is_empty():
+		var chosen = final_valid_rooms.pick_random()
+		var chosen_name = chosen.resource_path.get_file().get_basename()
 		
-		var chosen = valid_rooms.pick_random()
-		print("Selected Room: ", chosen.resource_path.get_file().get_basename())
-		print("------------------------------------")
+		print(">> SELECTED: ", chosen_name)
+		
+		# Log the visit before loading
+		run_manager.visited_room_paths.append(chosen.scene.resource_path)
 		load_room(chosen.scene)
 	else:
-		print("!!! No valid rooms found. Loading fallback from database.")
-		load_room(room_database.rooms.pick_random().scene)
+		# Fallback logic
+		print("!!! No unique valid rooms left. Picking fallback random.")
+		var fallback = room_database.rooms.pick_random()
+		load_room(fallback.scene)
+	
+	print("--- [ROOM SELECTION END] ---\n")
 
 func _handle_upgrade_node():
 	# is_upgrade = true skips the room selection phase
@@ -189,9 +216,7 @@ func load_room(room_scene : PackedScene):
 	exit_used = false
 
 func restart_game():
-	run_manager.map_data = [] 
-	run_manager.current_map_node = null
-	run_manager.completed_nodes.clear()
+	run_manager.start_new_run()
 	game_over.hide()
 	player.reset_stats()
 	get_tree().change_scene_to_file("res://title_screen/title_screen.tscn")
