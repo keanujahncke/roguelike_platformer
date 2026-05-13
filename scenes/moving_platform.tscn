@@ -20,7 +20,7 @@ scale = Vector2(4.303661, 4.109879)
 texture = ExtResource("2_1tdcd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1986022610]
-position = Vector2(0, 24.999905)
+position = Vector2(0, 14.999943)
 shape = SubResource("RectangleShape2D_hrpga")
 
 [node name="LeftSensor" type="Area2D" parent="." unique_id=409287319]

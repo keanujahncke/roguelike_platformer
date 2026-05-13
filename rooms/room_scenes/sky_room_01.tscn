@@ -1388,7 +1388,7 @@ position = Vector2(1331, 97)
 id = "sky_01"
 
 [node name="BirdHazard4" parent="." index="24" unique_id=1399079097 instance=ExtResource("5_m08hm")]
-position = Vector2(1239, -248)
+position = Vector2(1750, -248)
 speed = 80.0
 fly_distance = 100.0
 perch_time = 1.2

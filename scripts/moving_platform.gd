@@ -4,13 +4,15 @@ extends AnimatableBody2D
 
 var move_direction = Vector2.LEFT
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_collide(move_direction * move_speed)
 
 func _on_left_sensor_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ground"):
-		move_direction = Vector2.RIGHT
+		if move_direction == Vector2.LEFT:
+			move_direction = Vector2.RIGHT
 
 func _on_right_sensor_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ground"):
-		move_direction = Vector2.LEFT
+		if move_direction == Vector2.RIGHT:
+			move_direction = Vector2.LEFT

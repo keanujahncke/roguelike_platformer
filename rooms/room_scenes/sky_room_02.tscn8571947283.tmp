@@ -1,0 +1,59 @@
+[gd_scene format=4 uid="uid://deu3hmpr4iwcm"]
+
+[ext_resource type="PackedScene" uid="uid://3wxce8hhqhj4" path="res://scenes/room_base_sky.tscn" id="1_g3upu"]
+[ext_resource type="PackedScene" uid="uid://wmn34oaurnku" path="res://scenes/moving_platform.tscn" id="2_4xm8h"]
+[ext_resource type="PackedScene" uid="uid://0ql3da7v7y7y" path="res://player/player.tscn" id="3_4xm8h"]
+[ext_resource type="PackedScene" uid="uid://b47ut10xqonq3" path="res://scenes/platform_path.tscn" id="4_m534c"]
+[ext_resource type="PackedScene" uid="uid://c6eqkfswfve8j" path="res://scenes/single_use_platform.tscn" id="5_6dnpg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m534c"]
+size = Vector2(16, 16)
+
+[node name="RoomBase" unique_id=2127497181 instance=ExtResource("1_g3upu")]
+
+[node name="Player" parent="." index="0" unique_id=1122822699 instance=ExtResource("3_4xm8h")]
+position = Vector2(66, -18)
+
+[node name="Camera2D" type="Camera2D" parent="Player" index="9" unique_id=443236059]
+
+[node name="GroundMap" parent="." index="3" unique_id=477515611 groups=["ground"]]
+tile_map_data = PackedByteArray("AAABAAAAAQAOAAEAAAACAAAAAQAPAAEAAAADAAAAAQAPAAEAAAAEAAAAAQAPAAEAAAAFAAAAAQAPAAEAAAAGAAAAAQAQAAEAAAAAAAAAAQAOAAEAAAD//wAAAQANAAEAAABzAPn/AQANAAEAAAB0APn/AQAOAAEAAAB1APn/AQAOAAEAAAB2APn/AQAOAAEAAAB3APn/AQAOAAEAAAB4APn/AQAOAAEAAAB5APn/AQAOAAEAAAB6APn/AQAOAAEAAAB7APn/AQAOAAEAAAB8APn/AQAOAAEAAAB9APn/AQAOAAEAAAB+APn/AQAOAAEAAAB/APn/AQAOAAEAAAA=")
+
+[node name="DecorationLayerBack" parent="." index="6" unique_id=1457861899]
+tile_map_data = PackedByteArray("AABZAP3/AQACAA8AAAAyAPj/AQAQAAwAAAAzAPj/AQARAAwAAAAyAPf/AQAQAAsAAAAzAPf/AQARAAsAAABVAPj/AQAQAAkAAABVAPf/AQAQAAgAAABWAPf/AQARAAgAAAA=")
+
+[node name="DecorationLayerFront" parent="." index="7" unique_id=48038365]
+tile_map_data = PackedByteArray("AAABAP//AQAMAAYAAAABAP7/AQAMAAUAAAABAP3/AQAMAAQAAAAAAP//AQALAAYAAAACAP//AQANAAYAAAACAP3/AQANAAQAAAAAAP3/AQALAAQAAAAAAPz/AQALAAMAAAABAPz/AQAMAAMAAAACAPz/AQANAAMAAAACAPv/AQANAAIAAAABAPv/AQAMAAIAAAAAAPv/AQALAAIAAAABAPr/AQAMAAEAAAACAPr/AQANAAEAAAAAAPr/AQALAAEAAAABAPn/AQAMAAAAAAACAPn/AQANAAAAAAADAPv/AQAOAAIAAAADAPr/AQAOAAEAAAADAPz/AQAOAAMAAAADAP3/AQAOAAQAAAD///3/AQAKAAQAAAD///z/AQAKAAMAAAD///v/AQAKAAIAAAAFAP//AAAHAAoAAAA=")
+
+[node name="Sprite2D" parent="." index="14" unique_id=1995723819]
+position = Vector2(2936, 1622)
+
+[node name="Platforms" type="Node" parent="." index="25" unique_id=939705973]
+
+[node name="moving_platform" parent="Platforms" index="0" unique_id=177821710 instance=ExtResource("2_4xm8h")]
+position = Vector2(644, 5)
+
+[node name="platform_path" parent="Platforms" index="1" unique_id=1510864010 instance=ExtResource("4_m534c")]
+position = Vector2(736, 6)
+
+[node name="single_use_platform" parent="Platforms" index="2" unique_id=923567094 instance=ExtResource("5_6dnpg")]
+position = Vector2(815, -105.00001)
+scale = Vector2(0.05, 0.09000489)
+
+[node name="single_use_platform2" parent="Platforms" index="3" unique_id=487242069 instance=ExtResource("5_6dnpg")]
+position = Vector2(1103, -105)
+scale = Vector2(0.05, 0.09000489)
+
+[node name="single_use_platform3" parent="Platforms" index="4" unique_id=1435561588 instance=ExtResource("5_6dnpg")]
+position = Vector2(1381, -105)
+scale = Vector2(0.05, 0.09000489)
+
+[node name="Cloud Boundary" type="Node2D" parent="." index="26" unique_id=1584178069]
+position = Vector2(515, -13)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Cloud Boundary" index="0" unique_id=1377634563 groups=["ground"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cloud Boundary/StaticBody2D" index="0" unique_id=702976783]
+position = Vector2(173, 21)
+shape = SubResource("RectangleShape2D_m534c")
+debug_color = Color(0.9097247, 0.00010935307, 0.7341598, 0.41960785)

@@ -4,9 +4,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_cnkj7"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -64, 0, 0, 0, 0, 0, -64)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -64, 0, 0, 0, 0, 0, -64, 0, 0, 0, 0, 0, -93, 0, 0, 0, 0, 0, -112)
 }
-point_count = 3
+point_count = 5
 
 [sub_resource type="GDScript" id="GDScript_ycdkm"]
 script/source = "extends Path2D
