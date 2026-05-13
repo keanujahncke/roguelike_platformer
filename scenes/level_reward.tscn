@@ -12,9 +12,6 @@ gradient = SubResource("Gradient_kffv2")
 [sub_resource type="LabelSettings" id="LabelSettings_g3irf"]
 font_size = 24
 
-[sub_resource type="LabelSettings" id="LabelSettings_gibuo"]
-font_size = 24
-
 [node name="LevelReward" type="CanvasLayer" unique_id=2064351492]
 layer = 100
 script = ExtResource("1_g3irf")
@@ -74,28 +71,4 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Choice3" parent="CenterContainer/VBoxContainer/RewardSection/HBoxContainer" unique_id=1985390082 instance=ExtResource("2_gibuo")]
-layout_mode = 2
-
-[node name="LevelSection" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=395888731]
-layout_mode = 2
-theme_override_constants/separation = 80
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/LevelSection" unique_id=878303993]
-layout_mode = 2
-text = "SELECT NEXT DESTINATION"
-label_settings = SubResource("LabelSettings_gibuo")
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/LevelSection" unique_id=1266058413]
-layout_mode = 2
-theme_override_constants/separation = 150
-alignment = 1
-
-[node name="Choice" parent="CenterContainer/VBoxContainer/LevelSection/HBoxContainer" unique_id=457077924 instance=ExtResource("2_gibuo")]
-layout_mode = 2
-
-[node name="Choice2" parent="CenterContainer/VBoxContainer/LevelSection/HBoxContainer" unique_id=737961598 instance=ExtResource("2_gibuo")]
-layout_mode = 2
-
-[node name="Choice3" parent="CenterContainer/VBoxContainer/LevelSection/HBoxContainer" unique_id=1782772765 instance=ExtResource("2_gibuo")]
 layout_mode = 2

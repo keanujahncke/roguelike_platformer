@@ -84,6 +84,7 @@ func _on_reward_clicked(res: AbilityData):
 	else:
 		# Sync with run_manager for future room filtering
 		run_manager.add_ability(res.id)
+		save_data.unlock_seen_ability(res.id)
 		ability_selected.emit(res.id)
 	
 	_close_ui()
