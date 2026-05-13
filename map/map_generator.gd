@@ -2,8 +2,8 @@ class_name MapGenerator
 extends Node
 
 
-const X_DIST := 30
-const Y_DIST := 25
+const X_DIST := 32
+const Y_DIST := 32
 const PLACEMENT_RANDOMNESS := 5
 const FLOORS := 15
 const MAP_WIDTH :=7
@@ -21,6 +21,9 @@ var random_room_type_weights = {
 var random_room_type_total_weight := 0
 var map_data: Array[Array]
 
+#func _ready() -> void:
+	#generate_map()
+
 
 func generate_map() -> Array[Array]:
 	map_data = _generate_initial_grid()
@@ -35,8 +38,16 @@ func generate_map() -> Array[Array]:
 	_setup_random_room_weights()
 	_setup_room_types()
 	
+	#var i := 0
+	#for floor in map_data:
+		#print("floor %s" % i)
+		#var used_rooms = floor.filter(
+			#func(room: MapNode): return room.next_rooms.size() > 0
+		#)
+		#print(used_rooms)
+		#i += 1
 	
-	return []
+	return map_data
 	
 
 func _generate_initial_grid() -> Array[Array]:
@@ -115,6 +126,8 @@ func _setup_boss_room() -> void:
 	var middle := floori(MAP_WIDTH * 0.5)
 	var boss_room := map_data[FLOORS - 1][middle] as MapNode
 	
+	boss_room.type = MapNode.Type.BOSS
+	
 	for j in MAP_WIDTH:
 		var current_room = map_data[FLOORS - 2][j] as MapNode
 		if current_room.next_rooms:
@@ -124,7 +137,7 @@ func _setup_boss_room() -> void:
 func _setup_random_room_weights() -> void:
 	random_room_type_weights[MapNode.Type.LEVEL] = LEVEL_NODE_WEIGHT
 	random_room_type_weights[MapNode.Type.HEAL] = LEVEL_NODE_WEIGHT + HEAL_NODE_WEIGHT
-	random_room_type_weights[MapNode.Type.LEVEL] = LEVEL_NODE_WEIGHT + HEAL_NODE_WEIGHT + UPGRADE_NODE_WEIGHT
+	random_room_type_weights[MapNode.Type.UPGRADE] = LEVEL_NODE_WEIGHT + HEAL_NODE_WEIGHT + UPGRADE_NODE_WEIGHT
 	
 	random_room_type_total_weight = random_room_type_weights[MapNode.Type.UPGRADE]
 
@@ -154,3 +167,54 @@ func _set_room_randomly(room_to_set: MapNode) -> void:
 	var consecutive_heal := true
 	var consecutive_upgrade := true
 	var heal_on_13 := true
+	
+	
+	var type_candidate: MapNode.Type
+	
+	while heal_below_2 or consecutive_heal or consecutive_upgrade or heal_on_13:
+		type_candidate = _get_random_room_type_by_weight()
+		
+		var is_heal := type_candidate == MapNode.Type.HEAL
+		var has_heal_parent := _room_has_parent_of_type(room_to_set, MapNode.Type.HEAL)
+		var is_upgrade := type_candidate == MapNode.Type.UPGRADE
+		var has_upgrade_parent := _room_has_parent_of_type(room_to_set, MapNode.Type.UPGRADE)
+		
+		heal_below_2 = is_heal and room_to_set.row < 3
+		consecutive_heal = is_heal and has_heal_parent
+		consecutive_upgrade = is_upgrade and has_upgrade_parent
+		heal_on_13 = is_heal and room_to_set.row == 12
+		
+	room_to_set.type = type_candidate
+
+func _room_has_parent_of_type(room: MapNode, type: MapNode.Type) -> bool:
+	var parents: Array[MapNode] = []
+	
+	if room.column > 0 and room.row > 0:
+		var parent_candidate := map_data[room.row - 1][room.column - 1] as MapNode
+		if parent_candidate.next_rooms.has(room):
+			parents.append(parent_candidate)
+	
+	if room.row > 0:
+		var parent_candidate := map_data[room.row - 1][room.column] as MapNode
+		if parent_candidate.next_rooms.has(room):
+			parents.append(parent_candidate)
+	
+	if room.column < (MAP_WIDTH - 1) and room.row > 0:
+		var parent_candidate := map_data[room.row - 1][room.column + 1] as MapNode
+		if parent_candidate.next_rooms.has(room):
+			parents.append(parent_candidate)
+	
+	for parent: MapNode in parents:
+		if parent.type == type:
+			return true
+	
+	return false
+
+func _get_random_room_type_by_weight() -> MapNode.Type:
+	var roll := randf_range(0.0, random_room_type_total_weight)
+	
+	for type: MapNode.Type in random_room_type_weights:
+		if random_room_type_weights[type] > roll:
+			return type
+	
+	return MapNode.Type.LEVEL

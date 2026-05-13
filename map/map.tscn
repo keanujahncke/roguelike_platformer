@@ -1,30 +1,42 @@
 [gd_scene format=3 uid="uid://bboayh17xrwuo"]
 
+[ext_resource type="Script" uid="uid://bf26esgmlh8bw" path="res://map/map.gd" id="1_a0dt8"]
 [ext_resource type="Script" uid="uid://ds3f70lakwwb6" path="res://map/map_generator.gd" id="1_hgrid"]
+[ext_resource type="PackedScene" uid="uid://cjhquoyhn8g81" path="res://map/map_room.tscn" id="2_lgq1i"]
+[ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_7lyie"]
+[ext_resource type="Script" uid="uid://wmwmchclmw7t" path="res://map/lines_container.gd" id="3_kffv2"]
 
-[node name="Map" type="Control" unique_id=67554772]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+[node name="Map" type="CanvasLayer" unique_id=264398369]
+script = ExtResource("1_a0dt8")
+node_scene = ExtResource("2_lgq1i")
+room_database = ExtResource("3_7lyie")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=388729501]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -576.5
+offset_top = -644.0
+offset_right = 576.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+follow_focus = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=138228007]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2119917361]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=707263876]
+[node name="MapContent" type="Control" parent="ScrollContainer" unique_id=231644203]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1172939826]
-layout_mode = 2
+[node name="LinesContainer" type="Node2D" parent="ScrollContainer/MapContent" unique_id=1165867347]
+position = Vector2(600, 600)
+script = ExtResource("3_kffv2")
+
+[node name="RoomsContainer" type="Control" parent="ScrollContainer/MapContent" unique_id=2125101584]
+anchors_preset = 0
+offset_left = 600.0
+offset_top = 600.0
+offset_right = 600.0
+offset_bottom = 600.0
 
 [node name="MapGenerator" type="Node" parent="." unique_id=1838421192]
 script = ExtResource("1_hgrid")

@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://cjhquoyhn8g81"]
+
+[ext_resource type="Script" uid="uid://cuxwiqxs0tmf1" path="res://map/map_room.gd" id="1_iqn3p"]
+[ext_resource type="Texture2D" uid="uid://cywbmkd1fpthm" path="res://assets/placeholder_tiles.png" id="2_3hxdi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ogv3"]
+atlas = ExtResource("2_3hxdi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68rea"]
+atlas = ExtResource("2_3hxdi")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hxdi"]
+atlas = ExtResource("2_3hxdi")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm248"]
+atlas = ExtResource("2_3hxdi")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ahqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ogv3")
+}],
+"loop": true,
+"name": &"boss",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68rea")
+}],
+"loop": true,
+"name": &"heal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hxdi")
+}],
+"loop": true,
+"name": &"level",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm248")
+}],
+"loop": true,
+"name": &"upgrade",
+"speed": 5.0
+}]
+
+[node name="MapRoom" type="TextureButton" unique_id=796269602]
+custom_minimum_size = Vector2(32, 32)
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(16, 16)
+script = ExtResource("1_iqn3p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=534366968]
+position = Vector2(16, 16)
+sprite_frames = SubResource("SpriteFrames_2ahqc")
+animation = &"upgrade"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2094729314]
