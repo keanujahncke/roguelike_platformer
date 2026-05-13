@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cn56443l5ygfa" path="res://assets/audio/foresttrack1.1.wav" id="5_5newe"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="5_gv0uq"]
 [ext_resource type="AudioStream" uid="uid://y3m1ha6edvsu" path="res://assets/audio/skytrack1.wav" id="6_37s47"]
-[ext_resource type="AudioStream" uid="uid://c6limdgyiaqtg" path="res://assets/audio/bossintro.wav" id="7_bt5mj"]
+[ext_resource type="AudioStream" uid="uid://c2l8mm37h2upv" path="res://assets/audio/bossopener.wav" id="7_1kice"]
 [ext_resource type="Script" uid="uid://dhdhyr4j3myj4" path="res://scripts/game_over.gd" id="7_u5sy4"]
 [ext_resource type="AudioStream" uid="uid://bdsx8y2i388k6" path="res://assets/audio/bossloop.wav" id="8_e1j6l"]
 [ext_resource type="PackedScene" uid="uid://bwm4ym3xm4kcc" path="res://scenes/level_reward.tscn" id="8_gee14"]
@@ -31,7 +31,7 @@ boss_room = ExtResource("3_ir15t")
 dungeon_music = ExtResource("4_1kice")
 forest_music = ExtResource("5_5newe")
 sky_music = ExtResource("6_37s47")
-boss_intro_music = ExtResource("7_bt5mj")
+boss_intro_music = ExtResource("7_1kice")
 boss_loop_music = ExtResource("8_e1j6l")
 
 [node name="Player" parent="." unique_id=1122822699 instance=ExtResource("2_feb5d")]
