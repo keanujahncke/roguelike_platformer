@@ -6,21 +6,10 @@
 [ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_7lyie"]
 [ext_resource type="Script" uid="uid://wmwmchclmw7t" path="res://map/lines_container.gd" id="3_kffv2"]
 
-[sub_resource type="Gradient" id="Gradient_kffv2"]
-colors = PackedColorArray(0.21568628, 0.21568628, 0.21568628, 1, 0.4, 0.21960784, 0.20392157, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7lyie"]
-gradient = SubResource("Gradient_kffv2")
-
 [node name="Map" type="CanvasLayer" unique_id=264398369]
 script = ExtResource("1_a0dt8")
 node_scene = ExtResource("2_lgq1i")
 room_database = ExtResource("3_7lyie")
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1632846495]
-offset_right = 1160.0
-offset_bottom = 660.0
-texture = SubResource("GradientTexture1D_7lyie")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=388729501]
 anchors_preset = 7

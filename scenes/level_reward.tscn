@@ -3,6 +3,12 @@
 [ext_resource type="Script" uid="uid://cns5uk4ucmk3l" path="res://scripts/level_reward.gd" id="1_g3irf"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="2_gibuo"]
 
+[sub_resource type="Gradient" id="Gradient_kffv2"]
+colors = PackedColorArray(0.21568628, 0.21568628, 0.21568628, 1, 0.4, 0.21960784, 0.20392157, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gibuo"]
+gradient = SubResource("Gradient_kffv2")
+
 [sub_resource type="LabelSettings" id="LabelSettings_g3irf"]
 font_size = 24
 
@@ -12,6 +18,11 @@ font_size = 24
 [node name="LevelReward" type="CanvasLayer" unique_id=2064351492]
 layer = 100
 script = ExtResource("1_g3irf")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=788984973]
+offset_right = 1160.0
+offset_bottom = 660.0
+texture = SubResource("GradientTexture1D_gibuo")
 
 [node name="BackgroundDimmer" type="ColorRect" parent="." unique_id=1595461536]
 anchors_preset = 15

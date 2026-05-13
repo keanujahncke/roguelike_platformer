@@ -142,6 +142,14 @@ func _on_start_run_pressed() -> void:
 
 
 func start_game() -> void:
+	print("[MENU] Starting Run. Clearing old session data to force map regeneration...")
+	
+	# CRITICAL: Wipe the Singleton data so the next scene builds a fresh map
+	run_manager.map_data = [] 
+	run_manager.current_map_node = null
+	run_manager.completed_nodes.clear()
+	
+	# Change to the game scene
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 

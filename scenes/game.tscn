@@ -2,14 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ck3gm8r2dqkhv" path="res://scripts/level_manager.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://0ql3da7v7y7y" path="res://player/player.tscn" id="2_feb5d"]
+[ext_resource type="Resource" uid="uid://bjwkla2xyglfp" path="res://rooms/room_data/boss_room.tres" id="3_ir15t"]
 [ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_wo7d7"]
-[ext_resource type="AudioStream" uid="uid://cn56443l5ygfa" path="res://assets/audio/foresttrack1.1.wav" id="5_ca42v"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="5_gv0uq"]
-[ext_resource type="PackedScene" uid="uid://b7wwu7ep80n3i" path="res://rooms/room_scenes/starting_room.tscn" id="6_iotsf"]
-[ext_resource type="AudioStream" uid="uid://y3m1ha6edvsu" path="res://assets/audio/skytrack1.wav" id="6_rysoc"]
-[ext_resource type="AudioStream" uid="uid://c6limdgyiaqtg" path="res://assets/audio/bossintro.wav" id="7_1kice"]
 [ext_resource type="Script" uid="uid://dhdhyr4j3myj4" path="res://scripts/game_over.gd" id="7_u5sy4"]
-[ext_resource type="AudioStream" uid="uid://bdsx8y2i388k6" path="res://assets/audio/bossloop.wav" id="8_5newe"]
 [ext_resource type="PackedScene" uid="uid://bwm4ym3xm4kcc" path="res://scenes/level_reward.tscn" id="8_gee14"]
 [ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="9_vtaks"]
 [ext_resource type="Resource" uid="uid://bor87w5jkm81m" path="res://player/abilities/ability_data/dash_data.tres" id="10_dinhu"]
@@ -17,23 +13,16 @@
 [ext_resource type="PackedScene" uid="uid://cfremxn7gbkoc" path="res://pause_menu/pause_menu.tscn" id="12_dinhu"]
 [ext_resource type="Resource" uid="uid://pgw54aoe863w" path="res://player/abilities/ability_data/glide_data.tres" id="12_ir15t"]
 [ext_resource type="Resource" uid="uid://c012xdw7v11y0" path="res://player/abilities/ability_data/wall_jump_data.tres" id="12_kvuet"]
-[ext_resource type="AudioStream" uid="uid://dxkdlsc1hu2tm" path="res://assets/audio/dungeontrack.wav" id="13_kvuet"]
 [ext_resource type="PackedScene" uid="uid://bq62es6xdgoei" path="res://scenes/heart_container.tscn" id="16_ca42v"]
-[ext_resource type="Resource" uid="uid://cs6l3rpb2ekm4" path="res://player/abilities/ability_data/heal_1.tres" id="16_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://bboayh17xrwuo" path="res://map/map.tscn" id="19_5newe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p57ef"]
 font_size = 100
 
 [node name="Game" type="Node2D" unique_id=1310302999]
 script = ExtResource("1_e2o6t")
-starting_room = ExtResource("6_iotsf")
 room_database = ExtResource("3_wo7d7")
-dungeon_music = ExtResource("13_kvuet")
-forest_music = ExtResource("5_ca42v")
-sky_music = ExtResource("6_rysoc")
-boss_intro_music = ExtResource("7_1kice")
-boss_loop_music = ExtResource("8_5newe")
-boss_music_db = -17.0
+boss_room = ExtResource("3_ir15t")
 
 [node name="Player" parent="." unique_id=1122822699 instance=ExtResource("2_feb5d")]
 
@@ -101,7 +90,9 @@ text = "Restart"
 
 [node name="LevelReward" parent="CanvasLayer" unique_id=2064351492 instance=ExtResource("8_gee14")]
 card_template = ExtResource("5_gv0uq")
-available_abilities = Array[ExtResource("9_vtaks")]([ExtResource("10_dinhu"), ExtResource("10_kvpfn"), ExtResource("12_kvuet"), ExtResource("12_ir15t"), ExtResource("16_ssvqc")])
+available_abilities = Array[ExtResource("9_vtaks")]([ExtResource("10_dinhu"), ExtResource("10_kvpfn"), ExtResource("12_kvuet"), ExtResource("12_ir15t")])
+
+[node name="Map" parent="CanvasLayer" unique_id=264398369 instance=ExtResource("19_5newe")]
 
 [node name="PauseMenu" parent="." unique_id=926336203 instance=ExtResource("12_dinhu")]
 
