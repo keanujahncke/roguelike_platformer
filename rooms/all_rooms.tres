@@ -1,23 +1,17 @@
 [gd_resource type="Resource" script_class="RoomDatabase" format=3 uid="uid://c4jifodginq5u"]
 
 [ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_3s7hy"]
-[ext_resource type="Resource" uid="uid://drmvqxwweftdh" path="res://rooms/room_data/dunegon_double_jump_01.tres" id="2_c65sq"]
+[ext_resource type="Resource" uid="uid://drmvqxwweftdh" path="res://rooms/room_data/dungeon_double_jump_01.tres" id="2_c65sq"]
 [ext_resource type="Script" uid="uid://c7tyxjnhcnlh0" path="res://scripts/room_database.gd" id="2_yqhpg"]
-[ext_resource type="Resource" uid="uid://bfl6ivjbvqx3n" path="res://rooms/room_data/dunegon_double_jump_02.tres.tres" id="3_88oy0"]
-[ext_resource type="Texture2D" uid="uid://btonu4ekyh2jo" path="res://rooms/room_images/hybrid_room_01.png" id="6_gxp3f"]
-[ext_resource type="PackedScene" uid="uid://c0o4fyr5m58tx" path="res://rooms/room_scenes/hybrid_room_01.tscn" id="7_06l4k"]
+[ext_resource type="Resource" uid="uid://bfl6ivjbvqx3n" path="res://rooms/room_data/dungeon_double_jump_02.tres.tres" id="3_88oy0"]
+[ext_resource type="Resource" uid="uid://crbf0rwihbllo" path="res://rooms/room_data/dungeon_hybrid_room_01.tres" id="4_0qgse"]
+[ext_resource type="Resource" uid="uid://dfvpp50073l66" path="res://rooms/room_data/dungeon_precision_room_01.tres" id="5_urktn"]
+[ext_resource type="Resource" path="res://rooms/room_data/forest_room_02.tres" id="8_0qgse"]
 [ext_resource type="Resource" uid="uid://bvqes6gsphksd" path="res://rooms/room_data/forest_room_01.tres" id="8_8bjt5"]
-[ext_resource type="Resource" uid="uid://bjwkla2xyglfp" path="res://rooms/room_data/boss_room.tres" id="8_88oy0"]
 [ext_resource type="Resource" uid="uid://bg18huxx8kppx" path="res://rooms/room_data/sky_room_01.tres" id="9_8bjt5"]
-
-[sub_resource type="Resource" id="Resource_0cnjv"]
-script = ExtResource("1_3s7hy")
-scene = ExtResource("7_06l4k")
-preview = ExtResource("6_gxp3f")
-required_abilities = ["wall_jump", ["dash", "double_jump", "glide"]]
-metadata/_custom_type_script = "uid://6kicdo0hg3ia"
+[ext_resource type="Resource" path="res://rooms/room_data/sky_room_02.tres" id="9_urktn"]
 
 [resource]
 script = ExtResource("2_yqhpg")
-rooms = Array[ExtResource("1_3s7hy")]([ExtResource("2_c65sq"), ExtResource("3_88oy0"), SubResource("Resource_0cnjv"), ExtResource("9_8bjt5"), ExtResource("8_8bjt5"), ExtResource("8_88oy0")])
+rooms = Array[ExtResource("1_3s7hy")]([ExtResource("2_c65sq"), ExtResource("3_88oy0"), ExtResource("4_0qgse"), ExtResource("5_urktn"), ExtResource("9_8bjt5"), ExtResource("8_8bjt5"), ExtResource("8_0qgse"), ExtResource("9_urktn")])
 metadata/_custom_type_script = "uid://c7tyxjnhcnlh0"
