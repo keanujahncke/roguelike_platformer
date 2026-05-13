@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://wmn34oaurnku"]
 
 [ext_resource type="Script" uid="uid://dmxe0paio6omx" path="res://scripts/moving_platform.gd" id="1_hrpga"]
-[ext_resource type="Texture2D" uid="uid://27607oiimi5q" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Book Desk/7.png" id="1_q06lf"]
+[ext_resource type="Texture2D" uid="uid://c7vf2i6gex7qb" path="res://assets/bg_cloud_A.png" id="2_1tdcd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hrpga"]
 size = Vector2(209.9992, 79.999695)
@@ -15,12 +15,12 @@ sync_to_physics = false
 script = ExtResource("1_hrpga")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=274447732]
-position = Vector2(-0.9999995, 15.00005)
-scale = Vector2(0.2669271, 0.14285699)
-texture = ExtResource("1_q06lf")
+position = Vector2(4.9999814, 0)
+scale = Vector2(4.303661, 4.109879)
+texture = ExtResource("2_1tdcd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1986022610]
-position = Vector2(-1, 15)
+position = Vector2(0, 24.999905)
 shape = SubResource("RectangleShape2D_hrpga")
 
 [node name="LeftSensor" type="Area2D" parent="." unique_id=409287319]

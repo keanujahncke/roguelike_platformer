@@ -5,6 +5,7 @@ signal health_changed(new_health)
 
 var current_room: Node2D
 var is_dead := false
+var controls_locked := false
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var abilities_root = $Abilities
@@ -75,6 +76,15 @@ func _ready():
 
 func _physics_process(delta):
 	if is_dead:
+		return
+
+	if controls_locked:
+		velocity = Vector2.ZERO
+
+		if run_sfx.playing:
+			run_sfx.stop()
+
+		move_and_slide()
 		return
 
 	coyote_timer -= delta
@@ -170,6 +180,18 @@ func _physics_process(delta):
 		fall_timer = 0.0
 
 	was_on_floor = is_on_floor()
+
+
+func set_controls_locked(locked: bool) -> void:
+	controls_locked = locked
+
+	if locked:
+		velocity = Vector2.ZERO
+
+		if run_sfx.playing:
+			run_sfx.stop()
+
+		anim.play("idle")
 
 
 func is_dash_active() -> bool:
@@ -327,6 +349,7 @@ func take_damage(amount: int):
 	health_changed.emit(health)
 
 	is_dead = true
+	controls_locked = false
 	velocity = Vector2.ZERO
 
 	death_sfx.play()
@@ -351,6 +374,7 @@ func take_damage(amount: int):
 
 func reset_stats():
 	is_dead = false
+	controls_locked = false
 	health = max_health
 	velocity = Vector2.ZERO
 	set_physics_process(true)

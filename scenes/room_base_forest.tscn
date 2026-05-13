@@ -1806,7 +1806,7 @@ tile_set = SubResource("TileSet_a556r")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=365841425]
 texture_repeat = 2
-scroll_scale = Vector2(0.55, 1)
+scroll_scale = Vector2(0.15, 1)
 repeat_size = Vector2(369, 0)
 repeat_times = 25
 
@@ -1822,7 +1822,7 @@ region_rect = Rect2(0, 1, 294, 209)
 
 [node name="Parallax2D2" type="Parallax2D" parent="." unique_id=164589663]
 texture_repeat = 2
-scroll_scale = Vector2(0.25, 1)
+scroll_scale = Vector2(0.08, 1)
 repeat_size = Vector2(369, 0)
 repeat_times = 24
 
@@ -1838,7 +1838,7 @@ region_rect = Rect2(0, 0, 294, 178)
 
 [node name="Parallax2D3" type="Parallax2D" parent="." unique_id=1382791215]
 texture_repeat = 2
-scroll_scale = Vector2(0.75, 1)
+scroll_scale = Vector2(0.2, 1)
 repeat_size = Vector2(369, 0)
 repeat_times = 28
 
@@ -1853,7 +1853,7 @@ region_rect = Rect2(0, 0, 294, 178)
 
 [node name="Parallax2D4" type="Parallax2D" parent="." unique_id=1070048750]
 texture_repeat = 2
-scroll_scale = Vector2(0.4, 1)
+scroll_scale = Vector2(0.1, 1)
 repeat_size = Vector2(369, 0)
 repeat_times = 30
 
@@ -1869,7 +1869,7 @@ region_rect = Rect2(109, 0, 69, 178)
 
 [node name="Parallax2D5" type="Parallax2D" parent="." unique_id=1329277239]
 texture_repeat = 2
-scroll_scale = Vector2(0.1, 1)
+scroll_scale = Vector2(0.025, 1)
 scroll_offset = Vector2(0, 410)
 repeat_size = Vector2(226.345, 0)
 repeat_times = 46

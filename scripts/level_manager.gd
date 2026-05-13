@@ -7,9 +7,16 @@ extends Node2D
 @export var forest_music: AudioStream
 @export var sky_music: AudioStream
 
+# Boss music:
+# Boss Intro Music plays once.
+# Boss Loop Music starts immediately after the intro finishes and loops.
+@export var boss_intro_music: AudioStream
+@export var boss_loop_music: AudioStream
+
 @export var dungeon_music_db := -15.0
 @export var forest_music_db := -20.0
 @export var sky_music_db := -15.0
+@export var boss_music_db := -15.0
 
 @onready var player = $Player
 @onready var game_over = $CanvasLayer/GameOver
@@ -22,6 +29,7 @@ var current_room : Node2D
 var current_exit : Area2D
 
 var exit_used := false
+var waiting_for_boss_loop := false
 
 
 func _ready():
@@ -31,6 +39,10 @@ func _ready():
 	game_over.hide()
 	level_rewards_ui.hide()
 	heartContainer.setMaxHearts(player.max_health)
+
+	# Music connection for boss intro -> boss loop.
+	if music != null and not music.finished.is_connected(_on_music_finished):
+		music.finished.connect(_on_music_finished)
 
 	# UI connections
 	if not level_rewards_ui.room_selected.is_connected(_on_room_selected):
@@ -62,11 +74,19 @@ func play_music_for_room(room_scene: PackedScene):
 		return
 
 	var path := room_scene.resource_path.to_lower()
+
+	print("ROOM PATH: ", path)
+
+	if "boss" in path:
+		print("MUSIC TYPE DETECTED: boss")
+		play_boss_music()
+		return
+
 	var next_track: AudioStream = dungeon_music
 	var next_volume_db := dungeon_music_db
 	var track_name := "dungeon"
 
-	print("ROOM PATH: ", path)
+	waiting_for_boss_loop = false
 
 	if "forest" in path:
 		next_track = forest_music
@@ -102,6 +122,53 @@ func play_music_for_room(room_scene: PackedScene):
 	music.play()
 
 	print("MUSIC: Now playing ", track_name, " track at ", next_volume_db, " dB.")
+
+
+func play_boss_music() -> void:
+	if music == null:
+		print("MUSIC ERROR: Music node was not found.")
+		return
+
+	if boss_intro_music == null and boss_loop_music == null:
+		print("MUSIC ERROR: No boss intro or boss loop music assigned.")
+		return
+
+	# If the boss loop is already playing, do not restart it.
+	if music.stream == boss_loop_music and music.playing:
+		music.volume_db = boss_music_db
+		print("MUSIC: Already playing boss loop. Volume updated to ", boss_music_db, " dB.")
+		return
+
+	music.stop()
+	music.volume_db = boss_music_db
+
+	if boss_intro_music != null:
+		waiting_for_boss_loop = true
+		music.stream = boss_intro_music
+		music.play()
+		print("MUSIC: Now playing boss intro at ", boss_music_db, " dB.")
+	else:
+		waiting_for_boss_loop = false
+		music.stream = boss_loop_music
+		music.play()
+		print("MUSIC: No boss intro assigned. Playing boss loop at ", boss_music_db, " dB.")
+
+
+func _on_music_finished() -> void:
+	if not waiting_for_boss_loop:
+		return
+
+	waiting_for_boss_loop = false
+
+	if boss_loop_music == null:
+		print("MUSIC ERROR: Boss intro finished, but Boss Loop Music is not assigned.")
+		return
+
+	music.stream = boss_loop_music
+	music.volume_db = boss_music_db
+	music.play()
+
+	print("MUSIC: Boss intro finished. Now playing boss loop.")
 
 
 func _on_ability_reward_selected(id: String):

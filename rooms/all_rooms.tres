@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://btonu4ekyh2jo" path="res://rooms/room_images/hybrid_room_01.png" id="6_gxp3f"]
 [ext_resource type="PackedScene" uid="uid://c0o4fyr5m58tx" path="res://rooms/room_scenes/hybrid_room_01.tscn" id="7_06l4k"]
 [ext_resource type="Resource" uid="uid://bvqes6gsphksd" path="res://rooms/room_data/forest_room_01.tres" id="8_8bjt5"]
+[ext_resource type="Resource" uid="uid://bjwkla2xyglfp" path="res://rooms/room_data/boss_room.tres" id="8_88oy0"]
 [ext_resource type="Resource" uid="uid://bg18huxx8kppx" path="res://rooms/room_data/sky_room_01.tres" id="9_8bjt5"]
 
 [sub_resource type="Resource" id="Resource_0cnjv"]
@@ -18,5 +19,5 @@ metadata/_custom_type_script = "uid://6kicdo0hg3ia"
 
 [resource]
 script = ExtResource("2_yqhpg")
-rooms = Array[ExtResource("1_3s7hy")]([ExtResource("2_c65sq"), ExtResource("3_88oy0"), SubResource("Resource_0cnjv"), ExtResource("9_8bjt5"), ExtResource("8_8bjt5")])
+rooms = Array[ExtResource("1_3s7hy")]([ExtResource("2_c65sq"), ExtResource("3_88oy0"), SubResource("Resource_0cnjv"), ExtResource("9_8bjt5"), ExtResource("8_8bjt5"), ExtResource("8_88oy0")])
 metadata/_custom_type_script = "uid://c7tyxjnhcnlh0"

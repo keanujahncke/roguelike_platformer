@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://bklkly5qjuxak"]
+
+[ext_resource type="Script" uid="uid://dges2gdml2f0h" path="res://scripts/sword_slash_effect.gd" id="1_28n7f"]
+[ext_resource type="Texture2D" uid="uid://cq661645b2dab" path="res://assets/Spritesheets/swordslash.png" id="2_7xt4x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3f3i"]
+atlas = ExtResource("2_7xt4x")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yafbq"]
+atlas = ExtResource("2_7xt4x")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tajoo"]
+atlas = ExtResource("2_7xt4x")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtlcu"]
+atlas = ExtResource("2_7xt4x")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5ux5"]
+atlas = ExtResource("2_7xt4x")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vekll"]
+atlas = ExtResource("2_7xt4x")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nsd3"]
+atlas = ExtResource("2_7xt4x")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r13i4"]
+atlas = ExtResource("2_7xt4x")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7xc58"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_i3f3i")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_yafbq")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_tajoo")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_mtlcu")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_j5ux5")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_vekll")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_1nsd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r13i4")
+}],
+"loop": true,
+"name": &"slash",
+"speed": 5.0
+}]
+
+[node name="SwordSlashEffect" type="Node2D" unique_id=1735789637]
+script = ExtResource("1_28n7f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=307929059]
+position = Vector2(-118.00001, -19)
+scale = Vector2(17.890625, 44.203125)
+sprite_frames = SubResource("SpriteFrames_7xc58")
+animation = &"slash"
+frame_progress = 0.20605484

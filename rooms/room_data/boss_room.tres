@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://bjwkla2xyglfp"]
+
+[ext_resource type="Texture2D" uid="uid://c50fn0x1xblar" path="res://assets/boss parallax/bg3.png" id="1_eim0a"]
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_qt0qo"]
+[ext_resource type="PackedScene" uid="uid://24dkh1lw0w15" path="res://rooms/room_scenes/boss_room1.tscn" id="2_q4mc1"]
+
+[resource]
+script = ExtResource("1_qt0qo")
+scene = ExtResource("2_q4mc1")
+preview = ExtResource("1_eim0a")
+required_abilities = ["glide", "double_jump", "wall_jump", "dash"]
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"

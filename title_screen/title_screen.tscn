@@ -111,7 +111,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4627451)
 theme_override_constants/shadow_offset_x = 9
 theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 60
-text = "Chronicles of Ascending"
+text = "Ascendia"
 horizontal_alignment = 1
 uppercase = true
 
