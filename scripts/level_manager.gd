@@ -19,8 +19,8 @@ extends Node2D
 
 # Boss music offsets:
 # boss_intro_start_offset skips silence at the start of the boss intro file.
-# Example: 0.4 starts 0.4 seconds into the .wav.
-@export var boss_intro_start_offset := 0.4
+# Example: starts 1 seconds into the .wav.
+@export var boss_intro_start_offset := 1
 @export var boss_loop_start_offset := 0.0
 
 @onready var player = $Player
