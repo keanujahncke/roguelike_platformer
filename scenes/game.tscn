@@ -33,6 +33,10 @@ forest_music = ExtResource("5_5newe")
 sky_music = ExtResource("6_37s47")
 boss_intro_music = ExtResource("7_1kice")
 boss_loop_music = ExtResource("8_e1j6l")
+dungeon_music_db = -20.0
+forest_music_db = -25.0
+sky_music_db = -20.0
+boss_music_db = -20.0
 
 [node name="Player" parent="." unique_id=1122822699 instance=ExtResource("2_feb5d")]
 

@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bklkly5qjuxak" path="res://scenes/SwordSlashEffect.tscn" id="11_mc58d"]
 [ext_resource type="Texture2D" uid="uid://c50fn0x1xblar" path="res://assets/boss parallax/bg3.png" id="14_ys6to"]
 [ext_resource type="Texture2D" uid="uid://m61i8vq8bhkd" path="res://assets/boss parallax/bg_stars.png" id="15_ur6or"]
+[ext_resource type="Script" uid="uid://b76nog1jin2xb" path="res://rooms/room_scenes/death_zone.gd" id="17_byv4o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uj0n8"]
 texture = ExtResource("2_n4t5u")
@@ -1401,6 +1402,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n55xu"]
 size = Vector2(31.75, 44)
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_immaw"]
+
 [node name="BossRoom" type="Node2D" unique_id=2127497181]
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=1516571430]
@@ -1434,11 +1437,13 @@ tile_map_data = PackedByteArray("AAD1//n/AAABAAIAAAD2//n/AAACAAIAAAD3//n/AAADAAI
 tile_set = SubResource("TileSet_uk836")
 
 [node name="Boss" type="CharacterBody2D" parent="." unique_id=1971026561]
+z_index = 5
 position = Vector2(278, -60)
 script = ExtResource("4_svw71")
 idle_animation = "boss_idle"
 fake_death_animation = "boss_death"
-laser_phase_start_delay = 1.0
+manual_follow_offset = Vector2(210, -100)
+invert_face_player_direction = true
 boss_laser_scene = ExtResource("5_ys6to")
 laser_attack_enabled = true
 laser_interval = 1.5
@@ -1456,6 +1461,9 @@ position = Vector2(-148, -60)
 shape = SubResource("CapsuleShape2D_1x4m3")
 
 [node name="AttackTimer" type="Timer" parent="Boss" unique_id=1887546432]
+
+[node name="BossCameraTarget" type="Marker2D" parent="Boss" unique_id=450588477]
+position = Vector2(-154, -67)
 
 [node name="AreaManipulator" type="Node2D" parent="." unique_id=690111990 node_paths=PackedStringArray("ground_map", "chunk_move")]
 position = Vector2(-1, -51)
@@ -1520,7 +1528,7 @@ script = ExtResource("10_6wbvr")
 boss = NodePath("../Boss")
 sword_slash_scene = ExtResource("11_mc58d")
 slash_target = NodePath("../Boss")
-boss_camera_target = NodePath("../BossCameraTarget")
+boss_camera_target = NodePath("../Boss/BossCameraTarget")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BossFakeDeathTrigger" unique_id=1384054150]
 position = Vector2(142.75, -428.00003)
@@ -1535,7 +1543,7 @@ shape = SubResource("RectangleShape2D_n55xu")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxSky" unique_id=1023557261]
 z_index = -50
-position = Vector2(-28.000002, -68)
+position = Vector2(-11, -51)
 scale = Vector2(46.165627, 15.913043)
 texture = ExtResource("14_ys6to")
 
@@ -1543,7 +1551,7 @@ texture = ExtResource("14_ys6to")
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxStars" unique_id=1694709330]
-position = Vector2(8.000076, -489.5)
+position = Vector2(15, -375.99997)
 scale = Vector2(5.5375004, 5.0706525)
 texture = ExtResource("15_ur6or")
 region_rect = Rect2(0, 0, 320, 184)
@@ -1558,5 +1566,12 @@ scroll_offset = Vector2(65, 105)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxMtFar" unique_id=372843819]
 
-[node name="BossCameraTarget" type="Marker2D" parent="." unique_id=450588477]
-position = Vector2(124, -127)
+[node name="DeathZone" type="Area2D" parent="." unique_id=1844329608]
+position = Vector2(-1, 229)
+script = ExtResource("17_byv4o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=989219115]
+position = Vector2(11, 6)
+shape = SubResource("WorldBoundaryShape2D_immaw")
+
+[connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_body_entered"]

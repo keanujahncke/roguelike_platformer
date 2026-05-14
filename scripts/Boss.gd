@@ -14,7 +14,38 @@ signal fake_death_finished
 @export var laser_attack_animation: String = "laser_attack"
 
 # Delay between boss attack animation starting and lasers beginning to spawn.
-@export var laser_phase_start_delay: float = 0.3
+@export var laser_phase_start_delay: float = 1.0
+
+# Boss physical collision.
+# Keep this true if you do NOT want the boss to block/touch the player physically.
+@export var disable_boss_collision: bool = true
+
+# Boss follow settings.
+@export var follow_player: bool = true
+
+# If true, the boss remembers its starting offset from the player AFTER the room loads.
+# Example: if boss starts 200px above/right of player, it keeps that same relative position.
+@export var use_starting_relative_offset: bool = false
+
+# Used only if use_starting_relative_offset is false.
+@export var manual_follow_offset: Vector2 = Vector2(180.0, -120.0)
+
+# If true, the boss snaps perfectly to the relative position.
+# If false, the boss smoothly floats toward that position.
+@export var snap_to_follow_position: bool = false
+
+# Lower = slower/more sluggish. Higher = faster/tighter follow.
+@export var follow_smoothing_speed: float = 2.5
+
+# If the boss is already close enough to the target position, he will not move.
+# This helps stop tiny jittery movements.
+@export var follow_deadzone: float = 8.0
+
+# If true, boss sprite flips depending on whether player is left/right.
+@export var face_player: bool = true
+
+# Turn this on if the boss is facing the wrong direction.
+@export var invert_face_player_direction: bool = false
 
 # If true, the fake death sequence waits for the death animation to finish.
 # If false, the fake death sequence waits for fake_death_delay seconds instead.
@@ -71,13 +102,101 @@ var active_lasers: Array[Node] = []
 var last_laser_angle_index: int = -1
 var laser_attack_animation_token: int = 0
 
+var player_ref: Node2D = null
+var stored_follow_offset: Vector2 = Vector2.ZERO
+var follow_setup_finished: bool = false
+
 
 func _ready() -> void:
 	randomize()
+	
+	setup_boss_collision()
 	play_idle()
+	
+	# IMPORTANT:
+	# When this boss room is loaded by LevelManager, the boss may enter the tree
+	# before the real player has been moved to the boss room Spawn.
+	# Waiting a frame lets LevelManager finish placing the player first.
+	await get_tree().process_frame
+	await get_tree().physics_frame
+	
+	setup_follow_offset()
 	
 	if laser_attack_enabled:
 		start_laser_phase_loop()
+
+
+func _physics_process(delta: float) -> void:
+	update_follow_player(delta)
+
+
+func setup_boss_collision() -> void:
+	if disable_boss_collision and collision_shape != null:
+		collision_shape.disabled = true
+
+
+func setup_follow_offset() -> void:
+	player_ref = get_tree().get_first_node_in_group("player") as Node2D
+	
+	if player_ref == null:
+		push_warning("Boss: Could not find player for follow setup. Make sure Player is in the 'player' group.")
+		stored_follow_offset = manual_follow_offset
+		follow_setup_finished = true
+		return
+	
+	if use_starting_relative_offset:
+		stored_follow_offset = global_position - player_ref.global_position
+	else:
+		stored_follow_offset = manual_follow_offset
+	
+	follow_setup_finished = true
+	
+	print("[BOSS FOLLOW] Player found: ", player_ref.name)
+	print("[BOSS FOLLOW] Stored offset: ", stored_follow_offset)
+
+
+func update_follow_player(delta: float) -> void:
+	if not follow_player:
+		return
+	
+	if not follow_setup_finished:
+		return
+	
+	if player_ref == null or not is_instance_valid(player_ref):
+		player_ref = get_tree().get_first_node_in_group("player") as Node2D
+		
+		if player_ref == null:
+			return
+	
+	var target_position := player_ref.global_position + stored_follow_offset
+	var distance_to_target := global_position.distance_to(target_position)
+	
+	if snap_to_follow_position:
+		global_position = target_position
+	else:
+		if distance_to_target > follow_deadzone:
+			var t := 1.0 - exp(-follow_smoothing_speed * delta)
+			global_position = global_position.lerp(target_position, t)
+	
+	update_facing_direction()
+
+
+func update_facing_direction() -> void:
+	if not face_player:
+		return
+	
+	if animated_sprite == null:
+		return
+	
+	if player_ref == null or not is_instance_valid(player_ref):
+		return
+	
+	var should_flip := player_ref.global_position.x < global_position.x
+	
+	if invert_face_player_direction:
+		should_flip = not should_flip
+	
+	animated_sprite.flip_h = should_flip
 
 
 func play_idle() -> void:
@@ -282,7 +401,8 @@ func fake_death_only() -> void:
 	
 	stop_laser_loop()
 
-	if collision_shape != null:
+	# Boss should not have physical collision.
+	if disable_boss_collision and collision_shape != null:
 		collision_shape.disabled = true
 
 	if animated_sprite == null:
@@ -309,9 +429,6 @@ func fake_death_only() -> void:
 	else:
 		await get_tree().create_timer(fake_death_delay).timeout
 
-	if collision_shape != null:
-		collision_shape.disabled = false
-
 	play_idle_forced()
 
 	if idle_after_fake_death_delay > 0.0:
@@ -334,8 +451,9 @@ func kill_player(player: Node) -> void:
 	if player == null:
 		return
 
-	if collision_shape != null:
-		collision_shape.disabled = false
+	# Do not re-enable boss collision here.
+	if disable_boss_collision and collision_shape != null:
+		collision_shape.disabled = true
 
 	await get_tree().process_frame
 
