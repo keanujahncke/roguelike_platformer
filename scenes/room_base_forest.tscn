@@ -1811,6 +1811,7 @@ repeat_size = Vector2(369, 0)
 repeat_times = 25
 
 [node name="FrontLayer" type="Sprite2D" parent="Parallax2D" unique_id=353806906]
+modulate = Color(0.8509804, 0.8, 0.33333334, 0.96862745)
 z_index = -50
 texture_filter = 1
 texture_repeat = 2
@@ -1827,6 +1828,7 @@ repeat_size = Vector2(369, 0)
 repeat_times = 24
 
 [node name="BackLayer" type="Sprite2D" parent="Parallax2D2" unique_id=524875021]
+modulate = Color(0.44705883, 0.3882353, 0.15294118, 1)
 z_index = -90
 texture_filter = 1
 texture_repeat = 2
@@ -1875,6 +1877,7 @@ repeat_size = Vector2(226.345, 0)
 repeat_times = 46
 
 [node name="FullBackground" type="Sprite2D" parent="Parallax2D5" unique_id=1805915804]
+modulate = Color(0.8156863, 0.8156863, 0.8156863, 1)
 z_index = -100
 texture_repeat = 2
 position = Vector2(326.00006, -359)
@@ -1884,6 +1887,7 @@ region_enabled = true
 region_rect = Rect2(0, 89, 67, 151.07)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D5" unique_id=1248703803]
+modulate = Color(1.1759251, 1.1759251, 1.1759251, 1)
 z_index = -300
 position = Vector2(777, -434)
 scale = Vector2(8.178125, 13.01087)
@@ -1896,6 +1900,7 @@ repeat_size = Vector2(400, 0)
 repeat_times = 30
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D6" unique_id=960431816]
+modulate = Color(1, 0.8039216, 0.54901963, 1)
 position = Vector2(313, 79)
 scale = Vector2(1.4966668, 1.4123781)
 texture = ExtResource("10_6rnjf")
