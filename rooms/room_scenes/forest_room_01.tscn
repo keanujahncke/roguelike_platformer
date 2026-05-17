@@ -1458,16 +1458,22 @@ tile_set = SubResource("TileSet_a556r")
 [node name="Parallax2D" parent="." index="7" unique_id=365841425]
 scroll_scale = Vector2(0.15, 1)
 scroll_offset = Vector2(0, 0)
+repeat_size = Vector2(248, 0)
 
 [node name="FrontLayer" parent="Parallax2D" index="0" unique_id=353806906]
 modulate = Color(0.84947944, 0.79803985, 0.33508354, 0.96862745)
+position = Vector2(666.375, -65.054405)
+scale = Vector2(0.84608847, 0.8990008)
 
 [node name="Parallax2D2" parent="." index="8" unique_id=164589663]
 scroll_scale = Vector2(0.08, 1)
 scroll_offset = Vector2(0, 0)
+repeat_size = Vector2(248, 0)
 
 [node name="BackLayer" parent="Parallax2D2" index="0" unique_id=524875021]
 modulate = Color(0.44593602, 0.38735598, 0.1530358, 1)
+position = Vector2(1037.2031, -51.3125)
+scale = Vector2(0.84491897, 0.8391854)
 
 [node name="Parallax2D3" parent="." index="9" unique_id=1382791215]
 scroll_scale = Vector2(0.2, 1)
@@ -1483,12 +1489,17 @@ scale = Vector2(1.1938776, 1.4297749)
 scroll_scale = Vector2(0.1, 1)
 scroll_offset = Vector2(0, 0)
 
+[node name="BackLayerLight" parent="Parallax2D4" index="0" unique_id=1730226537]
+position = Vector2(1089, -28.999985)
+scale = Vector2(1.4489795, 1.0112361)
+
 [node name="Parallax2D5" parent="." index="11" unique_id=1329277239]
 scroll_scale = Vector2(0.025, 1)
 
 [node name="FullBackground" parent="Parallax2D5" index="0" unique_id=1805915804]
 modulate = Color(0.8153955, 0.8153955, 0.8153955, 1)
-position = Vector2(326.00006, -359)
+position = Vector2(326.00006, -377.5)
+scale = Vector2(3.5337603, 2.152318)
 
 [node name="Sprite2D" parent="Parallax2D5" index="1" unique_id=1248703803]
 modulate = Color(1.1755697, 1.1755697, 1.1755697, 1)

@@ -1807,7 +1807,7 @@ tile_set = SubResource("TileSet_a556r")
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=365841425]
 texture_repeat = 2
 scroll_scale = Vector2(0.15, 1)
-repeat_size = Vector2(369, 0)
+repeat_size = Vector2(248, 0)
 repeat_times = 25
 
 [node name="FrontLayer" type="Sprite2D" parent="Parallax2D" unique_id=353806906]
@@ -1815,8 +1815,8 @@ modulate = Color(0.8509804, 0.8, 0.33333334, 0.96862745)
 z_index = -50
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(606, -127.12499)
-scale = Vector2(1.2568027, 1.4929777)
+position = Vector2(667.00006, -66.05441)
+scale = Vector2(0.8435373, 0.9085701)
 texture = ExtResource("5_bcbyu")
 region_enabled = true
 region_rect = Rect2(0, 1, 294, 209)
@@ -1824,7 +1824,7 @@ region_rect = Rect2(0, 1, 294, 209)
 [node name="Parallax2D2" type="Parallax2D" parent="." unique_id=164589663]
 texture_repeat = 2
 scroll_scale = Vector2(0.08, 1)
-repeat_size = Vector2(369, 0)
+repeat_size = Vector2(248, 0)
 repeat_times = 24
 
 [node name="BackLayer" type="Sprite2D" parent="Parallax2D2" unique_id=524875021]
@@ -1832,8 +1832,8 @@ modulate = Color(0.44705883, 0.3882353, 0.15294118, 1)
 z_index = -90
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(924, -104)
-scale = Vector2(1.6150082, 1.4311798)
+position = Vector2(1036.7031, -56.812496)
+scale = Vector2(0.8483205, 0.9009832)
 texture = ExtResource("6_wuxj7")
 region_enabled = true
 region_rect = Rect2(0, 0, 294, 178)
@@ -1863,8 +1863,8 @@ repeat_times = 30
 z_index = -80
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(1089, -95.49999)
-scale = Vector2(1.4489795, 1.7584271)
+position = Vector2(1089, -36.999985)
+scale = Vector2(1.4489795, 1.1011237)
 texture = ExtResource("7_p5qp3")
 region_enabled = true
 region_rect = Rect2(109, 0, 69, 178)
@@ -1880,8 +1880,8 @@ repeat_times = 46
 modulate = Color(0.8156863, 0.8156863, 0.8156863, 1)
 z_index = -100
 texture_repeat = 2
-position = Vector2(326.00006, -359)
-scale = Vector2(3.5337603, 2.9513388)
+position = Vector2(326.00006, -377)
+scale = Vector2(3.5337603, 2)
 texture = ExtResource("9_6rnjf")
 region_enabled = true
 region_rect = Rect2(0, 89, 67, 151.07)
