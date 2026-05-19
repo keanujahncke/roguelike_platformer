@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://xhblhqd2hr88"]
+
+[ext_resource type="PackedScene" uid="uid://cwnop2m2u0l4y" path="res://scenes/tutorial_room.tscn" id="1_m80tg"]
+
+[node name="RoomBase" unique_id=2127497181 instance=ExtResource("1_m80tg")]
+
+[node name="TutorialDirector" parent="." index="11" unique_id=1801909515]
+dialogue_box_path = NodePath("../CanvasLayer/DialogueBox")

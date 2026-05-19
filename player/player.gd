@@ -6,6 +6,7 @@ signal health_changed(new_health)
 var current_room: Node2D
 var is_dead := false
 var controls_locked := false
+var allow_gravity_while_controls_locked := false
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var abilities_root = $Abilities
@@ -79,12 +80,26 @@ func _physics_process(delta):
 		return
 
 	if controls_locked:
-		velocity = Vector2.ZERO
+		if allow_gravity_while_controls_locked:
+			velocity.x = 0.0
+
+			if not is_on_floor():
+				velocity.y += gravity * delta
+			else:
+				velocity.y = 0.0
+		else:
+			velocity = Vector2.ZERO
 
 		if run_sfx.playing:
 			run_sfx.stop()
 
 		move_and_slide()
+
+		if allow_gravity_while_controls_locked:
+			_update_locked_fall_animation()
+		else:
+			play_anim("idle")
+
 		return
 
 	coyote_timer -= delta
@@ -182,16 +197,35 @@ func _physics_process(delta):
 	was_on_floor = is_on_floor()
 
 
-func set_controls_locked(locked: bool) -> void:
+func set_controls_locked(locked: bool, allow_gravity: bool = false) -> void:
 	controls_locked = locked
+	allow_gravity_while_controls_locked = allow_gravity
 
 	if locked:
-		velocity = Vector2.ZERO
+		velocity.x = 0.0
+
+		if not allow_gravity:
+			velocity.y = 0.0
 
 		if run_sfx.playing:
 			run_sfx.stop()
 
-		anim.play("idle")
+		if allow_gravity:
+			_update_locked_fall_animation()
+		else:
+			anim.play("idle")
+	else:
+		allow_gravity_while_controls_locked = false
+
+
+func _update_locked_fall_animation() -> void:
+	if not is_on_floor():
+		if velocity.y < 0.0:
+			play_anim("jump")
+		else:
+			play_anim("fall")
+	else:
+		play_anim("idle")
 
 
 func is_dash_active() -> bool:
@@ -212,7 +246,6 @@ func update_animation(input_axis: float, delta: float):
 		return
 
 	# Double jump priority.
-	# This stays above glide so holding glide does not skip the double jump animation.
 	if is_doing_double_jump:
 		was_gliding = false
 		glide_startup_done = false
@@ -223,30 +256,24 @@ func update_animation(input_axis: float, delta: float):
 			is_doing_double_jump = false
 
 	# Glide priority.
-	# This is below double jump, but above wall slide and normal fall.
-	# So the order becomes:
-	# double_jump animation -> glide_startup -> glide
 	if has_node("Abilities/GlideAbility"):
 		var glide_ability = $Abilities/GlideAbility
 
 		if glide_ability.is_gliding:
 			is_stopping = false
 
-			# First frame of entering glide
 			if not was_gliding:
 				was_gliding = true
 				glide_startup_done = false
 				anim.play("glide_startup")
 				return
 
-			# Let glide_startup finish without being overridden
 			if anim.animation == "glide_startup":
 				if anim.is_playing():
 					return
 				else:
 					glide_startup_done = true
 
-			# After startup ends, play looping glide
 			if glide_startup_done:
 				play_anim("glide")
 				return
@@ -255,7 +282,6 @@ func update_animation(input_axis: float, delta: float):
 			glide_startup_done = false
 
 	# Wall slide priority.
-	# This is below glide so glide can take over once glide conditions are met.
 	if has_node("Abilities/WallJumpAbility"):
 		var wall_jump = $"Abilities/WallJumpAbility"
 
@@ -350,6 +376,7 @@ func take_damage(amount: int):
 
 	is_dead = true
 	controls_locked = false
+	allow_gravity_while_controls_locked = false
 	velocity = Vector2.ZERO
 
 	death_sfx.play()
@@ -375,6 +402,7 @@ func take_damage(amount: int):
 func reset_stats():
 	is_dead = false
 	controls_locked = false
+	allow_gravity_while_controls_locked = false
 	health = max_health
 	velocity = Vector2.ZERO
 	set_physics_process(true)
