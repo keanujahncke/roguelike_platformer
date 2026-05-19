@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://c7tyxjnhcnlh0" path="res://scripts/room_database.gd" id="2_yqhpg"]
 [ext_resource type="Resource" uid="uid://bfl6ivjbvqx3n" path="res://rooms/room_data/dungeon_double_jump_02.tres.tres" id="3_88oy0"]
 [ext_resource type="Resource" uid="uid://crbf0rwihbllo" path="res://rooms/room_data/dungeon_hybrid_room_01.tres" id="4_0qgse"]
-[ext_resource type="Resource" uid="uid://dfvpp50073l66" path="res://rooms/room_data/dungeon_precision_room_01.tres" id="5_urktn"]
 [ext_resource type="Resource" uid="uid://dgmfbbsw7a62x" path="res://rooms/room_data/forest_room_02.tres" id="8_0qgse"]
 [ext_resource type="Resource" uid="uid://bvqes6gsphksd" path="res://rooms/room_data/forest_room_01.tres" id="8_8bjt5"]
 [ext_resource type="Resource" uid="uid://bg18huxx8kppx" path="res://rooms/room_data/sky_room_01.tres" id="9_8bjt5"]
@@ -15,5 +14,5 @@
 
 [resource]
 script = ExtResource("2_yqhpg")
-rooms = Array[ExtResource("1_3s7hy")]([ExtResource("2_c65sq"), ExtResource("3_88oy0"), ExtResource("4_0qgse"), ExtResource("5_urktn"), ExtResource("9_8bjt5"), ExtResource("8_8bjt5"), ExtResource("8_0qgse"), ExtResource("9_urktn"), ExtResource("10_urktn"), ExtResource("11_3sxxt")])
+rooms = Array[ExtResource("1_3s7hy")]([ExtResource("2_c65sq"), ExtResource("3_88oy0"), ExtResource("4_0qgse"), ExtResource("11_3sxxt"), ExtResource("10_urktn"), ExtResource("9_8bjt5"), ExtResource("8_8bjt5"), ExtResource("8_0qgse"), ExtResource("9_urktn")])
 metadata/_custom_type_script = "uid://c7tyxjnhcnlh0"
