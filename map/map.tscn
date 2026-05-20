@@ -3,12 +3,29 @@
 [ext_resource type="Script" uid="uid://bf26esgmlh8bw" path="res://map/map.gd" id="1_a0dt8"]
 [ext_resource type="Script" uid="uid://ds3f70lakwwb6" path="res://map/map_generator.gd" id="1_hgrid"]
 [ext_resource type="Script" uid="uid://wmwmchclmw7t" path="res://map/lines_container.gd" id="3_kffv2"]
+[ext_resource type="Texture2D" uid="uid://okgj0cqub8pf" path="res://assets/map_icons.png" id="4_lgq1i"]
 
 [sub_resource type="Gradient" id="Gradient_kffv2"]
 colors = PackedColorArray(0.21568628, 0.21568628, 0.21568628, 1, 0.4, 0.21960784, 0.20392157, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7lyie"]
 gradient = SubResource("Gradient_kffv2")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kffv2"]
+atlas = ExtResource("4_lgq1i")
+region = Rect2(34.82434, 2.0822372, 27.584488, 28.142883)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lyie"]
+atlas = ExtResource("4_lgq1i")
+region = Rect2(97.15171, 1.6416912, 29.766624, 28.147896)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jdw0"]
+atlas = ExtResource("4_lgq1i")
+region = Rect2(0.119431496, 1.4261227, 31.269875, 28.254564)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxmgb"]
+atlas = ExtResource("4_lgq1i")
+region = Rect2(66.468895, 0.6859684, 26.132675, 27.249462)
 
 [node name="Map" type="CanvasLayer" unique_id=264398369]
 script = ExtResource("1_a0dt8")
@@ -46,3 +63,59 @@ offset_bottom = 1450.0
 
 [node name="MapGenerator" type="Node" parent="." unique_id=1838421192]
 script = ExtResource("1_hgrid")
+
+[node name="Legend" type="VBoxContainer" parent="." unique_id=1763616336]
+offset_left = 990.0
+offset_top = 4.0
+offset_right = 1085.0
+offset_bottom = 127.0
+scale = Vector2(1.5893893, 1.5893893)
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Legend" unique_id=1349501830]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="Legend/HBoxContainer" unique_id=1085691825]
+layout_mode = 2
+texture = SubResource("AtlasTexture_kffv2")
+
+[node name="Label" type="Label" parent="Legend/HBoxContainer" unique_id=818649329]
+layout_mode = 2
+text = "Room"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Legend" unique_id=1931235325]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="Legend/HBoxContainer2" unique_id=1179535645]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7lyie")
+
+[node name="Label" type="Label" parent="Legend/HBoxContainer2" unique_id=97555181]
+layout_mode = 2
+text = "Upgrade"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Legend" unique_id=959418318]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="Legend/HBoxContainer3" unique_id=808528639]
+layout_mode = 2
+texture = SubResource("AtlasTexture_5jdw0")
+
+[node name="Label" type="Label" parent="Legend/HBoxContainer3" unique_id=1681131073]
+layout_mode = 2
+text = "Health"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Legend" unique_id=447229322]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="Legend/HBoxContainer4" unique_id=194090273]
+layout_mode = 2
+texture = SubResource("AtlasTexture_kxmgb")
+
+[node name="Label" type="Label" parent="Legend/HBoxContainer4" unique_id=1943687836]
+layout_mode = 2
+text = "Boss"
