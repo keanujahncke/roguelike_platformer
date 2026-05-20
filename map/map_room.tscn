@@ -1,23 +1,23 @@
 [gd_scene format=3 uid="uid://cjhquoyhn8g81"]
 
 [ext_resource type="Script" uid="uid://cuxwiqxs0tmf1" path="res://map/map_room.gd" id="1_iqn3p"]
-[ext_resource type="Texture2D" uid="uid://cywbmkd1fpthm" path="res://assets/placeholder_tiles.png" id="2_3hxdi"]
+[ext_resource type="Texture2D" uid="uid://p48ccx1uyoiw" path="res://assets/map_icons.png" id="2_3hxdi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ogv3"]
 atlas = ExtResource("2_3hxdi")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_68rea"]
 atlas = ExtResource("2_3hxdi")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3hxdi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ordnh"]
 atlas = ExtResource("2_3hxdi")
-region = Rect2(48, 0, 16, 16)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sm248"]
 atlas = ExtResource("2_3hxdi")
-region = Rect2(64, 0, 16, 16)
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2ahqc"]
 animations = [{
@@ -39,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3hxdi")
+"texture": SubResource("AtlasTexture_ordnh")
 }],
 "loop": true,
 "name": &"level",
