@@ -6,6 +6,7 @@ var current_map_node: MapNode = null # Tracks player position [cite: 23]
 var completed_nodes: Array[MapNode] = [] # Tracks progress [cite: 23]
 var next_room_to_load: PackedScene = null # The room selected from map [cite: 24]
 var visited_room_paths: Array[String] = []
+var map_scroll_position : int = -1
 
 func start_new_run():
 	current_run_abilities = save_data.get_selected_starting_abilities().duplicate() 

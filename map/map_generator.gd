@@ -118,7 +118,7 @@ func _would_cross_existing_path(i: int, j: int, room: MapNode) -> bool:
 			if next_room.column < room.column:
 				return true
 				
-	if left_neighbor and room.column > j:
+	if left_neighbor and room.column < j:
 		for next_room: MapNode in left_neighbor.next_rooms:
 			if next_room.column > room.column:
 				return true

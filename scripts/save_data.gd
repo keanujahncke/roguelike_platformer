@@ -14,7 +14,8 @@ var data = {
 	"max_energy": 1,
 	"seen_abilities": [],
 	"selected_starting_abilities": [],
-	"collected_ids": []
+	"collected_ids": [],
+	"has_completed_tutorial": false
 }
 
 
@@ -61,6 +62,9 @@ func load_save() -> bool:
 
 
 func _apply_missing_defaults():
+	if not data.has("has_completed_tutorial"):
+		data["has_completed_tutorial"] = false
+
 	if not data.has("max_energy"):
 		data["max_energy"] = 1
 
@@ -98,7 +102,8 @@ func _reset_runtime_data():
 		"max_energy": 1,
 		"seen_abilities": [],
 		"selected_starting_abilities": [],
-		"collected_ids": []
+		"collected_ids": [],
+		"has_completed_tutorial": false
 	}
 
 func reset_save():
@@ -157,3 +162,10 @@ func mark_collected(id: String):
 	if not data["collected_ids"].has(id):
 		data["collected_ids"].append(id)
 		save()
+
+func has_completed_tutorial() -> bool:
+	return data.get("has_completed_tutorial", false)
+
+func complete_tutorial():
+	data["has_completed_tutorial"] = true
+	save()

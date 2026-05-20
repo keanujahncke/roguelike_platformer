@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://bdnxk7vtkd6fp"]
+
+[ext_resource type="Texture2D" uid="uid://clnqsh38nxv0n" path="res://rooms/room_images/sky_glide_room.png" id="1_ql0ph"]
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_qos15"]
+[ext_resource type="PackedScene" uid="uid://dcpcful01wuir" path="res://rooms/room_scenes/sky_glide_room.tscn" id="2_d0hkq"]
+
+[resource]
+script = ExtResource("1_qos15")
+scene = ExtResource("2_d0hkq")
+preview = ExtResource("1_ql0ph")
+required_abilities = ["glide", "double_jump"]
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"

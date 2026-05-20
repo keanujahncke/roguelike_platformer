@@ -98,9 +98,27 @@ func _handle_boss_node(node):
 
 
 func _handle_level_node(_node: MapNode):
+	# --- THE FIX: Hijack the first room selection if the tutorial isn't done ---
+	if not save_data.has_completed_tutorial():
+		print("[GAME] Tutorial active! Overriding map selection to force starting room.")
+		
+		# Flag it as completed so their next map choice behaves normally
+		save_data.complete_tutorial()
+		
+		if starting_room != null:
+			load_room(starting_room)
+		else:
+			printerr("Starting room scene not assigned in Inspector! Using database fallback.")
+			_select_random_database_room()
+		return
+
+	# Otherwise, run your normal generation/filtering mechanics
+	_select_random_database_room()
+
+
+# Encapsulated your existing setup to keep the code organized and scannable
+func _select_random_database_room():
 	var current_abilities = run_manager.get_abilities()
-	
-	# 1. Start with the full list.
 	var all_rooms = room_database.rooms
 	var ability_filtered: Array[RoomData] = []
 	var final_valid_rooms: Array[RoomData] = []
@@ -108,7 +126,6 @@ func _handle_level_node(_node: MapNode):
 	print("\n--- [ROOM SELECTION START] ---")
 	print("Total rooms in Database: ", all_rooms.size())
 	
-	# 2. Filter by Ability.
 	for rd in all_rooms:
 		if _player_can_complete_room(rd, current_abilities):
 			ability_filtered.append(rd)
@@ -116,9 +133,6 @@ func _handle_level_node(_node: MapNode):
 			var r_name = rd.resource_path.get_file().get_basename()
 			print("  [X] Removed (Missing Ability): ", r_name)
 
-	print("Rooms passing ability check: ", ability_filtered.size())
-
-	# 3. Filter by Visited Status.
 	for rd in ability_filtered:
 		if not run_manager.visited_room_paths.has(rd.scene.resource_path):
 			final_valid_rooms.append(rd)
@@ -126,21 +140,11 @@ func _handle_level_node(_node: MapNode):
 			var r_name = rd.resource_path.get_file().get_basename()
 			print("  [X] Removed (Already Visited): ", r_name)
 
-	print("Final Pool Size: ", final_valid_rooms.size())
-	print("-------------------------------")
-
-	# 4. Selection and Loading.
 	if not final_valid_rooms.is_empty():
 		var chosen = final_valid_rooms.pick_random()
-		var chosen_name = chosen.resource_path.get_file().get_basename()
-		
-		print(">> SELECTED: ", chosen_name)
-		
-		# Log the visit before loading.
 		run_manager.visited_room_paths.append(chosen.scene.resource_path)
 		load_room(chosen.scene)
 	else:
-		# Fallback logic.
 		print("!!! No unique valid rooms left. Picking fallback random.")
 		var fallback = room_database.rooms.pick_random()
 		load_room(fallback.scene)

@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_3sejn"]
 [ext_resource type="Script" uid="uid://c7tyxjnhcnlh0" path="res://scripts/room_database.gd" id="2_oyd61"]
-[ext_resource type="Resource" uid="uid://b2u167bft4s1b" path="res://rooms/room_data/sky_room_02.tres" id="2_pt8yu"]
-[ext_resource type="Resource" uid="uid://dgmfbbsw7a62x" path="res://rooms/room_data/forest_room_02.tres" id="3_h8yxp"]
+[ext_resource type="Resource" uid="uid://bdnxk7vtkd6fp" path="res://rooms/room_data/sky_glide_room.tres" id="2_pt8yu"]
 
 [resource]
 script = ExtResource("2_oyd61")
-rooms = Array[ExtResource("1_3sejn")]([ExtResource("2_pt8yu"), ExtResource("3_h8yxp")])
+rooms = Array[ExtResource("1_3sejn")]([ExtResource("2_pt8yu")])
 metadata/_custom_type_script = "uid://c7tyxjnhcnlh0"
