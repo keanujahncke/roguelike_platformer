@@ -2,8 +2,8 @@ extends CanvasLayer
 
 # Signal now passes the entire MapNode resource
 signal map_node_selected(node: MapNode)
-
-@export var node_scene: PackedScene
+# added this because of an error i got :P, fix if you want
+@export var node_scene: PackedScene = preload("res://map/map_room.tscn")
 @export var room_database: RoomDatabase
 
 @onready var lines_container = $ScrollContainer/MapContent/LinesContainer
@@ -35,6 +35,10 @@ func open_map():
 	self.show()
 	
 	await get_tree().process_frame
+	var scroll_container: ScrollContainer = $ScrollContainer
+	var v_scroll = scroll_container.get_v_scroll_bar()
+	scroll_container.scroll_vertical = int(v_scroll.max_value)
+	
 	_grab_correct_focus()
 	lines_container.queue_redraw()
 

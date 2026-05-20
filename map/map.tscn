@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bf26esgmlh8bw" path="res://map/map.gd" id="1_a0dt8"]
 [ext_resource type="Script" uid="uid://ds3f70lakwwb6" path="res://map/map_generator.gd" id="1_hgrid"]
-[ext_resource type="PackedScene" uid="uid://cjhquoyhn8g81" path="res://map/map_room.tscn" id="2_lgq1i"]
-[ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_7lyie"]
 [ext_resource type="Script" uid="uid://wmwmchclmw7t" path="res://map/lines_container.gd" id="3_kffv2"]
 
 [sub_resource type="Gradient" id="Gradient_kffv2"]
@@ -14,8 +12,6 @@ gradient = SubResource("Gradient_kffv2")
 
 [node name="Map" type="CanvasLayer" unique_id=264398369]
 script = ExtResource("1_a0dt8")
-node_scene = ExtResource("2_lgq1i")
-room_database = ExtResource("3_7lyie")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1632846495]
 offset_right = 1160.0
@@ -36,18 +32,17 @@ grow_vertical = 0
 follow_focus = true
 
 [node name="MapContent" type="Control" parent="ScrollContainer" unique_id=231644203]
+custom_minimum_size = Vector2(1152, 1500)
 layout_mode = 2
 
 [node name="LinesContainer" type="Node2D" parent="ScrollContainer/MapContent" unique_id=1165867347]
-position = Vector2(600, 600)
+position = Vector2(0, 1450)
 script = ExtResource("3_kffv2")
 
 [node name="RoomsContainer" type="Control" parent="ScrollContainer/MapContent" unique_id=2125101584]
 anchors_preset = 0
-offset_left = 600.0
-offset_top = 600.0
-offset_right = 600.0
-offset_bottom = 600.0
+offset_top = 1450.0
+offset_bottom = 1450.0
 
 [node name="MapGenerator" type="Node" parent="." unique_id=1838421192]
 script = ExtResource("1_hgrid")

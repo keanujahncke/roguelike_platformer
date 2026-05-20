@@ -2,11 +2,11 @@ class_name MapGenerator
 extends Node
 
 
-const X_DIST := 32
-const Y_DIST := 32
-const PLACEMENT_RANDOMNESS := 5
+const X_DIST := 160
+const Y_DIST := 140
+const PLACEMENT_RANDOMNESS := 35
 const FLOORS := 10
-const MAP_WIDTH :=5
+const MAP_WIDTH := 5
 const PATHS := 5
 const LEVEL_NODE_WEIGHT := 10.0
 const UPGRADE_NODE_WEIGHT := 4.0
@@ -52,6 +52,8 @@ func generate_map() -> Array[Array]:
 
 func _generate_initial_grid() -> Array[Array]:
 	var result: Array[Array] = []
+	var total_map_width := (MAP_WIDTH - 1) * X_DIST
+	var start_x_padding := (1152 - total_map_width) / 2.0
 	
 	for i in FLOORS:
 		var adjacent_rooms: Array[MapNode] = []
@@ -59,7 +61,8 @@ func _generate_initial_grid() -> Array[Array]:
 		for j in MAP_WIDTH:
 			var current_room := MapNode.new()
 			var offset := Vector2(randf(), randf() * PLACEMENT_RANDOMNESS)
-			current_room.position = Vector2(j * X_DIST, i * -Y_DIST) + offset
+			
+			current_room.position = Vector2(start_x_padding + (j * X_DIST), i * -Y_DIST) + offset
 			current_room.row = i
 			current_room.column = j
 			current_room.next_rooms = []
@@ -82,7 +85,7 @@ func _get_random_starting_points() -> Array[int]:
 		y_coordinates = []
 		
 		for i in PATHS:
-			var starting_point : = randi_range(0, MAP_WIDTH - 1)
+			var starting_point := randi_range(0, MAP_WIDTH - 1)
 			if not y_coordinates.has(starting_point):
 				unique_points += 1
 			
