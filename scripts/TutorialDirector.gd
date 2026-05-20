@@ -106,7 +106,7 @@ func _on_tutorial_triggered(trigger_id: String) -> void:
 		"momentum":
 			await _play_checkpoint_dialogue([
 				"Hold on a sec. There's a big gap here.",
-				"I'm sure if you build up some momentum before jumping, you can traverse a large gap like this."
+				"If you build up some momentum before jumping, you can traverse a large gap like this."
 			])
 
 		"collectible":
@@ -133,10 +133,9 @@ func _play_final_dialogue() -> void:
 	guide.stop_and_idle()
 
 	await _play_dialogue([
-		"Look up there. Do you see that floppy disk?",
+		"Look up there. Do you see that large floppy disk?",
 		"If you collect those on your journey you might gain some sort of hidden power...",
-		"Or not. Who knows. I just work here.",
-		"By the way, if you keep using that cape you might come up with some cool techniques",
+		"Oh! Also, if you keep using that cape you might come up with some cool techniques",
 		"Okay... well... it's been good knowin' ya!",
 		"You can head to the exit on the right when you're finished, or you can stick around and practice some more.",
 		"Best of luck on getting home, pal."
