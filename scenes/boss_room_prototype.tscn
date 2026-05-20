@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://btuie170b84dq" path="res://assets/Spritesheets/bossdeath.png" id="5_kr2de"]
 [ext_resource type="PackedScene" uid="uid://u3sm1x26ij8t" path="res://scenes/BossLaser.tscn" id="5_ys6to"]
 [ext_resource type="Texture2D" uid="uid://8lwbprotifkq" path="res://assets/Spritesheets/boss attack laser1.png" id="8_byv4o"]
+[ext_resource type="Texture2D" uid="uid://cf55po850hc68" path="res://assets/Spritesheets/boss rush attack.png" id="9_immaw"]
 [ext_resource type="Script" uid="uid://bnbmu8id2s1q3" path="res://scripts/boss_fake_death_trigger.gd" id="10_6wbvr"]
 [ext_resource type="Texture2D" uid="uid://dlrlgalheuph0" path="res://assets/Spritesheets/sword.png" id="10_kr2de"]
 [ext_resource type="PackedScene" uid="uid://bklkly5qjuxak" path="res://scenes/SwordSlashEffect.tscn" id="11_mc58d"]
@@ -1052,6 +1053,10 @@ region = Rect2(4160, 0, 64, 64)
 atlas = ExtResource("8_byv4o")
 region = Rect2(4224, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7aji"]
+atlas = ExtResource("9_immaw")
+region = Rect2(0, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_immaw"]
 animations = [{
 "frames": [{
@@ -1368,6 +1373,14 @@ animations = [{
 "loop": false,
 "name": &"laser_attack",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7aji")
+}],
+"loop": true,
+"name": &"rush_attack",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1x4m3"]
@@ -1453,8 +1466,7 @@ laser_phase_duration = 6.0
 position = Vector2(-153.5, -60)
 scale = Vector2(1.984375, 2)
 sprite_frames = SubResource("SpriteFrames_immaw")
-animation = &"laser_attack"
-frame_progress = 1.0
+animation = &"boss_death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boss" unique_id=671337126]
 position = Vector2(-148, -60)
