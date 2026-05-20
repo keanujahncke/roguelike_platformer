@@ -1461,7 +1461,7 @@ scroll_offset = Vector2(0, 0)
 repeat_size = Vector2(248, 0)
 
 [node name="FrontLayer" parent="Parallax2D" index="0" unique_id=353806906]
-modulate = Color(0.84947944, 0.79803985, 0.33508354, 0.96862745)
+modulate = Color(0.4745098, 0.47843137, 0.63529414, 0.96862745)
 position = Vector2(666.375, -65.054405)
 scale = Vector2(0.84608847, 0.8990008)
 

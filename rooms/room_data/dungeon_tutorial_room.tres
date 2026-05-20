@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://1okp00dhscbg"]
 
-[ext_resource type="PackedScene" uid="uid://xhblhqd2hr88" path="res://rooms/room_scenes/dunegon_tutorial_room.tscn" id="1_0tu0e"]
+[ext_resource type="PackedScene" uid="uid://xhblhqd2hr88" path="res://rooms/room_scenes/dungeon_tutorial_room.tscn" id="1_0tu0e"]
 [ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_g6wj6"]
+
 
 [resource]
 script = ExtResource("1_g6wj6")

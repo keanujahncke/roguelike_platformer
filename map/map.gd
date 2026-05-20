@@ -12,8 +12,23 @@ signal map_node_selected(node: MapNode)
 var map_data: Array[Array]
 var room_buttons = {}
 
+@export var stick_scroll_speed := 450.0  # Pixels per second
+@onready var scroll_container: ScrollContainer = $ScrollContainer
+
 func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS 
+
+
+func _process(delta: float) -> void:
+	if not self.visible:
+		return
+		
+	var input_axis := Input.get_axis("map_scroll_up", "map_scroll_down")
+	
+	if abs(input_axis) > 0.1:
+		scroll_container.scroll_vertical += int(input_axis * stick_scroll_speed * delta)
+		run_manager.map_scroll_position = scroll_container.scroll_vertical
+		lines_container.queue_redraw()
 
 func open_map():
 	map_data = run_manager.map_data
@@ -35,9 +50,13 @@ func open_map():
 	self.show()
 	
 	await get_tree().process_frame
-	var scroll_container: ScrollContainer = $ScrollContainer
 	var v_scroll = scroll_container.get_v_scroll_bar()
-	scroll_container.scroll_vertical = int(v_scroll.max_value)
+	
+	if run_manager.map_scroll_position != -1:
+		scroll_container.scroll_vertical = run_manager.map_scroll_position
+	else:
+		scroll_container.scroll_vertical = int(v_scroll.max_value)
+		run_manager.map_scroll_position = scroll_container.scroll_vertical
 	
 	_grab_correct_focus()
 	lines_container.queue_redraw()
@@ -90,7 +109,7 @@ func _on_node_pressed(room: MapNode) -> void:
 		run_manager.completed_nodes.append(run_manager.current_map_node)
 	
 	run_manager.current_map_node = room
-	
+	run_manager.map_scroll_position = scroll_container.scroll_vertical
 	# Pass the whole node to LevelManager
 	map_node_selected.emit(room)
 	self.hide()

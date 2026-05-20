@@ -1811,7 +1811,7 @@ repeat_size = Vector2(248, 0)
 repeat_times = 25
 
 [node name="FrontLayer" type="Sprite2D" parent="Parallax2D" unique_id=353806906]
-modulate = Color(0.8509804, 0.8, 0.33333334, 0.96862745)
+modulate = Color(0.47798383, 0.4745896, 0.63411987, 1)
 z_index = -50
 texture_filter = 1
 texture_repeat = 2
