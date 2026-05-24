@@ -265,7 +265,7 @@ func set_laser_attack_enabled(enabled: bool) -> void:
 	if laser_attack_enabled:
 		start_laser_phase_loop()
 	else:
-		play_idle()
+		stop_all_laser_attacks(false)
 
 
 func start_laser_phase_loop() -> void:
@@ -288,6 +288,9 @@ func start_laser_phase_loop() -> void:
 
 
 func run_laser_phase() -> void:
+	if not laser_attack_enabled or trap_sequence_running:
+		return
+
 	# 1. Boss attack animation starts first.
 	# Do not await it. It returns to idle by itself when finished.
 	play_laser_attack_then_return_to_idle()
@@ -317,8 +320,46 @@ func run_laser_phase() -> void:
 
 
 func stop_laser_loop() -> void:
+	stop_all_laser_attacks(false)
+
+
+func stop_all_laser_attacks(force_idle: bool = true) -> void:
 	laser_attack_enabled = false
-	play_idle()
+	waiting_cleanup_for_lasers()
+
+	# Invalidate any laser attack animation await that might later try to return to idle.
+	laser_attack_animation_token += 1
+
+	for laser in active_lasers:
+		_force_remove_laser(laser)
+
+	active_lasers.clear()
+
+	for laser in get_tree().get_nodes_in_group("boss_lasers"):
+		_force_remove_laser(laser)
+
+	if force_idle and not trap_sequence_running:
+		play_idle()
+
+
+func waiting_cleanup_for_lasers() -> void:
+	clean_active_laser_list()
+
+
+func _force_remove_laser(laser: Node) -> void:
+	if laser == null:
+		return
+
+	if not is_instance_valid(laser):
+		return
+
+	if laser.is_queued_for_deletion():
+		return
+
+	if laser.has_method("force_stop_laser"):
+		laser.force_stop_laser()
+	else:
+		laser.queue_free()
 
 
 func clean_active_laser_list() -> void:
@@ -332,6 +373,9 @@ func clean_active_laser_list() -> void:
 
 
 func spawn_laser_at_locked_player_position() -> void:
+	if not laser_attack_enabled or trap_sequence_running:
+		return
+
 	if boss_laser_scene == null:
 		push_warning("Boss: boss_laser_scene is not assigned.")
 		return
@@ -399,7 +443,8 @@ func fake_death_only() -> void:
 	trap_sequence_running = true
 	fake_death_is_finished = false
 	
-	stop_laser_loop()
+	# Stop laser attacks immediately and remove any existing laser/indicator.
+	stop_all_laser_attacks(false)
 
 	# Boss should not have physical collision.
 	if disable_boss_collision and collision_shape != null:

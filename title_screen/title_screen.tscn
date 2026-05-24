@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bkr0a26h6xq1y" path="res://title_screen/title_screen.gd" id="1_g2mvh"]
 [ext_resource type="Texture2D" uid="uid://cyikb2fmdx6gb" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/3 Item Holder/1.png" id="2_2dq6q"]
 [ext_resource type="Script" uid="uid://cfsq4qfwmg04g" path="res://title_screen/loadout_menu.gd" id="2_dxpbd"]
+[ext_resource type="AudioStream" uid="uid://v37a3o417nbs" path="res://assets/audio/titleOpener.wav" id="2_fh6ay"]
+[ext_resource type="AudioStream" uid="uid://ciim5vcbcsvsv" path="res://assets/audio/titleLoop.wav" id="3_jabur"]
 [ext_resource type="Texture2D" uid="uid://qjqx4b1e4qe8" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Plain/9 Rewards/1.png" id="4_0m3ch"]
 [ext_resource type="Texture2D" uid="uid://cl74uc82d8eo8" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Plain/8 Shop/1.png" id="5_fk0fn"]
 [ext_resource type="Texture2D" uid="uid://duumqumxe2emm" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Content/1 Items/3.png" id="5_oqrgu"]
@@ -70,6 +72,10 @@ corner_radius_bottom_left = 4
 [node name="TitleScreen" type="CanvasLayer" unique_id=926336203]
 layer = 5
 script = ExtResource("1_g2mvh")
+title_opener_stream = ExtResource("2_fh6ay")
+title_loop_stream = ExtResource("3_jabur")
+title_music_volume_db = -16.0
+title_opener_start_offset = 2.0
 
 [node name="MainMenu" type="Control" parent="." unique_id=1885359974]
 unique_name_in_owner = true

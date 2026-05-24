@@ -1,5 +1,10 @@
 extends CanvasLayer
 
+@export var title_opener_stream: AudioStream
+@export var title_loop_stream: AudioStream
+@export var title_music_volume_db: float = -8.0
+@export var title_opener_start_offset: float = 1.0
+
 @onready var main_menu = %MainMenu
 @onready var new_game_menu = %NewGameMenu
 @onready var loadout_menu = %LoadoutMenu
@@ -10,7 +15,6 @@ extends CanvasLayer
 @onready var slot_00_load = %slot_00_load
 @onready var slot_00_delete = %slot_00_delete
 
-
 @onready var slot_01_load = %slot_01_load
 @onready var slot_01_delete = %slot_01_delete
 
@@ -20,9 +24,12 @@ extends CanvasLayer
 @onready var start_run_button = %StartRun
 @onready var pointer = %Pointer
 
+var title_music_player: AudioStreamPlayer
 
 
 func _ready() -> void:
+	_setup_title_music()
+
 	# Hides Pointer
 	pointer.visible = false
 	
@@ -47,7 +54,32 @@ func _ready() -> void:
 		show_loadout_menu()
 	else:
 		show_main_menu()
-		
+
+
+func _setup_title_music() -> void:
+	title_music_player = AudioStreamPlayer.new()
+	title_music_player.name = "TitleMusicPlayer"
+	title_music_player.volume_db = title_music_volume_db
+	add_child(title_music_player)
+
+	if title_opener_stream:
+		title_music_player.stream = title_opener_stream
+		title_music_player.finished.connect(_on_title_opener_finished)
+		title_music_player.play(title_opener_start_offset)
+	elif title_loop_stream:
+		title_music_player.stream = title_loop_stream
+		title_music_player.play()
+
+
+func _on_title_opener_finished() -> void:
+	if not title_music_player:
+		return
+	
+	if title_loop_stream:
+		title_music_player.stream = title_loop_stream
+		title_music_player.play()
+
+
 func _process(_delta: float) -> void:
 	var focused_node = get_viewport().gui_get_focus_owner()
 	
@@ -108,8 +140,6 @@ func show_loadout_menu() -> void:
 # SLOT SELECT
 # ==================================================
 
-# Inside your CanvasLayer / Main Menu script
-
 func _on_new_game_pressed(slot: int) -> void:
 	print("--- SLOT SWAP INITIATED ---")
 	save_data.current_slot = slot
@@ -121,7 +151,6 @@ func _on_new_game_pressed(slot: int) -> void:
 	
 	if success:
 		loadout_menu.refresh() 
-		
 		show_loadout_menu()
 	else:
 		printerr("Failed to load slot ", slot)
@@ -144,6 +173,8 @@ func _on_start_run_pressed() -> void:
 func start_game() -> void:
 	print("[MENU] Starting Run. Clearing old session data to force map regeneration...")
 	
+	_stop_title_music()
+	
 	# CRITICAL: Wipe the Singleton data so the next scene builds a fresh map
 	run_manager.map_data = [] 
 	run_manager.current_map_node = null
@@ -153,10 +184,16 @@ func start_game() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 
+func _stop_title_music() -> void:
+	if title_music_player and title_music_player.playing:
+		title_music_player.stop()
+
+
 # ==================================================
 # QUIT
 # ==================================================
 
 func _on_quit_pressed() -> void:
 	save_data.save()
+	_stop_title_music()
 	get_tree().quit()

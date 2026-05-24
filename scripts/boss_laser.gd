@@ -29,10 +29,13 @@ class_name BossLaser
 var is_active: bool = false
 var has_hit_player: bool = false
 var sequence_started: bool = false
+var force_stopped: bool = false
 var current_phase: String = ""
 
 
 func _ready() -> void:
+	add_to_group("boss_lasers")
+
 	if not body_entered.is_connected(_on_body_entered):
 		body_entered.connect(_on_body_entered)
 
@@ -40,6 +43,9 @@ func _ready() -> void:
 
 
 func setup_laser(target_position: Vector2, laser_rotation: float, laser_scale: Vector2 = Vector2.ONE) -> void:
+	if force_stopped:
+		return
+
 	global_position = target_position
 	global_rotation = laser_rotation
 	scale = laser_scale
@@ -48,6 +54,9 @@ func setup_laser(target_position: Vector2, laser_rotation: float, laser_scale: V
 
 
 func start_laser_sequence() -> void:
+	if force_stopped:
+		return
+
 	if sequence_started:
 		return
 
@@ -90,11 +99,17 @@ func start_indicator_backup_timer() -> void:
 	if not is_instance_valid(self):
 		return
 
+	if force_stopped:
+		return
+
 	if current_phase == "indicator":
 		begin_indicator_hold()
 
 
 func _on_animation_finished() -> void:
+	if force_stopped:
+		return
+
 	if current_phase == "indicator":
 		begin_indicator_hold()
 	elif current_phase == "laser":
@@ -102,6 +117,9 @@ func _on_animation_finished() -> void:
 
 
 func begin_indicator_hold() -> void:
+	if force_stopped:
+		return
+
 	if current_phase != "indicator":
 		return
 
@@ -113,11 +131,17 @@ func begin_indicator_hold() -> void:
 	if not is_instance_valid(self):
 		return
 
+	if force_stopped:
+		return
+
 	if current_phase == "indicator_hold":
 		start_actual_laser()
 
 
 func start_actual_laser() -> void:
+	if force_stopped:
+		return
+
 	if current_phase != "indicator_hold":
 		return
 
@@ -150,6 +174,9 @@ func play_laser_sfx_after_delay() -> void:
 	if not is_instance_valid(self):
 		return
 
+	if force_stopped:
+		return
+
 	if current_phase != "laser":
 		return
 
@@ -173,6 +200,9 @@ func start_laser_hurtbox_window() -> void:
 	if not is_instance_valid(self):
 		return
 
+	if force_stopped:
+		return
+
 	if current_phase != "laser":
 		return
 
@@ -184,11 +214,17 @@ func start_laser_hurtbox_window() -> void:
 	if not is_instance_valid(self):
 		return
 
+	if force_stopped:
+		return
+
 	if current_phase == "laser":
 		disable_hurtbox()
 
 
 func play_laser_sfx() -> void:
+	if force_stopped:
+		return
+
 	if laser_sfx == null:
 		return
 
@@ -200,6 +236,9 @@ func play_laser_sfx() -> void:
 
 
 func enable_hurtbox() -> void:
+	if force_stopped:
+		return
+
 	is_active = true
 
 	if collision_shape != null:
@@ -211,6 +250,26 @@ func disable_hurtbox() -> void:
 
 	if collision_shape != null:
 		collision_shape.disabled = true
+
+
+func force_stop_laser() -> void:
+	if force_stopped:
+		return
+
+	force_stopped = true
+	current_phase = "done"
+	is_active = false
+	has_hit_player = true
+
+	disable_hurtbox()
+
+	if laser_sfx != null:
+		laser_sfx.stop()
+
+	if animated_sprite != null:
+		animated_sprite.stop()
+
+	queue_free()
 
 
 func end_laser() -> void:
@@ -247,6 +306,9 @@ func get_animation_duration(animation_name: String, fallback_time: float) -> flo
 
 
 func check_overlapping_bodies_for_damage() -> void:
+	if force_stopped:
+		return
+
 	if not is_active:
 		return
 
@@ -255,6 +317,9 @@ func check_overlapping_bodies_for_damage() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if force_stopped:
+		return
+
 	if not is_active:
 		return
 
@@ -262,6 +327,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func try_damage_body(body: Node) -> void:
+	if force_stopped:
+		return
+
 	if has_hit_player:
 		return
 

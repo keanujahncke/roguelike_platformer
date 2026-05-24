@@ -7,6 +7,7 @@ extends Node2D
 @export var dungeon_music: AudioStream
 @export var forest_music: AudioStream
 @export var sky_music: AudioStream
+@export var tutorial_music: AudioStream
 
 # Boss music:
 @export var boss_intro_music: AudioStream
@@ -15,6 +16,7 @@ extends Node2D
 @export var dungeon_music_db := -15.0
 @export var forest_music_db := -20.0
 @export var sky_music_db := -15.0
+@export var tutorial_music_db := -15.0
 @export var boss_music_db := -15.0
 
 # Boss music offsets:
@@ -273,7 +275,14 @@ func play_music_for_room(room_scene: PackedScene):
 	var next_volume_db := dungeon_music_db
 	var track_name := "dungeon"
 	
-	if "forest" in path:
+	# IMPORTANT:
+	# tutorial is checked before dungeon because rooms like "dungeon_tutorial"
+	# contain both words. This gives tutorial music priority.
+	if "tutorial" in path:
+		next_track = tutorial_music
+		next_volume_db = tutorial_music_db
+		track_name = "tutorial"
+	elif "forest" in path:
 		next_track = forest_music
 		next_volume_db = forest_music_db
 		track_name = "forest"

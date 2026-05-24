@@ -42,6 +42,11 @@ func _on_body_entered(body: Node2D) -> void:
 
 	lock_player_controls(body)
 
+	# Stop all boss laser attacks the instant the sword trigger is touched.
+	# This prevents active lasers/indicators from hitting the player during the camera pan.
+	if boss != null and boss.has_method("stop_all_laser_attacks"):
+		boss.stop_all_laser_attacks(false)
+
 	# 1. Camera pans down to boss FIRST.
 	await pan_camera_to_boss(body)
 
