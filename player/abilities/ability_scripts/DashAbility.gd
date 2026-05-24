@@ -4,6 +4,10 @@ class_name DashAbility
 @export var dash_speed := 500.0
 @export var dash_time := 0.10
 @export var max_dashes := 1
+@export var dash_cooldown := 1.0
+
+var cooldown_max := 0.0
+var cooldown_left := 0.0
 
 # Collision layer used for solid terrain
 @export var terrain_layer := 1
@@ -14,11 +18,20 @@ var is_dashing := false
 
 func setup(_player):
 	dashes_left = max_dashes
+	cooldown_max = dash_cooldown
+	cooldown_left = 0.0
 
 
-func ability_process(player, _delta):
+func ability_process(player, delta):
 	if not unlocked:
 		return
+		
+	if cooldown_left > 0.0 and not is_dashing:
+		cooldown_left = max(cooldown_left - delta, 0.0)
+
+	if is_dashing:
+		cooldown_max = 1.0
+		cooldown_left = 1.0
 
 	if player.is_on_floor():
 		dashes_left = max_dashes
@@ -27,7 +40,8 @@ func ability_process(player, _delta):
 
 	if Input.is_action_just_pressed("dash") \
 	and dashes_left > 0 \
-	and not is_dashing:
+	and not is_dashing \
+	and cooldown_left <= 0.0:
 		start_dash(player)
 
 
@@ -58,6 +72,10 @@ func start_dash(player):
 		player.set_collision_mask_value(terrain_layer, true)
 
 	is_dashing = false
+	
+	if is_instance_valid(player):
+		cooldown_max = dash_cooldown
+		cooldown_left = cooldown_max
 
 
 func get_dash_direction(player) -> Vector2:

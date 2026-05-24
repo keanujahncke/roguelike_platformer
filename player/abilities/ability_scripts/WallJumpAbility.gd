@@ -5,22 +5,32 @@ class_name WallJumpAbility
 @export var wall_jump_y := -300.0
 @export var wall_slide_speed := 60.0
 @export var wall_jump_grace_time := 0.15
+@export var wall_jump_cooldown := 0.5
+
+var cooldown_max := 0.0
+var cooldown_left := 0.0
 
 var is_wall_sliding := false
+var was_sliding_last_frame := false
 var wall_jump_grace_timer := 0.0
 var last_wall_normal := Vector2.ZERO
 
 
 func setup(_player):
-	pass
+	cooldown_max = wall_jump_cooldown
+	cooldown_left = 0.0
 
 
 func ability_process(player, delta):
 	if not unlocked:
 		is_wall_sliding = false
+		was_sliding_last_frame = false
 		wall_jump_grace_timer = 0.0
 		last_wall_normal = Vector2.ZERO
 		return
+		
+	if cooldown_left > 0.0 and not is_wall_sliding:
+		cooldown_left = max(cooldown_left - delta, 0.0)
 
 	is_wall_sliding = false
 
@@ -33,22 +43,37 @@ func ability_process(player, delta):
 		if player.velocity.y > 0 and Input.get_axis("move_left", "move_right") != 0:
 			is_wall_sliding = true
 			player.velocity.y = min(player.velocity.y, wall_slide_speed)
+		
+			cooldown_max = 1.0
+			cooldown_left = 1.0
+			
 		else:
 			is_wall_sliding = false
 	else:
 		is_wall_sliding = false
 		wall_jump_grace_timer = max(wall_jump_grace_timer - delta, 0.0)
+		
+	if not is_wall_sliding and was_sliding_last_frame:
+		cooldown_max = wall_jump_cooldown
+		cooldown_left = cooldown_max
+		was_sliding_last_frame = false
 
 	# Wall jump with grace window
 	if wall_jump_grace_timer > 0.0 \
 	and not player.is_on_floor() \
 	and Input.is_action_just_pressed("jump") \
-	and last_wall_normal != Vector2.ZERO:
+	and last_wall_normal != Vector2.ZERO \
+	and (cooldown_left <= 0.0 or was_sliding_last_frame):
 
 		player.is_doing_double_jump = false
 		player.velocity.y = wall_jump_y
 		player.velocity.x = last_wall_normal.x * wall_jump_x
 		wall_jump_grace_timer = 0.0
+		
+		is_wall_sliding = false
+		was_sliding_last_frame = false
+		cooldown_max = wall_jump_cooldown
+		cooldown_left = cooldown_max
 
 		if player.jump_sfx:
 			player.jump_sfx.play()

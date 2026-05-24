@@ -33,6 +33,8 @@ extends Node2D
 @onready var heartContainer = $HeartUI/heartContainer
 @onready var map_ui = $CanvasLayer/Map 
 
+@onready var ability_bar: HBoxContainer = $CanvasLayer/AbilityBarUI/AbilityBar
+
 var current_room : Node2D
 var current_exit : Area2D
 
@@ -54,6 +56,10 @@ func _ready():
 	game_over.hide()
 	level_rewards_ui.hide()
 	heartContainer.setMaxHearts(player.max_health)
+
+	if ability_bar != null:
+		ability_bar.player = player
+		player.ability_bar = ability_bar
 
 	if music != null and not music.finished.is_connected(_on_music_finished):
 		music.finished.connect(_on_music_finished)

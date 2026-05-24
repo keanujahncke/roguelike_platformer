@@ -64,6 +64,7 @@ var was_on_floor := false
 var fall_timer := 0.0
 @export var min_fall_time_for_land_sfx := 0.30
 
+var ability_bar: HBoxContainer
 
 func _ready():
 	anim.play("idle")

@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://c82276nry3tt0"]
+
+[ext_resource type="Script" uid="uid://dnbjns1rllol0" path="res://AbilityBar.gd" id="1_7yykb"]
+[ext_resource type="Texture2D" uid="uid://dl38mmfax4il1" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/1 Paper/18.png" id="1_mygb6"]
+[ext_resource type="Texture2D" uid="uid://c5qdgejpgos6e" path="res://assets/Monsters_19.png" id="2_c1fvc"]
+[ext_resource type="Script" uid="uid://b527js5t4aljw" path="res://AbilitySlotUI.gd" id="3_g478g"]
+
+[node name="AbilityBarUI" type="CanvasLayer" unique_id=1831152166]
+
+[node name="AbilityBar" type="HBoxContainer" parent="." unique_id=218614196]
+offset_top = 79.0
+offset_right = 96.0
+offset_bottom = 115.0
+theme_override_constants/separation = 8
+script = ExtResource("1_7yykb")
+
+[node name="DashSlot" type="TextureRect" parent="AbilityBar" unique_id=329035478]
+layout_mode = 2
+texture = ExtResource("2_c1fvc")
+stretch_mode = 3
+script = ExtResource("3_g478g")
+ability_name = "dash"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="AbilityBar/DashSlot" unique_id=1686210579]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_progress = ExtResource("1_mygb6")
+
+[node name="WallJumpSlot" type="TextureRect" parent="AbilityBar" unique_id=1852179290]
+layout_mode = 2
+texture = ExtResource("2_c1fvc")
+stretch_mode = 3
+script = ExtResource("3_g478g")
+ability_name = "wall_jump"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="AbilityBar/WallJumpSlot" unique_id=1333938285]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_progress = ExtResource("1_mygb6")
+
+[node name="DoubleJumpSlot" type="TextureRect" parent="AbilityBar" unique_id=1537522009]
+layout_mode = 2
+texture = ExtResource("2_c1fvc")
+stretch_mode = 3
+script = ExtResource("3_g478g")
+ability_name = "double_jump"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="AbilityBar/DoubleJumpSlot" unique_id=839122608]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_progress = ExtResource("1_mygb6")
+
+[node name="GlideSlot" type="TextureRect" parent="AbilityBar" unique_id=1226678523]
+layout_mode = 2
+texture = ExtResource("2_c1fvc")
+stretch_mode = 3
+script = ExtResource("3_g478g")
+ability_name = "glide"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="AbilityBar/GlideSlot" unique_id=883369818]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_progress = ExtResource("1_mygb6")
