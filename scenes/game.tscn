@@ -117,6 +117,7 @@ available_abilities = Array[ExtResource("9_vtaks")]([ExtResource("10_dinhu"), Ex
 visible = false
 
 [node name="AbilityBarUI" parent="CanvasLayer" unique_id=1831152166 instance=ExtResource("21_bt5mj")]
+layer = 0
 
 [node name="PauseMenu" parent="." unique_id=926336203 instance=ExtResource("12_dinhu")]
 
@@ -125,6 +126,7 @@ volume_db = -18.064
 autoplay = true
 
 [node name="HeartUI" type="CanvasLayer" parent="." unique_id=1563169944]
+layer = 0
 
 [node name="heartContainer" parent="HeartUI" unique_id=1797831083 instance=ExtResource("16_ca42v")]
 

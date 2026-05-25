@@ -2,14 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bf26esgmlh8bw" path="res://map/map.gd" id="1_a0dt8"]
 [ext_resource type="Script" uid="uid://ds3f70lakwwb6" path="res://map/map_generator.gd" id="1_hgrid"]
+[ext_resource type="Texture2D" uid="uid://dl38mmfax4il1" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/1 Paper/18.png" id="2_7lyie"]
+[ext_resource type="Texture2D" uid="uid://dumn4c8e2h0m7" path="res://assets/map_background.png" id="2_kffv2"]
+[ext_resource type="Texture2D" uid="uid://c8kvsfpjwonoy" path="res://assets/bg2.png" id="3_5jdw0"]
 [ext_resource type="Script" uid="uid://wmwmchclmw7t" path="res://map/lines_container.gd" id="3_kffv2"]
 [ext_resource type="Texture2D" uid="uid://rsc1tqljjaeo" path="res://assets/new_map_icons.png" id="4_lgq1i"]
-
-[sub_resource type="Gradient" id="Gradient_kffv2"]
-colors = PackedColorArray(0.21568628, 0.21568628, 0.21568628, 1, 0.4, 0.21960784, 0.20392157, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7lyie"]
-gradient = SubResource("Gradient_kffv2")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kffv2"]
 atlas = ExtResource("4_lgq1i")
@@ -30,10 +27,37 @@ region = Rect2(32, 0, 32, 32)
 [node name="Map" type="CanvasLayer" unique_id=264398369]
 script = ExtResource("1_a0dt8")
 
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=2033180785]
+modulate = Color(0.08627451, 0.14901961, 0.27058825, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7lyie")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1856615308]
+modulate = Color(0.08627451, 0.14901961, 0.27058825, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_5jdw0")
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1632846495]
-offset_right = 1160.0
-offset_bottom = 660.0
-texture = SubResource("GradientTexture1D_7lyie")
+self_modulate = Color(0.899258, 0.89925855, 0.89925826, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 149.0
+offset_right = 149.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.707334, 1)
+size_flags_horizontal = 4
+texture = ExtResource("2_kffv2")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=388729501]
 anchors_preset = 7
@@ -65,11 +89,11 @@ offset_bottom = 1450.0
 script = ExtResource("1_hgrid")
 
 [node name="Legend" type="VBoxContainer" parent="." unique_id=1763616336]
-offset_left = 990.0
-offset_top = 4.0
-offset_right = 1085.0
-offset_bottom = 127.0
-scale = Vector2(1.5893893, 1.5893893)
+offset_left = 992.0
+offset_top = 22.0
+offset_right = 1090.0
+offset_bottom = 162.0
+scale = Vector2(1.2680023, 1.2680023)
 size_flags_horizontal = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Legend" unique_id=1349501830]
@@ -82,6 +106,8 @@ texture = SubResource("AtlasTexture_kffv2")
 
 [node name="Label" type="Label" parent="Legend/HBoxContainer" unique_id=818649329]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.44313726)
+theme_override_constants/shadow_outline_size = -1
 text = "Room"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Legend" unique_id=1931235325]
@@ -94,6 +120,8 @@ texture = SubResource("AtlasTexture_7lyie")
 
 [node name="Label" type="Label" parent="Legend/HBoxContainer2" unique_id=97555181]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.44313726)
+theme_override_constants/shadow_outline_size = -1
 text = "Upgrade"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Legend" unique_id=959418318]
@@ -106,6 +134,8 @@ texture = SubResource("AtlasTexture_5jdw0")
 
 [node name="Label" type="Label" parent="Legend/HBoxContainer3" unique_id=1681131073]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.44313726)
+theme_override_constants/shadow_outline_size = -1
 text = "Health"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Legend" unique_id=447229322]
@@ -118,4 +148,6 @@ texture = SubResource("AtlasTexture_kxmgb")
 
 [node name="Label" type="Label" parent="Legend/HBoxContainer4" unique_id=1943687836]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.44313726)
+theme_override_constants/shadow_outline_size = -1
 text = "Boss"
