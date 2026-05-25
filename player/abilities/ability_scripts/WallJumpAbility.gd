@@ -15,6 +15,9 @@ var was_sliding_last_frame := false
 var wall_jump_grace_timer := 0.0
 var last_wall_normal := Vector2.ZERO
 
+# Used so DoubleJumpAbility knows not to consume the same jump input.
+var consumed_jump_this_frame := false
+
 
 func setup(_player):
 	cooldown_max = wall_jump_cooldown
@@ -22,6 +25,8 @@ func setup(_player):
 
 
 func ability_process(player, delta):
+	consumed_jump_this_frame = false
+
 	if not unlocked:
 		return
 
@@ -42,8 +47,9 @@ func ability_process(player, delta):
 			was_sliding_last_frame = true
 			player.velocity.y = min(player.velocity.y, wall_slide_speed)
 
-			# While actively sliding, we keep this high so the player cannot spam
-			# repeated wall jumps instantly, but we still allow the current slide jump.
+			# While actively sliding, keep this high so the player cannot
+			# spam repeated wall jumps instantly while sticking to the wall.
+			# The current slide jump is still allowed through was_sliding_last_frame.
 			cooldown_max = 1.0
 			cooldown_left = 1.0
 		else:
@@ -52,6 +58,8 @@ func ability_process(player, delta):
 		is_wall_sliding = false
 		wall_jump_grace_timer = max(wall_jump_grace_timer - delta, 0.0)
 
+	# Wall jump with grace window and cooldown check.
+	# Important: this happens before clearing was_sliding_last_frame.
 	var can_wall_jump: bool = (
 		wall_jump_grace_timer > 0.0
 		and not player.is_on_floor()
@@ -65,6 +73,8 @@ func ability_process(player, delta):
 	)
 
 	if can_wall_jump:
+		consumed_jump_this_frame = true
+
 		player.is_doing_double_jump = false
 
 		player.velocity.y = wall_jump_y

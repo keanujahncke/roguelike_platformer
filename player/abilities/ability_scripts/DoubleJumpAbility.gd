@@ -23,6 +23,8 @@ func ability_process(player, delta):
 	if not unlocked:
 		return
 
+	var jump_pressed: bool = Input.is_action_just_pressed("jump")
+
 	# Count down cooldown.
 	# When cooldown finishes, refill the double jump even if airborne.
 	var was_on_cooldown: bool = cooldown_left > 0.0
@@ -45,10 +47,12 @@ func ability_process(player, delta):
 	if double_jump_in_progress:
 		return
 
-	# Do NOT reset jumps_left on wall.
-	# Do NOT block double jump just because the player is touching a wall.
-	# This prevents wall spam while still allowing double jump near walls.
-	if Input.is_action_just_pressed("jump") and jumps_left > 0 and cooldown_left <= 0.0:
+	# Wall jump gets priority over double jump.
+	# This prevents a wall jump from also consuming double jump cooldown.
+	if jump_pressed and _wall_jump_should_take_priority(player):
+		return
+
+	if jump_pressed and jumps_left > 0 and cooldown_left <= 0.0:
 		jumps_left -= 1
 		cooldown_left = cooldown_max
 		double_jump_in_progress = true
@@ -67,3 +71,33 @@ func ability_process(player, delta):
 			player.velocity.y = jump_velocity
 
 		double_jump_in_progress = false
+
+
+func _wall_jump_should_take_priority(player) -> bool:
+	if not player.has_node("Abilities/WallJumpAbility"):
+		return false
+
+	var wall_jump = player.get_node("Abilities/WallJumpAbility")
+
+	if not wall_jump.unlocked:
+		return false
+
+	# If WallJumpAbility already used this same jump input this frame,
+	# DoubleJumpAbility should not also consume it.
+	if wall_jump.consumed_jump_this_frame:
+		return true
+
+	var touching_wall: bool = player.is_on_wall() and not player.is_on_floor()
+
+	var wall_jump_available: bool = (
+		wall_jump.wall_jump_grace_timer > 0.0
+		and not player.is_on_floor()
+		and wall_jump.last_wall_normal != Vector2.ZERO
+		and (
+			wall_jump.cooldown_left <= 0.0
+			or wall_jump.was_sliding_last_frame
+			or not touching_wall
+		)
+	)
+
+	return wall_jump_available
