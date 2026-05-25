@@ -1,29 +1,29 @@
 [gd_scene format=3 uid="uid://cjhquoyhn8g81"]
 
 [ext_resource type="Script" uid="uid://cuxwiqxs0tmf1" path="res://map/map_room.gd" id="1_iqn3p"]
-[ext_resource type="Texture2D" uid="uid://p48ccx1uyoiw" path="res://assets/map_icons.png" id="2_3hxdi"]
+[ext_resource type="Texture2D" uid="uid://rsc1tqljjaeo" path="res://assets/new_map_icons.png" id="2_3ogv3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ogv3"]
-atlas = ExtResource("2_3hxdi")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_68rea"]
-atlas = ExtResource("2_3hxdi")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ordnh"]
-atlas = ExtResource("2_3hxdi")
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nejf"]
+atlas = ExtResource("2_3ogv3")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sm248"]
-atlas = ExtResource("2_3hxdi")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ogv3"]
+atlas = ExtResource("2_3ogv3")
 region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68rea"]
+atlas = ExtResource("2_3ogv3")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hxdi"]
+atlas = ExtResource("2_3ogv3")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2ahqc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3ogv3")
+"texture": SubResource("AtlasTexture_8nejf")
 }],
 "loop": true,
 "name": &"boss",
@@ -31,7 +31,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_68rea")
+"texture": SubResource("AtlasTexture_3ogv3")
 }],
 "loop": true,
 "name": &"heal",
@@ -39,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ordnh")
+"texture": SubResource("AtlasTexture_68rea")
 }],
 "loop": true,
 "name": &"level",
@@ -47,7 +47,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sm248")
+"texture": SubResource("AtlasTexture_3hxdi")
 }],
 "loop": true,
 "name": &"upgrade",
