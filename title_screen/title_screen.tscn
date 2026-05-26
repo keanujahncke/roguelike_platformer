@@ -10,9 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://cl74uc82d8eo8" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Plain/8 Shop/1.png" id="5_fk0fn"]
 [ext_resource type="Texture2D" uid="uid://duumqumxe2emm" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Content/1 Items/3.png" id="5_oqrgu"]
 [ext_resource type="Texture2D" uid="uid://c13xmss82w0ux" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Content/6 Highlighter/7.png" id="6_oqrgu"]
+[ext_resource type="Texture2D" uid="uid://b17ahlfpnxguf" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Plain/4 Notification/2.png" id="6_uiiip"]
 [ext_resource type="Texture2D" uid="uid://b511nr0i60m71" path="res://assets/cursor.png" id="8_fv0o7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fh6ay"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uiiip"]
+line_spacing = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk0fn"]
 bg_color = Color(0, 0.4745098, 0.5686275, 1)
@@ -143,6 +147,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_bottom = NodePath("../HBoxContainer/Controls")
 theme_override_colors/font_color = Color(0, 0.5681175, 0.6823397, 1)
 theme_override_colors/font_focus_color = Color(0, 0.5686275, 0.68235296, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.5686275, 0.68235296, 1)
@@ -157,11 +162,61 @@ icon = ExtResource("2_2dq6q")
 flat = true
 icon_alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/MainMenuContainer" unique_id=319899137]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Controls" type="Button" parent="MainMenu/MainMenuContainer/HBoxContainer" unique_id=1330528867]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../../NewGameButton")
+focus_neighbor_right = NodePath("../Credits")
+focus_neighbor_bottom = NodePath("../../QuitGameButton")
+theme_override_colors/font_color = Color(0, 0.5681175, 0.6823397, 1)
+theme_override_colors/font_focus_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_hover_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_outline_color = Color(1.1551381e-06, 0.4615777, 0.5513931, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fh6ay")
+text = "Controls"
+icon = ExtResource("6_uiiip")
+flat = true
+icon_alignment = 1
+
+[node name="Credits" type="Button" parent="MainMenu/MainMenuContainer/HBoxContainer" unique_id=81800919]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../Controls")
+focus_neighbor_top = NodePath("../../NewGameButton")
+focus_neighbor_bottom = NodePath("../../QuitGameButton")
+theme_override_colors/font_color = Color(0, 0.5681175, 0.6823397, 1)
+theme_override_colors/font_focus_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_hover_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_outline_color = Color(1.1551381e-06, 0.4615777, 0.5513931, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fh6ay")
+text = "Credits"
+icon = ExtResource("6_uiiip")
+flat = true
+icon_alignment = 1
+
 [node name="QuitGameButton" type="Button" parent="MainMenu/MainMenuContainer" unique_id=447272607]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../HBoxContainer/Controls")
 theme_override_colors/font_color = Color(0, 0.5686275, 0.68235296, 1)
 theme_override_colors/font_focus_color = Color(0, 0.5686275, 0.68235296, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.5686275, 0.68235296, 1)
@@ -212,21 +267,72 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -135.0
-offset_top = -28.5
-offset_right = 135.0
-offset_bottom = 28.5
+offset_left = -600.0
+offset_top = -324.0
+offset_right = 600.0
+offset_bottom = 459.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Credits/VBoxContainer" unique_id=2119394211]
+custom_minimum_size = Vector2(1200, 100)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4627451)
 theme_override_constants/shadow_offset_x = 9
 theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 60
-text = "Ascendia"
+text = "=== Credits ===
+
+Team Members
+
+Keanu Jahncke
+Programmer
+- Backend Systems
+- Gameplay Programming
+- Core Game Implementation
+
+John Gorgas
+Artist & Composer
+- Character and Environment Art
+- Music & Audio
+- Level Design
+- Additional Programming Support
+
+Katherine Julian Cortez
+UI/UX Designer & Level Designer
+- User Interface Design
+- UI Implementation
+- Level Design
+- Additional Programming Support
+
+
+Third-Party Assets
+
+Some visual and audio assets were sourced from free and open-source asset libraries.
+All external assets remain property of their respective creators.
+
+External resources used may include:
+- ...
+- ...
+- ...
+
+Built With
+- Godot
+
+
+Special Thanks
+
+Thanks to our classmates, friends, and instructors for feedback, testing, and support.
+
+
+Academic Information
+
+Created for the Game Design and Interactive Media (GDIM) Program
+University of California, Irvine
+Spring 2026"
+label_settings = SubResource("LabelSettings_uiiip")
 horizontal_alignment = 1
+autowrap_mode = 2
 uppercase = true
 
 [node name="NewGameMenu" type="Control" parent="." unique_id=1453785846]
