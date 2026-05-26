@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RoomDatabase" format=3 uid="uid://dlopwt2pe1ldv"]
+
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_3sejn"]
+[ext_resource type="Script" uid="uid://c7tyxjnhcnlh0" path="res://scripts/room_database.gd" id="2_oyd61"]
+[ext_resource type="Resource" uid="uid://drmvqxwweftdh" path="res://rooms/room_data/dungeon_double_jump_01.tres" id="2_sd1wn"]
+[ext_resource type="Resource" uid="uid://bfl6ivjbvqx3n" path="res://rooms/room_data/dungeon_double_jump_02.tres.tres" id="3_l8wwm"]
+[ext_resource type="Resource" uid="uid://crbf0rwihbllo" path="res://rooms/room_data/dungeon_hybrid_room_01.tres" id="4_ijhl0"]
+[ext_resource type="Resource" uid="uid://cuy8kyo4qjae2" path="res://rooms/room_data/dungeon_standard_room_01.tres" id="6_bfbcm"]
+[ext_resource type="Resource" uid="uid://dng4ft23vtwla" path="res://rooms/room_data/dungeon_standard_room_02.tres" id="7_mhkpb"]
+[ext_resource type="Resource" uid="uid://bvrafcbjfeg36" path="res://rooms/room_data/dungeon_starting_room.tres" id="8_2eyt1"]
+[ext_resource type="Resource" uid="uid://oggv7c8r1key" path="res://rooms/room_data/dungeon_platforms_room_01.tres" id="9_s6my4"]
+
+[resource]
+script = ExtResource("2_oyd61")
+rooms = Array[ExtResource("1_3sejn")]([ExtResource("2_sd1wn"), ExtResource("3_l8wwm"), ExtResource("4_ijhl0"), ExtResource("6_bfbcm"), ExtResource("7_mhkpb"), ExtResource("8_2eyt1"), ExtResource("9_s6my4")])
+metadata/_custom_type_script = "uid://c7tyxjnhcnlh0"

@@ -12,9 +12,10 @@
 [ext_resource type="Resource" uid="uid://dng4ft23vtwla" path="res://rooms/room_data/dungeon_standard_room_02.tres" id="10_urktn"]
 [ext_resource type="Resource" uid="uid://cuy8kyo4qjae2" path="res://rooms/room_data/dungeon_standard_room_01.tres" id="11_3sxxt"]
 [ext_resource type="Resource" uid="uid://bvrafcbjfeg36" path="res://rooms/room_data/dungeon_starting_room.tres" id="11_11c3t"]
-[ext_resource type="Resource" path="res://rooms/room_data/sky_glide_room.tres" id="12_11c3t"]
-[ext_resource type="Resource" path="res://rooms/room_data/forest_wall_jump_room_01.tres" id="13_by1va"]
-[ext_resource type="Resource" uid="uid://oggv7c8r1key" path="res://rooms/room_data/platforms_room_01.tres" id="14_by1va"]
+[ext_resource type="Resource" uid="uid://bdnxk7vtkd6fp" path="res://rooms/room_data/sky_glide_room.tres" id="12_11c3t"]
+[ext_resource type="Resource" uid="uid://b10edd640q6vb" path="res://rooms/room_data/forest_wall_jump_room_01.tres" id="13_by1va"]
+[ext_resource type="Resource" uid="uid://oggv7c8r1key" path="res://rooms/room_data/dungeon_platforms_room_01.tres" id="14_by1va"]
+
 
 [resource]
 script = ExtResource("2_yqhpg")

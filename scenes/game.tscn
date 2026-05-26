@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://n2ohq57w3ju"]
 
 [ext_resource type="Script" uid="uid://ck3gm8r2dqkhv" path="res://scripts/level_manager.gd" id="1_e2o6t"]
-[ext_resource type="PackedScene" path="res://rooms/room_scenes/dungeon_tutorial_room.tscn" id="2_5newe"]
+[ext_resource type="PackedScene" uid="uid://xhblhqd2hr88" path="res://rooms/room_scenes/dungeon_tutorial_room.tscn" id="2_5newe"]
 [ext_resource type="PackedScene" uid="uid://0ql3da7v7y7y" path="res://player/player.tscn" id="2_feb5d"]
-[ext_resource type="Resource" uid="uid://c4jifodginq5u" path="res://rooms/all_rooms.tres" id="3_5newe"]
 [ext_resource type="Resource" uid="uid://bjwkla2xyglfp" path="res://rooms/room_data/boss_room.tres" id="3_ir15t"]
 [ext_resource type="AudioStream" uid="uid://dxkdlsc1hu2tm" path="res://assets/audio/dungeontrack.wav" id="4_1kice"]
+[ext_resource type="Resource" uid="uid://bgh7qxj5asmux" path="res://rooms/debug_rooms.tres" id="4_bhx41"]
+[ext_resource type="Resource" uid="uid://dlopwt2pe1ldv" path="res://rooms/dungeon_rooms.tres" id="4_pl11u"]
 [ext_resource type="AudioStream" uid="uid://cn56443l5ygfa" path="res://assets/audio/foresttrack1.1.wav" id="5_5newe"]
+[ext_resource type="Resource" uid="uid://duksb2cvcguyx" path="res://rooms/forest_rooms.tres" id="5_bhx41"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="5_gv0uq"]
 [ext_resource type="AudioStream" uid="uid://y3m1ha6edvsu" path="res://assets/audio/skytrack1.wav" id="6_37s47"]
+[ext_resource type="Resource" uid="uid://car4gwk8rxdnd" path="res://rooms/sky_rooms.tres" id="6_qnb83"]
 [ext_resource type="AudioStream" uid="uid://crka0c3uvplcy" path="res://assets/audio/bossopener.wav" id="7_1kice"]
 [ext_resource type="Script" uid="uid://dhdhyr4j3myj4" path="res://scripts/game_over.gd" id="7_u5sy4"]
 [ext_resource type="AudioStream" uid="uid://cf4yekqf8ij2i" path="res://assets/audio/tutorial.wav" id="8_37s47"]
@@ -30,9 +33,13 @@ font_size = 100
 
 [node name="Game" type="Node2D" unique_id=1310302999]
 script = ExtResource("1_e2o6t")
+debug_mode = true
 starting_room = ExtResource("2_5newe")
-room_database = ExtResource("3_5newe")
 boss_room = ExtResource("3_ir15t")
+debug_database = ExtResource("4_bhx41")
+dungeon_database = ExtResource("4_pl11u")
+forest_database = ExtResource("5_bhx41")
+sky_database = ExtResource("6_qnb83")
 dungeon_music = ExtResource("4_1kice")
 forest_music = ExtResource("5_5newe")
 sky_music = ExtResource("6_37s47")

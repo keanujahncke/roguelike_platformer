@@ -1,8 +1,17 @@
 extends Node2D
 
+@export var debug_mode: bool = false
+
 @export var starting_room : PackedScene
-@export var room_database : RoomDatabase
 @export var boss_room : RoomData
+@export_group("Room Databases")
+@export var debug_database: RoomDatabase
+@export var dungeon_database : RoomDatabase
+@export var forest_database : RoomDatabase
+@export var sky_database : RoomDatabase
+@export var nodes_per_floor := 4
+
+
 
 @export var dungeon_music: AudioStream
 @export var forest_music: AudioStream
@@ -123,38 +132,58 @@ func _handle_level_node(_node: MapNode):
 	# Otherwise, run your normal generation/filtering mechanics
 	_select_random_database_room()
 
-
-# Encapsulated your existing setup to keep the code organized and scannable
 func _select_random_database_room():
+	var db = _get_current_database()
+	
+	if db == null:
+		printerr("CRITICAL: Current RoomDatabase is NULL. Check Inspector assignments!")
+		return 
+
 	var current_abilities = run_manager.get_abilities()
-	var all_rooms = room_database.rooms
+	var all_rooms = db.rooms
 	var ability_filtered: Array[RoomData] = []
 	var final_valid_rooms: Array[RoomData] = []
 	
-	print("\n--- [ROOM SELECTION START] ---")
-	print("Total rooms in Database: ", all_rooms.size())
+	# --- ENHANCED PROGRESS PRINTING ---
+	print("\n==========================================")
+	print("RUN PROGRESS REPORT")
+	print("==========================================")
+	print("Current Floor DB: ", db.resource_path.get_file())
+	print("Total Nodes Completed: ", run_manager.completed_nodes.size())
 	
+	if run_manager.visited_room_paths.is_empty():
+		print("History: No rooms completed yet.")
+	else:
+		print("History (Completed Rooms):")
+		for i in range(run_manager.visited_room_paths.size()):
+			var path = run_manager.visited_room_paths[i]
+			# .get_file().get_basename() turns "res://rooms/Dungeon_01.tscn" into "Dungeon_01"
+			var room_name = path.get_file().get_basename()
+			print("  %d. %s" % [i + 1, room_name])
+	print("------------------------------------------")
+
 	for rd in all_rooms:
 		if _player_can_complete_room(rd, current_abilities):
 			ability_filtered.append(rd)
 		else:
 			var r_name = rd.resource_path.get_file().get_basename()
-			print("  [X] Removed (Missing Ability): ", r_name)
+			print("  [X] Skipped (Missing Ability): ", r_name)
 
 	for rd in ability_filtered:
 		if not run_manager.visited_room_paths.has(rd.scene.resource_path):
 			final_valid_rooms.append(rd)
 		else:
 			var r_name = rd.resource_path.get_file().get_basename()
-			print("  [X] Removed (Already Visited): ", r_name)
+			print("  [X] Skipped (Already Visited): ", r_name)
 
 	if not final_valid_rooms.is_empty():
 		var chosen = final_valid_rooms.pick_random()
 		run_manager.visited_room_paths.append(chosen.scene.resource_path)
+		print("  [✓] SELECTED NEW ROOM: ", chosen.scene.resource_path.get_file())
 		load_room(chosen.scene)
 	else:
-		print("!!! No unique valid rooms left. Picking fallback random.")
-		var fallback = room_database.rooms.pick_random()
+		print("!!! No unique valid rooms left. Picking fallback random from current DB.")
+		var fallback = db.rooms.pick_random()
 		load_room(fallback.scene)
 	
 	print("--- [ROOM SELECTION END] ---\n")
@@ -162,8 +191,27 @@ func _select_random_database_room():
 
 func _handle_upgrade_node():
 	# is_upgrade = true skips the room selection phase.
-	level_rewards_ui.open_ui(room_database, true)
+	level_rewards_ui.open_ui(true)
 
+func _get_current_database() -> RoomDatabase:
+	# Check if debug mode is toggled first
+	if debug_mode:
+		if debug_database != null:
+			return debug_database
+		else:
+			printerr("DEBUG MODE ACTIVE: But debug_database is null! Falling back to floors.")
+
+	var completed = run_manager.completed_nodes.size()
+	
+	# Floor 1: Dungeon
+	if completed < nodes_per_floor:
+		return dungeon_database
+	# Floor 2: Forest
+	elif completed < nodes_per_floor * 2:
+		return forest_database
+	# Floor 3: Sky
+	else:
+		return sky_database
 
 func _handle_heal_node():
 	# Restore 2 life points.
