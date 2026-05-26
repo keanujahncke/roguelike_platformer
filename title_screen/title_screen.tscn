@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://v37a3o417nbs" path="res://assets/audio/titleOpener.wav" id="2_fh6ay"]
 [ext_resource type="AudioStream" uid="uid://ciim5vcbcsvsv" path="res://assets/audio/titleLoop.wav" id="3_jabur"]
 [ext_resource type="Texture2D" uid="uid://qjqx4b1e4qe8" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Plain/9 Rewards/1.png" id="4_0m3ch"]
+[ext_resource type="Texture2D" uid="uid://dumn4c8e2h0m7" path="res://assets/map_background.png" id="4_jabur"]
 [ext_resource type="Texture2D" uid="uid://cl74uc82d8eo8" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Plain/8 Shop/1.png" id="5_fk0fn"]
 [ext_resource type="Texture2D" uid="uid://duumqumxe2emm" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Content/1 Items/3.png" id="5_oqrgu"]
 [ext_resource type="Texture2D" uid="uid://c13xmss82w0ux" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Content/6 Highlighter/7.png" id="6_oqrgu"]
@@ -96,6 +97,22 @@ grow_vertical = 2
 scale = Vector2(1.0011889, 1)
 color = Color(0.085079186, 0.15019315, 0.27016392, 1)
 
+[node name="TextureRect" type="TextureRect" parent="MainMenu" unique_id=1790589034]
+self_modulate = Color(0.28614435, 0.28614435, 0.28614435, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -24.0
+offset_right = 1.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.6)
+texture = ExtResource("4_jabur")
+expand_mode = 5
+
 [node name="MainMenuContainer" type="VBoxContainer" parent="MainMenu" unique_id=1606639054]
 layout_mode = 1
 anchors_preset = 8
@@ -159,6 +176,58 @@ text = "Quit"
 icon = ExtResource("2_2dq6q")
 flat = true
 icon_alignment = 1
+
+[node name="ControlsMenu" type="Control" parent="." unique_id=1045819987]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlsMenu" unique_id=2028670988]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Credits" type="Control" parent="." unique_id=1508815336]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits" unique_id=2046183358]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -28.5
+offset_right = 135.0
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Credits/VBoxContainer" unique_id=2119394211]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4627451)
+theme_override_constants/shadow_offset_x = 9
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 60
+text = "Ascendia"
+horizontal_alignment = 1
+uppercase = true
 
 [node name="NewGameMenu" type="Control" parent="." unique_id=1453785846]
 unique_name_in_owner = true

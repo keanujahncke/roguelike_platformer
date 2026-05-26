@@ -3,9 +3,10 @@ extends Node
 
 
 const X_DIST := 160
-const Y_DIST := 140
+const Y_DIST := 127
+
 const PLACEMENT_RANDOMNESS := 35
-const FLOORS := 10
+const FLOORS := 13
 const MAP_WIDTH := 5
 const PATHS := 5
 const LEVEL_NODE_WEIGHT := 10.0

@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://bf26esgmlh8bw" path="res://map/map.gd" id="1_a0dt8"]
 [ext_resource type="Script" uid="uid://ds3f70lakwwb6" path="res://map/map_generator.gd" id="1_hgrid"]
 [ext_resource type="Texture2D" uid="uid://dl38mmfax4il1" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Folding & Cutout/1 Paper/18.png" id="2_7lyie"]
-[ext_resource type="Texture2D" uid="uid://dumn4c8e2h0m7" path="res://assets/map_background.png" id="2_kffv2"]
 [ext_resource type="Texture2D" uid="uid://c8kvsfpjwonoy" path="res://assets/bg2.png" id="3_5jdw0"]
 [ext_resource type="Script" uid="uid://wmwmchclmw7t" path="res://map/lines_container.gd" id="3_kffv2"]
 [ext_resource type="Texture2D" uid="uid://rsc1tqljjaeo" path="res://assets/new_map_icons.png" id="4_lgq1i"]
+[ext_resource type="Texture2D" uid="uid://dj54g6tm8kwib" path="res://assets/mapbackground.png" id="5_5jdw0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kffv2"]
 atlas = ExtResource("4_lgq1i")
@@ -45,20 +45,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_5jdw0")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1632846495]
-self_modulate = Color(0.899258, 0.89925855, 0.89925826, 1)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 149.0
-offset_right = 149.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.707334, 1)
-size_flags_horizontal = 4
-texture = ExtResource("2_kffv2")
-
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=388729501]
 anchors_preset = 7
 anchor_left = 0.5
@@ -73,17 +59,31 @@ grow_vertical = 0
 follow_focus = true
 
 [node name="MapContent" type="Control" parent="ScrollContainer" unique_id=231644203]
-custom_minimum_size = Vector2(1152, 1500)
+custom_minimum_size = Vector2(1152, 2000)
 layout_mode = 2
 
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/MapContent" unique_id=1632846495]
+modulate = Color(0.67206675, 0.67206675, 0.67206675, 1)
+self_modulate = Color(0.899258, 0.89925855, 0.89925826, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_5jdw0")
+
 [node name="LinesContainer" type="Node2D" parent="ScrollContainer/MapContent" unique_id=1165867347]
-position = Vector2(0, 1450)
+position = Vector2(-26, 1920)
 script = ExtResource("3_kffv2")
 
 [node name="RoomsContainer" type="Control" parent="ScrollContainer/MapContent" unique_id=2125101584]
 anchors_preset = 0
-offset_top = 1450.0
-offset_bottom = 1450.0
+offset_left = -26.0
+offset_top = 1920.0
+offset_right = -26.0
+offset_bottom = 1920.0
 
 [node name="MapGenerator" type="Node" parent="." unique_id=1838421192]
 script = ExtResource("1_hgrid")
