@@ -34,8 +34,13 @@ var abilities: Array = []
 @export var coyote_time := 0.10
 @export var jump_buffer_time := 0.20
 
+# Prevents the final dialogue advance input from becoming a jump
+# on the same frame controls unlock.
+@export var jump_input_unlock_grace_time := 0.15
+
 var coyote_timer := 0.0
 var jump_buffer_timer := 0.0
+var jump_unlock_grace_timer := 0.0
 
 # STATE
 var facing: int = 1
@@ -66,6 +71,7 @@ var fall_timer := 0.0
 
 var ability_bar: HBoxContainer
 
+
 func _ready():
 	anim.play("idle")
 
@@ -79,6 +85,9 @@ func _ready():
 func _physics_process(delta):
 	if is_dead:
 		return
+
+	if jump_unlock_grace_timer > 0.0:
+		jump_unlock_grace_timer = max(jump_unlock_grace_timer - delta, 0.0)
 
 	if controls_locked:
 		if allow_gravity_while_controls_locked:
@@ -111,7 +120,10 @@ func _physics_process(delta):
 	if input_axis != 0:
 		facing = int(sign(input_axis))
 
-	if Input.is_action_just_pressed("jump"):
+	# IMPORTANT:
+	# Do not accept jump input immediately after dialogue unlocks controls.
+	# This prevents pressing space to close the final dialogue line from also jumping.
+	if jump_unlock_grace_timer <= 0.0 and Input.is_action_just_pressed("jump"):
 		jump_buffer_timer = jump_buffer_time
 
 	if is_on_floor():
@@ -132,7 +144,7 @@ func _physics_process(delta):
 		coyote_timer = 0
 
 	# short hop
-	if Input.is_action_just_released("jump") and velocity.y < 0:
+	if jump_unlock_grace_timer <= 0.0 and Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= 0.5
 
 	# movement
@@ -202,6 +214,10 @@ func set_controls_locked(locked: bool, allow_gravity: bool = false) -> void:
 	controls_locked = locked
 	allow_gravity_while_controls_locked = allow_gravity
 
+	# Clear any stored jump whenever the lock state changes.
+	# This prevents dialogue inputs from being buffered into gameplay.
+	jump_buffer_timer = 0.0
+
 	if locked:
 		velocity.x = 0.0
 
@@ -217,6 +233,7 @@ func set_controls_locked(locked: bool, allow_gravity: bool = false) -> void:
 			anim.play("idle")
 	else:
 		allow_gravity_while_controls_locked = false
+		jump_unlock_grace_timer = jump_input_unlock_grace_time
 
 
 func _update_locked_fall_animation() -> void:
@@ -378,6 +395,8 @@ func take_damage(amount: int):
 	is_dead = true
 	controls_locked = false
 	allow_gravity_while_controls_locked = false
+	jump_unlock_grace_timer = 0.0
+	jump_buffer_timer = 0.0
 	velocity = Vector2.ZERO
 
 	death_sfx.play()
@@ -404,6 +423,8 @@ func reset_stats():
 	is_dead = false
 	controls_locked = false
 	allow_gravity_while_controls_locked = false
+	jump_unlock_grace_timer = 0.0
+	jump_buffer_timer = 0.0
 	health = max_health
 	velocity = Vector2.ZERO
 	set_physics_process(true)

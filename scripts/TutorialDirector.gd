@@ -57,8 +57,9 @@ func _connect_triggers() -> void:
 
 
 func _start_intro_sequence() -> void:
-	# Once the guide intro begins, fully freeze the player.
-	_lock_player()
+	# Lock input, but still allow gravity while the guide intro/dialogue starts.
+	# This prevents the player from freezing in midair during the NPC talking sections.
+	_lock_player_with_gravity()
 
 	guide.global_position = guide_spawn_point.global_position
 	guide.run_to_point(guide_intro_stop_point.global_position)
@@ -117,7 +118,9 @@ func _on_tutorial_triggered(trigger_id: String) -> void:
 
 
 func _play_checkpoint_dialogue(lines: Array[String]) -> void:
-	_lock_player()
+	# Lock input, but allow gravity.
+	# The player cannot move/jump during dialogue, but will still fall if airborne.
+	_lock_player_with_gravity()
 
 	# Do not stop the guide here.
 	# Let him continue replay-following while the dialogue is open,
@@ -129,7 +132,9 @@ func _play_checkpoint_dialogue(lines: Array[String]) -> void:
 
 
 func _play_final_dialogue() -> void:
-	_lock_player()
+	# Lock input, but allow gravity.
+	# The guide stops, but the player will not freeze in midair.
+	_lock_player_with_gravity()
 	guide.stop_and_idle()
 
 	await _play_dialogue([
