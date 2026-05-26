@@ -9,13 +9,13 @@
 atlas = ExtResource("2_do8v2")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qgcgh"]
-atlas = ExtResource("2_do8v2")
-region = Rect2(64, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ul3sf"]
 atlas = ExtResource("2_do8v2")
 region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgcgh"]
+atlas = ExtResource("2_do8v2")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h46ov"]
 atlas = ExtResource("2_do8v2")
@@ -57,22 +57,6 @@ region = Rect2(448, 0, 64, 64)
 atlas = ExtResource("3_fkpcw")
 region = Rect2(512, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k0heq"]
-atlas = ExtResource("3_fkpcw")
-region = Rect2(576, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7vksk"]
-atlas = ExtResource("3_fkpcw")
-region = Rect2(640, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qjaux"]
-atlas = ExtResource("3_fkpcw")
-region = Rect2(704, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l6dnu"]
-atlas = ExtResource("3_fkpcw")
-region = Rect2(768, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_d1egx"]
 atlas = ExtResource("3_fkpcw")
 region = Rect2(832, 0, 64, 64)
@@ -104,10 +88,10 @@ animations = [{
 "texture": SubResource("AtlasTexture_xeuay")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qgcgh")
+"texture": SubResource("AtlasTexture_ul3sf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ul3sf")
+"texture": SubResource("AtlasTexture_qgcgh")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h46ov")
@@ -117,61 +101,55 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.5,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_thfwx")
 }, {
-"duration": 0.5,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_ln32r")
 }, {
-"duration": 0.5,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_joqjq")
 }, {
-"duration": 0.5,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_4ka33")
 }, {
-"duration": 0.5,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_l0wqq")
 }, {
-"duration": 0.5,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_ih464")
 }, {
-"duration": 0.5,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_t2uhl")
 }, {
-"duration": 0.5,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_v2oaq")
 }, {
-"duration": 0.5,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_qpu78")
 }, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_k0heq")
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_v2oaq")
 }, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_7vksk")
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_qpu78")
 }, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_qjaux")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_l6dnu")
-}, {
-"duration": 0.5,
+"duration": 0.45,
 "texture": SubResource("AtlasTexture_d1egx")
 }, {
-"duration": 0.5,
+"duration": 0.45,
 "texture": SubResource("AtlasTexture_dug5t")
 }, {
-"duration": 0.5,
+"duration": 0.45,
 "texture": SubResource("AtlasTexture_gnp03")
 }, {
-"duration": 0.5,
+"duration": 0.45,
 "texture": SubResource("AtlasTexture_6ih3n")
 }, {
-"duration": 0.5,
+"duration": 0.45,
 "texture": SubResource("AtlasTexture_jaqll")
 }, {
-"duration": 0.5,
+"duration": 0.45,
 "texture": SubResource("AtlasTexture_nsqbq")
 }],
 "loop": false,
@@ -183,13 +161,12 @@ animations = [{
 
 [node name="BossLaser" type="Area2D" unique_id=1738211909]
 script = ExtResource("1_x1dq0")
+laser_animation_speed_scale = 1.8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1083237642]
 scale = Vector2(4, 50)
 sprite_frames = SubResource("SpriteFrames_rftol")
-animation = &"laser"
-frame = 18
-frame_progress = 1.0
+animation = &"indicator"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1230104395]
 position = Vector2(-2, 0)
@@ -199,4 +176,4 @@ shape = SubResource("RectangleShape2D_efgmo")
 [node name="LaserSFX" type="AudioStreamPlayer2D" parent="." unique_id=561545457]
 stream = ExtResource("4_do8v2")
 volume_db = -24.099
-pitch_scale = 0.83
+pitch_scale = 1.2

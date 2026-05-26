@@ -5,22 +5,39 @@ class_name BossLaser
 @export var laser_animation: String = "laser"
 @export var damage_amount: int = 1
 
+
+# --- VISUAL SPEED SETTINGS ---
+# These appear in the Inspector.
+# 1.0 = normal speed.
+# 2.0 = twice as fast.
+# 3.0 = three times as fast.
+@export var indicator_animation_speed_scale: float = 1.0
+@export var laser_animation_speed_scale: float = 2.0
+
+
+# --- INDICATOR TIMING ---
 # Extra warning time after the indicator animation finishes.
 @export var extra_indicator_hold_time: float = 0.25
 
-# Hurtbox timing during the laser animation.
+
+# --- LASER HURTBOX TIMING ---
 # Damage starts this many seconds after the laser animation begins.
-@export var hurtbox_start_delay: float = 0.3
+@export var hurtbox_start_delay: float = 0.12
 
 # Damage ends this many seconds before the laser animation ends.
-@export var hurtbox_end_early: float = 0.3
+@export var hurtbox_end_early: float = 0.15
 
+
+# --- AUDIO TIMING ---
 # Delay before the laser SFX plays after the laser animation starts.
-@export var laser_sfx_delay: float = 0.15
+@export var laser_sfx_delay: float = 0.08
 
-# Backup values if animation duration cannot be calculated cleanly.
+
+# --- BACKUP TIMING ---
+# Used only if animation duration cannot be calculated cleanly.
 @export var fallback_indicator_time: float = 1.0
 @export var fallback_laser_time: float = 1.9
+
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -84,6 +101,7 @@ func start_laser_sequence() -> void:
 	if not animated_sprite.animation_finished.is_connected(_on_animation_finished):
 		animated_sprite.animation_finished.connect(_on_animation_finished)
 
+	animated_sprite.speed_scale = indicator_animation_speed_scale
 	animated_sprite.stop()
 	animated_sprite.frame = 0
 	animated_sprite.play(indicator_animation)
@@ -159,6 +177,7 @@ func start_actual_laser() -> void:
 		end_laser()
 		return
 
+	animated_sprite.speed_scale = laser_animation_speed_scale
 	animated_sprite.stop()
 	animated_sprite.frame = 0
 	animated_sprite.play(laser_animation)
@@ -189,7 +208,8 @@ func start_laser_hurtbox_window() -> void:
 	var start_delay := hurtbox_start_delay
 	var active_duration := laser_duration - hurtbox_start_delay - hurtbox_end_early
 
-	# Safety: if the animation is too short for the chosen timing,
+	# Safety:
+	# If the animation is too short for the chosen timing,
 	# use the middle half of the animation as the damage window.
 	if active_duration <= 0.0:
 		start_delay = laser_duration * 0.25
@@ -295,14 +315,19 @@ func get_animation_duration(animation_name: String, fallback_time: float) -> flo
 	var animation_speed := animated_sprite.sprite_frames.get_animation_speed(animation_name)
 
 	if frame_count <= 0 or animation_speed <= 0.0:
-		return fallback_time
+		return fallback_time / max(animated_sprite.speed_scale, 0.01)
 
 	var total_frame_duration := 0.0
 
 	for i in frame_count:
 		total_frame_duration += animated_sprite.sprite_frames.get_frame_duration(animation_name, i)
 
-	return total_frame_duration / animation_speed
+	var normal_duration := total_frame_duration / animation_speed
+
+	# Important:
+	# AnimatedSprite2D.speed_scale makes the animation visually faster,
+	# so the backend timer must shrink too.
+	return normal_duration / max(animated_sprite.speed_scale, 0.01)
 
 
 func check_overlapping_bodies_for_damage() -> void:
