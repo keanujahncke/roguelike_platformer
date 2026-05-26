@@ -10,7 +10,7 @@ const FLOORS := 13
 const MAP_WIDTH := 5
 const PATHS := 5
 const LEVEL_NODE_WEIGHT := 10.0
-const UPGRADE_NODE_WEIGHT := 4.0
+const UPGRADE_NODE_WEIGHT := 2.0
 const HEAL_NODE_WEIGHT := 4.0
 
 var random_room_type_weights = {
@@ -95,7 +95,7 @@ func _get_random_starting_points() -> Array[int]:
 	return y_coordinates
 
 func _setup_connection(i: int, j:int) -> int:
-	var next_room: MapNode
+	var next_room: MapNode = null
 	var current_room := map_data[i][j] as MapNode
 	
 	while not next_room or _would_cross_existing_path(i, j, next_room):
@@ -155,9 +155,17 @@ func _setup_room_types() -> void:
 		if room.next_rooms.size() > 0:
 			room.type = MapNode.Type.UPGRADE
 	
-	for room: MapNode in map_data[FLOORS / 2]:
+	for room: MapNode in map_data[4]:
 		if room.next_rooms.size() > 0:
 			room.type = MapNode.Type.UPGRADE
+	
+	for room: MapNode in map_data[8]:
+		if room.next_rooms.size() > 0:
+			room.type = MapNode.Type.UPGRADE
+	
+	#for room: MapNode in map_data[FLOORS / 2]:
+		#if room.next_rooms.size() > 0:
+			#room.type = MapNode.Type.UPGRADE
 	
 	for room: MapNode in map_data[FLOORS - 2]:
 		if room.next_rooms.size() > 0:

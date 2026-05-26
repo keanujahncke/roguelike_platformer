@@ -22,7 +22,7 @@ func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
 
 
-func open_ui(_db: RoomDatabase = null, _is_upgrade: bool = false):
+func open_ui(_is_upgrade: bool = false):
 	# db and is_upgrade parameters kept for signature compatibility with LevelManager
 	if visible:
 		return

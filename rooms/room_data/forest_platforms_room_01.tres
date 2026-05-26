@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://c32p7kftc6otk"]
+
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="1_lev61"]
+[ext_resource type="PackedScene" uid="uid://dlrrve85cs42f" path="res://rooms/room_scenes/forest_platforms_room_01.tscn" id="1_pdje5"]
+
+[resource]
+script = ExtResource("1_lev61")
+scene = ExtResource("1_pdje5")
+required_abilities = ["wall_jump", "dash", "glide"]
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
