@@ -10,7 +10,7 @@ colors = PackedColorArray(0.21568628, 0.21568628, 0.21568628, 1, 0.4, 0.21960784
 gradient = SubResource("Gradient_kffv2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_g3irf"]
-font_size = 24
+font_size = 40
 
 [node name="LevelReward" type="CanvasLayer" unique_id=2064351492]
 layer = 100
@@ -54,7 +54,7 @@ horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RewardSection" unique_id=1166033918]
 layout_mode = 2
-theme_override_constants/separation = 150
+theme_override_constants/separation = 200
 alignment = 1
 
 [node name="Choice" parent="CenterContainer/VBoxContainer/RewardSection/HBoxContainer" unique_id=1402156080 instance=ExtResource("2_gibuo")]

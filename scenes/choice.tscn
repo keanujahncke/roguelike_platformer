@@ -1,31 +1,44 @@
 [gd_scene format=3 uid="uid://b8nck1jtetqks"]
 
 [ext_resource type="Script" uid="uid://i2j6sgd4eew4" path="res://scripts/room_choice.gd" id="1_ohi1q"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1yc7t"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7aovw"]
-atlas = SubResource("CompressedTexture2D_1yc7t")
-region = Rect2(48, 0, 16, 16)
+[ext_resource type="Texture2D" uid="uid://dswlpgghe2a64" path="res://assets/heal upgrade.png" id="2_yhyp7"]
 
 [node name="Choice" type="Control" unique_id=1402156080]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -896.0
+offset_bottom = -392.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ohi1q")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=207736041]
-custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
-offset_left = -64.0
-offset_top = -64.0
-scale = Vector2(2, 2)
-texture = SubResource("AtlasTexture_7aovw")
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("2_yhyp7")
 expand_mode = 1
 
-[node name="Button" type="Button" parent="." unique_id=95930896]
+[node name="Button" type="Button" parent="." unique_id=1209955678]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_left = -72.0
+offset_top = -113.0
+offset_right = 88.0
+offset_bottom = 112.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0.5681175, 0.6823397, 1)
+theme_override_colors/font_focus_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_hover_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0.5686275, 0.68235296, 1)
+theme_override_colors/font_outline_color = Color(1.1551381e-06, 0.4615777, 0.5513931, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 25
 flat = true
+icon_alignment = 1
