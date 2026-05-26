@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://co57c7x1tlkrt"]
+
+[ext_resource type="PackedScene" uid="uid://64ojt540i3ly" path="res://rooms/room_scenes/forest_cave_room_01.tscn" id="1_yt710"]
+[ext_resource type="Script" uid="uid://6kicdo0hg3ia" path="res://scripts/room_data.gd" id="2_4ys4c"]
+
+[resource]
+script = ExtResource("2_4ys4c")
+scene = ExtResource("1_yt710")
+required_abilities = [["dash", "glide"]]
+metadata/_custom_type_script = "uid://6kicdo0hg3ia"
