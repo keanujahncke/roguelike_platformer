@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bq62es6xdgoei" path="res://scenes/heart_container.tscn" id="16_ca42v"]
 [ext_resource type="PackedScene" uid="uid://bboayh17xrwuo" path="res://map/map.tscn" id="19_5newe"]
 [ext_resource type="PackedScene" uid="uid://c82276nry3tt0" path="res://scenes/ability_bar_ui.tscn" id="21_bt5mj"]
+[ext_resource type="PackedScene" uid="uid://pjbwmpxpefsr" path="res://scenes/energy_ui.tscn" id="24_pl11u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p57ef"]
 font_size = 100
@@ -129,6 +130,9 @@ autoplay = true
 layer = 0
 
 [node name="heartContainer" parent="HeartUI" unique_id=1797831083 instance=ExtResource("16_ca42v")]
+
+[node name="EnergyUI" parent="." unique_id=812846946 instance=ExtResource("24_pl11u")]
+layer = 0
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="pressed" from="CanvasLayer/GameOver/HBoxContainer/Button" to="." method="_on_button_pressed"]
