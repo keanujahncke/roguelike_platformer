@@ -1432,6 +1432,9 @@ size = Vector2(3099, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uttuv"]
 size = Vector2(20, 316)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvxsh"]
+size = Vector2(33, 1089)
+
 [node name="RoomBase" unique_id=2127497181 instance=ExtResource("1_uyggk")]
 
 [node name="Exit" parent="." index="1" unique_id=2118638246]
@@ -1581,3 +1584,10 @@ shape = SubResource("RectangleShape2D_uttuv")
 [node name="Collectible" parent="." index="27" unique_id=2013095035 instance=ExtResource("10_vvxsh")]
 position = Vector2(1988, -496)
 id = "forest_01"
+
+[node name="Deathbox right" type="Area2D" parent="." index="28" unique_id=564859292]
+script = ExtResource("9_vvxsh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deathbox right" index="0" unique_id=1998686093]
+position = Vector2(2442, -535)
+shape = SubResource("RectangleShape2D_vvxsh")
