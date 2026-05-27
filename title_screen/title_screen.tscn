@@ -776,18 +776,6 @@ text = "  Start Run  "
 [node name="TextureRect" type="TextureRect" parent="LoadoutMenu/NinePatchRect/MarginContainer/LoadoutContainer" unique_id=1550362086]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LoadoutMenu/NinePatchRect/MarginContainer" unique_id=1511495546]
-layout_direction = 4
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_outline_size = 0
-text = "Press ESC to exit
-"
-
 [node name="Pointer" type="Sprite2D" parent="." unique_id=938876849]
 unique_name_in_owner = true
 visible = false

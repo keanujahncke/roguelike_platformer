@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dnbjns1rllol0" path="res://scripts/AbilityBar.gd" id="1_7yykb"]
 [ext_resource type="Texture2D" uid="uid://xta3ggncev5d" path="res://assets/icon.png" id="2_7rs50"]
 [ext_resource type="Script" uid="uid://b527js5t4aljw" path="res://scripts/AbilitySlotUI.gd" id="3_g478g"]
+[ext_resource type="Texture2D" uid="uid://tpsf6nej4t13" path="res://assets/Spritesheets/doublejump.png" id="5_7rs50"]
 [ext_resource type="Texture2D" uid="uid://cipqslnhpgqp2" path="res://assets/Spritesheets/wallslide.png" id="5_p1e0i"]
-[ext_resource type="Texture2D" uid="uid://b5l5crqqhjqsw" path="res://assets/Spritesheets/jump.png" id="6_p1e0i"]
 [ext_resource type="Texture2D" uid="uid://btb7yj5joevht" path="res://assets/Spritesheets/glide.png" id="7_p1e0i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rs50"]
@@ -13,7 +13,7 @@ region = Rect2(-8, 0, 40, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otrlu"]
 atlas = ExtResource("2_7rs50")
-region = Rect2(-8, 0, 40, 24)
+region = Rect2(-8, -1, 40, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1e0i"]
 atlas = ExtResource("5_p1e0i")
@@ -21,15 +21,15 @@ region = Rect2(32, -2, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uuin1"]
 atlas = ExtResource("5_p1e0i")
-region = Rect2(32, -3, 40, 32)
+region = Rect2(32, -4, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs7bs"]
-atlas = ExtResource("6_p1e0i")
+atlas = ExtResource("5_7rs50")
 region = Rect2(160, -2, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1cqgu"]
-atlas = ExtResource("6_p1e0i")
-region = Rect2(160, -3, 32, 32)
+atlas = ExtResource("5_7rs50")
+region = Rect2(192, -4, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_batf6"]
 atlas = ExtResource("7_p1e0i")
@@ -37,7 +37,7 @@ region = Rect2(584, 7, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8u37m"]
 atlas = ExtResource("7_p1e0i")
-region = Rect2(584, 6, 40, 32)
+region = Rect2(584, 5, 40, 34.95)
 
 [node name="AbilityBarUI" type="CanvasLayer" unique_id=1831152166]
 
@@ -67,7 +67,7 @@ grow_horizontal = 2
 grow_vertical = 2
 fill_mode = 3
 texture_progress = SubResource("AtlasTexture_otrlu")
-tint_progress = Color(0.51891166, 0.46856368, 0.54566103, 1)
+tint_progress = Color(0.083475925, 0.56035703, 0.99998015, 1)
 
 [node name="WallJumpSlot" type="TextureRect" parent="AbilityBar" unique_id=1852179290]
 layout_mode = 2
@@ -85,7 +85,7 @@ grow_horizontal = 2
 grow_vertical = 2
 fill_mode = 3
 texture_progress = SubResource("AtlasTexture_uuin1")
-tint_progress = Color(0.51891166, 0.46856368, 0.54566103, 1)
+tint_progress = Color(0.083475925, 0.56035703, 0.99998015, 1)
 
 [node name="DoubleJumpSlot" type="TextureRect" parent="AbilityBar" unique_id=1537522009]
 layout_mode = 2
@@ -103,7 +103,7 @@ grow_horizontal = 2
 grow_vertical = 2
 fill_mode = 3
 texture_progress = SubResource("AtlasTexture_1cqgu")
-tint_progress = Color(0.51891166, 0.46856368, 0.54566103, 1)
+tint_progress = Color(0.083475925, 0.56035703, 0.99998015, 1)
 
 [node name="GlideSlot" type="TextureRect" parent="AbilityBar" unique_id=1226678523]
 layout_mode = 2
@@ -121,4 +121,4 @@ grow_horizontal = 2
 grow_vertical = 2
 fill_mode = 3
 texture_progress = SubResource("AtlasTexture_8u37m")
-tint_progress = Color(0.51891166, 0.46856368, 0.54566103, 1)
+tint_progress = Color(0.083475925, 0.56035703, 0.99998015, 1)
