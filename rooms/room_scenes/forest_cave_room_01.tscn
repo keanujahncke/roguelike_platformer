@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c6eqkfswfve8j" path="res://scenes/single_use_platform.tscn" id="2_wro0w"]
 [ext_resource type="Texture2D" uid="uid://bvf4yujudul0b" path="res://assets/Dungeon Tile Set.png" id="3_o6ree"]
 [ext_resource type="Texture2D" uid="uid://dvxxkgjw2bem3" path="res://assets/Pixel Woods Asset Pack/Tileset/Pixel_Woods_Tileset.png" id="4_w1h4k"]
+[ext_resource type="Script" uid="uid://cetm0ffpiaqfx" path="res://scripts/deathbox_left.gd" id="5_lfcra"]
 [ext_resource type="PackedScene" uid="uid://bp1an824b1jrr" path="res://scenes/spider_hazard.tscn" id="6_w1h4k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_weias"]
@@ -613,6 +614,9 @@ texture = ExtResource("4_w1h4k")
 sources/0 = SubResource("TileSetAtlasSource_vvxsh")
 sources/1 = SubResource("TileSetAtlasSource_pfm1b")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uttuv"]
+size = Vector2(33, 1089)
+
 [node name="RoomBase" unique_id=2127497181 instance=ExtResource("1_fv34a")]
 
 [node name="Exit" parent="." index="1" unique_id=2118638246]
@@ -703,35 +707,42 @@ position = Vector2(490, -1207)
 visible = true
 position = Vector2(378, -1207)
 
-[node name="Collectible" parent="." index="32" unique_id=2013095035]
+[node name="Deathbox right" type="Area2D" parent="." index="32" unique_id=550463339]
+script = ExtResource("5_lfcra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deathbox right" index="0" unique_id=1639029991]
+position = Vector2(1753, -543)
+shape = SubResource("RectangleShape2D_uttuv")
+
+[node name="Collectible" parent="." index="33" unique_id=2013095035]
 visible = true
 position = Vector2(1591, -577)
 id = "forest_cave_02"
 
-[node name="single_use_platform" parent="." index="33" unique_id=923567094 instance=ExtResource("2_wro0w")]
+[node name="single_use_platform" parent="." index="34" unique_id=923567094 instance=ExtResource("2_wro0w")]
 position = Vector2(965, -395)
 scale = Vector2(0.05, 0.09000489)
 
-[node name="single_use_platform2" parent="." index="34" unique_id=160318135 instance=ExtResource("2_wro0w")]
+[node name="single_use_platform2" parent="." index="35" unique_id=160318135 instance=ExtResource("2_wro0w")]
 position = Vector2(1226, -435)
 scale = Vector2(0.05, 0.09000489)
 
-[node name="single_use_platform3" parent="." index="35" unique_id=1158816020 instance=ExtResource("2_wro0w")]
+[node name="single_use_platform3" parent="." index="36" unique_id=1158816020 instance=ExtResource("2_wro0w")]
 position = Vector2(1475, -476)
 scale = Vector2(0.05, 0.09000489)
 
-[node name="single_use_platform4" parent="." index="36" unique_id=1465049937 instance=ExtResource("2_wro0w")]
+[node name="single_use_platform4" parent="." index="37" unique_id=1465049937 instance=ExtResource("2_wro0w")]
 position = Vector2(1470, -596)
 scale = Vector2(0.05, 0.09000489)
 
-[node name="single_use_platform5" parent="." index="37" unique_id=1836537456 instance=ExtResource("2_wro0w")]
+[node name="single_use_platform5" parent="." index="38" unique_id=1836537456 instance=ExtResource("2_wro0w")]
 position = Vector2(1226, -648)
 scale = Vector2(0.05, 0.09000489)
 
-[node name="single_use_platform6" parent="." index="38" unique_id=1109980149 instance=ExtResource("2_wro0w")]
+[node name="single_use_platform6" parent="." index="39" unique_id=1109980149 instance=ExtResource("2_wro0w")]
 position = Vector2(970, -689)
 scale = Vector2(0.05, 0.09000489)
 
-[node name="SpiderHazard3" parent="." index="39" unique_id=848821054 instance=ExtResource("6_w1h4k")]
+[node name="SpiderHazard3" parent="." index="40" unique_id=848821054 instance=ExtResource("6_w1h4k")]
 position = Vector2(495, -55)
 move_distance = 20.0

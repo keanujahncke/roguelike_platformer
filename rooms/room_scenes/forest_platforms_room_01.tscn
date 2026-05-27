@@ -2,6 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://vd6nwya1a4kw" path="res://scenes/room_base_forest.tscn" id="1_qhko0"]
 [ext_resource type="PackedScene" uid="uid://d01dcy24xd2nh" path="res://scenes/snake_hazard.tscn" id="2_2typf"]
+[ext_resource type="Script" uid="uid://cetm0ffpiaqfx" path="res://scripts/deathbox_left.gd" id="3_ktt6v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62px0"]
+size = Vector2(33, 1089)
 
 [node name="RoomBase" unique_id=2127497181 instance=ExtResource("1_qhko0")]
 
@@ -98,3 +102,10 @@ position = Vector2(409, -1115)
 [node name="MushroomHazard3" parent="." index="31" unique_id=333166739]
 visible = true
 position = Vector2(297, -1115)
+
+[node name="Deathbox right" type="Area2D" parent="." index="35" unique_id=54829811]
+script = ExtResource("3_ktt6v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deathbox right" index="0" unique_id=865989428]
+position = Vector2(1888, -542)
+shape = SubResource("RectangleShape2D_62px0")
