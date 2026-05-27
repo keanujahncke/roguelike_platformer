@@ -21,7 +21,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 	if body.has_method("take_damage"):
 		if "health" in body:
-			body.take_damage(body.health)
+			body.take_damage(damage_amount)
 		else:
 			body.take_damage(damage_amount)
 	else:
