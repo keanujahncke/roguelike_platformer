@@ -5,10 +5,16 @@ extends CanvasLayer
 @export var title_music_volume_db: float = -8.0
 @export var title_opener_start_offset: float = 1.0
 
+@export var stick_scroll_speed := 450.0
+
 @onready var main_menu = %MainMenu
 @onready var new_game_menu = %NewGameMenu
 @onready var loadout_menu = %LoadoutMenu
+@onready var controls_menu = %ControlsMenu
+@onready var credits_menu = %CreditsMenu
 
+@onready var controls_button = %Controls
+@onready var credits_button = %Credits
 @onready var new_game_button = %NewGameButton
 @onready var quit_game_button = %QuitGameButton
 
@@ -35,6 +41,8 @@ func _ready() -> void:
 	
 	new_game_button.pressed.connect(show_new_game_menu)
 	quit_game_button.pressed.connect(_on_quit_pressed)
+	controls_button.pressed.connect(show_controls_menu)
+	credits_button.pressed.connect(show_credits_menu)
 
 	# LOAD buttons
 	slot_00_load.pressed.connect(_on_new_game_pressed.bind(0))
@@ -80,16 +88,20 @@ func _on_title_opener_finished() -> void:
 		title_music_player.play()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	_update_pointer_logic()
+	_handle_menu_scrolling(delta)
+
+func _update_pointer_logic() -> void:
 	var focused_node = get_viewport().gui_get_focus_owner()
 	
 	if focused_node != null and focused_node.is_visible_in_tree():
 		pointer.visible = true
 		var target_pos = focused_node.global_position
-		var x_offset = -50 # Default distance
+		var x_offset = -50 
 	
 		if "slot" in focused_node.name.to_lower() or "slot" in focused_node.get_parent().name.to_lower():
-			x_offset = -120 # Push it further left for the Slot menu
+			x_offset = -120 
 		elif focused_node is CheckBox:
 			x_offset = -40
 
@@ -100,6 +112,19 @@ func _process(_delta: float) -> void:
 		pointer.global_position.x += sin(Time.get_ticks_msec() * 0.01) * 5
 	else:
 		pointer.visible = false
+
+func _handle_menu_scrolling(delta: float) -> void:
+	var input_axis := Input.get_axis("map_scroll_up", "map_scroll_down")
+	
+	# Deadzone check
+	if abs(input_axis) <= 0.1:
+		return
+		
+	var scroll_amount = int(input_axis * stick_scroll_speed * delta)
+	if credits_menu.visible:
+		# Reference your specific Credits ScrollContainer here
+		var credits_scroll = %CreditsScrollContainer 
+		credits_scroll.scroll_vertical += scroll_amount
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -116,6 +141,8 @@ func show_main_menu() -> void:
 	main_menu.visible = true
 	new_game_menu.visible = false
 	loadout_menu.visible = false
+	controls_menu.visible = false  # Added
+	credits_menu.visible = false   # Added
 
 	new_game_button.grab_focus()
 
@@ -135,7 +162,24 @@ func show_loadout_menu() -> void:
 
 	start_run_button.grab_focus()
 
+func show_controls_menu() -> void:
+	main_menu.visible = false
+	new_game_menu.visible = false
+	loadout_menu.visible = false
+	controls_menu.visible = true
+	credits_menu.visible = false
+	
 
+func show_credits_menu() -> void:
+	main_menu.visible = false
+	new_game_menu.visible = false
+	loadout_menu.visible = false
+	controls_menu.visible = false
+	credits_menu.visible = true
+	
+	
+	
+	
 # ==================================================
 # SLOT SELECT
 # ==================================================

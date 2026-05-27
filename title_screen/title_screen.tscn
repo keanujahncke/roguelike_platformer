@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c13xmss82w0ux" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Content/6 Highlighter/7.png" id="6_oqrgu"]
 [ext_resource type="Texture2D" uid="uid://b17ahlfpnxguf" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Plain/4 Notification/2.png" id="6_uiiip"]
 [ext_resource type="Texture2D" uid="uid://b511nr0i60m71" path="res://assets/cursor.png" id="8_fv0o7"]
-[ext_resource type="Script" uid="uid://dnvwtapn7v2ry" path="res://scripts/menu_sfx_connector.gd" id="13_3eqcd"]
+[ext_resource type="Script" path="res://scripts/menu_sfx_connector.gd" id="13_3eqcd"]
 [ext_resource type="AudioStream" uid="uid://c5bvs6hiewx8v" path="res://assets/audio/select1.wav" id="14_mag7y"]
 [ext_resource type="AudioStream" uid="uid://b6cjd5qldrvmj" path="res://assets/audio/select2.wav" id="15_3d3o2"]
 
@@ -234,7 +234,7 @@ flat = true
 icon_alignment = 1
 
 [node name="ControlsMenu" type="Control" parent="." unique_id=1045819987]
-visible = false
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -242,47 +242,244 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ControlsMenu" unique_id=2028670988]
+[node name="ColorRect" type="ColorRect" parent="ControlsMenu" unique_id=796462676]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Credits" type="Control" parent="." unique_id=1508815336]
-visible = false
-layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.08627451, 0.14901961, 0.27058825, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Credits" unique_id=2046183358]
+[node name="NinePatchRect" type="NinePatchRect" parent="ControlsMenu" unique_id=512090383]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -600.0
+offset_left = -577.0
 offset_top = -324.0
-offset_right = 600.0
-offset_bottom = 459.0
+offset_right = 577.0
+offset_bottom = 329.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fk0fn")
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlsMenu" unique_id=381941909]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Credits/VBoxContainer" unique_id=2119394211]
-custom_minimum_size = Vector2(1200, 100)
+[node name="ControlsContainer" type="VBoxContainer" parent="ControlsMenu/MarginContainer" unique_id=1808625151]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Label" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer" unique_id=1648522831]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 50
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="KeybindsContainer" type="VBoxContainer" parent="ControlsMenu/MarginContainer/ControlsContainer" unique_id=1464857524]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="labels" type="HBoxContainer" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer" unique_id=1443392650]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/labels" unique_id=1056790084]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "Action"
+horizontal_alignment = 3
+
+[node name="Label2" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/labels" unique_id=1975659858]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "Keyboard"
+
+[node name="Label3" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/labels" unique_id=544016890]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "Controller"
+
+[node name="jump" type="HBoxContainer" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer" unique_id=2044302835]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/jump" unique_id=45873427]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "Jump"
+horizontal_alignment = 3
+
+[node name="Label2" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/jump" unique_id=309275311]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "Space"
+
+[node name="Label3" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/jump" unique_id=1861814372]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "X or A"
+
+[node name="dash" type="HBoxContainer" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer" unique_id=2067944962]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/dash" unique_id=1889303314]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "Dash"
+horizontal_alignment = 3
+
+[node name="Label2" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/dash" unique_id=566189045]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "Shift"
+
+[node name="Label3" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/dash" unique_id=2018726236]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "R2 or RT"
+
+[node name="glide" type="HBoxContainer" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer" unique_id=2088261504]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/glide" unique_id=893100872]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "Glide"
+horizontal_alignment = 3
+
+[node name="Label2" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/glide" unique_id=1583910820]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "W"
+
+[node name="Label3" type="Label" parent="ControlsMenu/MarginContainer/ControlsContainer/KeybindsContainer/glide" unique_id=524322637]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_colors/font_outline_color = Color(0.2901961, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 25
+text = "Square or X"
+
+[node name="CreditsMenu" type="Control" parent="." unique_id=1508815336]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CreditsMenu" unique_id=670314187]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08627451, 0.14901961, 0.27058825, 1)
+
+[node name="CreditsScrollContainer" type="ScrollContainer" parent="CreditsMenu" unique_id=460880999]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+
+[node name="Label" type="Label" parent="CreditsMenu/CreditsScrollContainer" unique_id=2119394211]
+custom_minimum_size = Vector2(1100, 100)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4627451)
 theme_override_constants/shadow_offset_x = 9
 theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 60
-text = "=== Credits ===
+text = "
+
+
+
+=== Credits ===
 
 Team Members
 
@@ -312,13 +509,22 @@ Third-Party Assets
 Some visual and audio assets were sourced from free and open-source asset libraries.
 All external assets remain property of their respective creators.
 
-External resources used may include:
-- ...
-- ...
-- ...
+External resources used:
+- Dungeon Platformer Tile Set by Incolgames
+- Pixel Woods Free Platformer Tileset by Cubic Tree
+- Free Platformer 16x16 by Oisougabo
+- Super Pixel Plains Tileset by Untied Games
+- Lil Fantasy by Rob van Saaze
+- Pixel Art Bird 16x16 by Ma9ici4n
+- Pocket Inventory Series 5 (Player Status) by Humble Pixel
+- PixelHearts 16x16 by RedReeh
+
+Tools Used:
+- Bfxr (SFX Audio Tool)
+
 
 Built With
-- Godot
+- Godot Engine
 
 
 Special Thanks
@@ -330,7 +536,11 @@ Academic Information
 
 Created for the Game Design and Interactive Media (GDIM) Program
 University of California, Irvine
-Spring 2026"
+Spring 2026
+
+
+
+"
 label_settings = SubResource("LabelSettings_uiiip")
 horizontal_alignment = 1
 autowrap_mode = 2
