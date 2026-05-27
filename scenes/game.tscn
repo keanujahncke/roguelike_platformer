@@ -36,6 +36,7 @@ font_size = 100
 
 [node name="Game" type="Node2D" unique_id=1310302999]
 script = ExtResource("1_e2o6t")
+debug_mode = true
 starting_room = ExtResource("2_5newe")
 boss_room = ExtResource("3_ir15t")
 debug_database = ExtResource("4_bhx41")

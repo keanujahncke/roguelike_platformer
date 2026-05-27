@@ -16,6 +16,10 @@ signal fake_death_finished
 # Delay between boss attack animation starting and lasers beginning to spawn.
 @export var laser_phase_start_delay: float = 1.0
 
+# NEW:
+# Delay after the boss room loads before the laser phase loop begins.
+@export var initial_laser_start_delay: float = 5.0
+
 # Boss physical collision.
 # Keep this true if you do NOT want the boss to block/touch the player physically.
 @export var disable_boss_collision: bool = true
@@ -97,6 +101,7 @@ var trap_sequence_running: bool = false
 var fake_death_is_finished: bool = false
 
 var laser_loop_running: bool = false
+var laser_start_delay_running: bool = false
 var active_lasers: Array[Node] = []
 
 var last_laser_angle_index: int = -1
@@ -123,7 +128,7 @@ func _ready() -> void:
 	setup_follow_offset()
 	
 	if laser_attack_enabled:
-		start_laser_phase_loop()
+		start_laser_phase_loop_after_delay()
 
 
 func _physics_process(delta: float) -> void:
@@ -263,9 +268,36 @@ func set_laser_attack_enabled(enabled: bool) -> void:
 	laser_attack_enabled = enabled
 	
 	if laser_attack_enabled:
-		start_laser_phase_loop()
+		start_laser_phase_loop_after_delay()
 	else:
 		stop_all_laser_attacks(false)
+
+
+func start_laser_phase_loop_after_delay() -> void:
+	if laser_loop_running:
+		return
+	
+	if laser_start_delay_running:
+		return
+	
+	if boss_laser_scene == null:
+		push_warning("Boss: boss_laser_scene is not assigned.")
+		return
+	
+	laser_start_delay_running = true
+	
+	if initial_laser_start_delay > 0.0:
+		await get_tree().create_timer(initial_laser_start_delay).timeout
+	
+	laser_start_delay_running = false
+	
+	if not laser_attack_enabled:
+		return
+	
+	if trap_sequence_running:
+		return
+	
+	start_laser_phase_loop()
 
 
 func start_laser_phase_loop() -> void:
@@ -325,6 +357,7 @@ func stop_laser_loop() -> void:
 
 func stop_all_laser_attacks(force_idle: bool = true) -> void:
 	laser_attack_enabled = false
+	laser_start_delay_running = false
 	waiting_cleanup_for_lasers()
 
 	# Invalidate any laser attack animation await that might later try to return to idle.
