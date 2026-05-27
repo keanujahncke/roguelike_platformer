@@ -4,107 +4,89 @@ class_name DashAbility
 @export var dash_speed := 500.0
 @export var dash_time := 0.10
 @export var max_dashes := 1
-@export var dash_cooldown := 1.0
-
-var cooldown_max := 0.0
-var cooldown_left := 0.0
+@export var dash_cooldown := 0.5
 
 # Collision layer used for solid terrain
 @export var terrain_layer := 1
 
+var cooldown_max := 0.0
+var cooldown_left := 0.0
 var dashes_left := 0
 var is_dashing := false
-
 
 func setup(_player):
 	dashes_left = max_dashes
 	cooldown_max = dash_cooldown
 	cooldown_left = 0.0
 
-
 func ability_process(player, delta):
 	if not unlocked:
 		return
 		
-	if cooldown_left > 0.0 and not is_dashing:
+	# Standard cooldown countdown
+	if cooldown_left > 0.0:
 		cooldown_left = max(cooldown_left - delta, 0.0)
 
-	if is_dashing:
-		cooldown_max = 1.0
-		cooldown_left = 1.0
-
-	if player.is_on_floor():
-		dashes_left = max_dashes
-	elif player.is_on_wall() and has_wall_jump(player):
+	# Reset dashes on floor or wall (if wall jump is unlocked)
+	if player.is_on_floor() or (player.is_on_wall() and has_wall_jump(player)):
 		dashes_left = max_dashes
 
+	# Trigger Dash
 	if Input.is_action_just_pressed("dash") \
 	and dashes_left > 0 \
 	and not is_dashing \
 	and cooldown_left <= 0.0:
 		start_dash(player)
 
-
 func start_dash(player):
 	is_dashing = true
 	dashes_left -= 1
+	
+	# Set up the UI cooldown bars immediately
+	cooldown_max = dash_cooldown
+	cooldown_left = dash_cooldown
 
 	var dash_vec: Vector2 = get_dash_direction(player)
 
 	# Safe fallback direction
 	if dash_vec == Vector2.ZERO:
-		dash_vec = Vector2(player.velocity.x, 0)
-		if dash_vec == Vector2.ZERO:
-			dash_vec = Vector2(player.facing, 0)
+		dash_vec = Vector2(player.facing, 0)
 
 	player.velocity = dash_vec.normalized() * dash_speed
 
+	# Phase dash handling
 	var phased := false
-
-	# Phase dash handling (safer restore)
 	if has_phase_dash(player):
 		player.set_collision_mask_value(terrain_layer, false)
 		phased = true
 
 	await player.get_tree().create_timer(dash_time).timeout
 
-	if phased and is_instance_valid(player):
-		player.set_collision_mask_value(terrain_layer, true)
-
-	is_dashing = false
-	
+	# Restore state
 	if is_instance_valid(player):
-		cooldown_max = dash_cooldown
-		cooldown_left = cooldown_max
-
+		if phased:
+			player.set_collision_mask_value(terrain_layer, true)
+		is_dashing = false
 
 func get_dash_direction(player) -> Vector2:
-	# Directional dash (if unlocked)
 	if has_directional_dash(player):
 		var x := Input.get_axis("move_left", "move_right")
 		var y := Input.get_axis("move_up", "move_down")
-
 		var dir := Vector2(x, y)
-
 		if dir != Vector2.ZERO:
 			return dir.normalized()
 
-	# Default horizontal dash
 	return Vector2(player.facing, 0)
 
-
+# Helper checks for sub-abilities
 func has_directional_dash(player) -> bool:
-	if player.has_node("Abilities/DirectionalDashAbility"):
-		return player.get_node("Abilities/DirectionalDashAbility").unlocked
-	return false
-
+	var node = player.get_node_or_null("Abilities/DirectionalDashAbility")
+	return node != null and node.unlocked
 
 func has_phase_dash(player) -> bool:
-	if player.has_node("Abilities/PhaseDashAbility"):
-		return player.get_node("Abilities/PhaseDashAbility").unlocked
-	return false
+	var node = player.get_node_or_null("Abilities/PhaseDashAbility")
+	return node != null and node.unlocked
 
 func has_wall_jump(player) -> bool:
-	if player.has_node("Abilities/WallJumpAbility"):
-		return player.get_node("Abilities/WallJumpAbility").unlocked
-	return false
+	var node = player.get_node_or_null("Abilities/WallJumpAbility")
+	return node != null and node.unlocked
