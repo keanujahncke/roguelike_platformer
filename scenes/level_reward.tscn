@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cns5uk4ucmk3l" path="res://scripts/level_reward.gd" id="1_g3irf"]
 [ext_resource type="PackedScene" uid="uid://b8nck1jtetqks" path="res://scenes/choice.tscn" id="2_gibuo"]
+[ext_resource type="AudioStream" uid="uid://c5bvs6hiewx8v" path="res://assets/audio/select1.wav" id="4_1pbpv"]
+[ext_resource type="AudioStream" uid="uid://b6cjd5qldrvmj" path="res://assets/audio/select2.wav" id="5_j6l4m"]
 
 [sub_resource type="Gradient" id="Gradient_kffv2"]
 colors = PackedColorArray(0.21568628, 0.21568628, 0.21568628, 1, 0.4, 0.21960784, 0.20392157, 1)
@@ -15,6 +17,10 @@ font_size = 40
 [node name="LevelReward" type="CanvasLayer" unique_id=2064351492]
 layer = 100
 script = ExtResource("1_g3irf")
+move_between_options_sfx = ExtResource("4_1pbpv")
+choose_option_sfx = ExtResource("5_j6l4m")
+move_sfx_volume_db = -5.0
+choose_sfx_volume_db = -7.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=788984973]
 offset_right = 1160.0

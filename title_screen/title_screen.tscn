@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://c13xmss82w0ux" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Content/6 Highlighter/7.png" id="6_oqrgu"]
 [ext_resource type="Texture2D" uid="uid://b17ahlfpnxguf" path="res://assets/GUI/Humble Gift - Paper UI System v1.1/Sprites/Paper UI Pack/Plain/4 Notification/2.png" id="6_uiiip"]
 [ext_resource type="Texture2D" uid="uid://b511nr0i60m71" path="res://assets/cursor.png" id="8_fv0o7"]
+[ext_resource type="Script" uid="uid://dnvwtapn7v2ry" path="res://scripts/menu_sfx_connector.gd" id="13_3eqcd"]
+[ext_resource type="AudioStream" uid="uid://c5bvs6hiewx8v" path="res://assets/audio/select1.wav" id="14_mag7y"]
+[ext_resource type="AudioStream" uid="uid://b6cjd5qldrvmj" path="res://assets/audio/select2.wav" id="15_3d3o2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fh6ay"]
 
@@ -791,6 +794,13 @@ visible = false
 z_index = 10
 texture = ExtResource("8_fv0o7")
 hframes = 4
+
+[node name="UISFXConnector" type="Node" parent="." unique_id=763165104]
+script = ExtResource("13_3eqcd")
+move_between_options_sfx = ExtResource("14_mag7y")
+choose_option_sfx = ExtResource("15_3d3o2")
+move_sfx_volume_db = -5.0
+choose_sfx_volume_db = -7.0
 
 [connection signal="toggled" from="LoadoutMenu/NinePatchRect/MarginContainer/LoadoutContainer/ColumnLabels/Upgrades/DoubleJumpBox" to="LoadoutMenu/NinePatchRect/MarginContainer/LoadoutContainer" method="_on_box_toggled"]
 [connection signal="toggled" from="LoadoutMenu/NinePatchRect/MarginContainer/LoadoutContainer/ColumnLabels/Upgrades/WallJumpBox" to="LoadoutMenu/NinePatchRect/MarginContainer/LoadoutContainer" method="_on_box_toggled"]

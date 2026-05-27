@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 signal ability_selected(id: String)
-signal upgrade_completed # Notifies LevelManager to return to map
+signal upgrade_completed
 
 const HEAL_REWARD_ID := "heal_1"
 
@@ -12,20 +12,72 @@ const HEAL_REWARD_ID := "heal_1"
 @export var available_abilities: Array[AbilityData] = []
 @export var rewards_to_show: int = 2
 
+@export_group("SFX")
+@export var move_between_options_sfx: AudioStream
+@export var choose_option_sfx: AudioStream
+@export var move_sfx_volume_db: float = 0.0
+@export var choose_sfx_volume_db: float = 0.0
+@export var choose_sfx_delay_before_close: float = 0.12
+
 @onready var reward_section = $CenterContainer/VBoxContainer/RewardSection
 @onready var reward_container = $CenterContainer/VBoxContainer/RewardSection/HBoxContainer
 
-# Removed level_section and level_container references
+var move_sfx_player: AudioStreamPlayer
+var choose_sfx_player: AudioStreamPlayer
+var reward_choice_locked := false
+
 
 func _ready():
 	hide()
 	process_mode = PROCESS_MODE_ALWAYS
+	_create_sfx_players()
+
+
+func _create_sfx_players() -> void:
+	move_sfx_player = AudioStreamPlayer.new()
+	move_sfx_player.name = "MoveBetweenOptionsSFXPlayer"
+	add_child(move_sfx_player)
+
+	choose_sfx_player = AudioStreamPlayer.new()
+	choose_sfx_player.name = "ChooseOptionSFXPlayer"
+	add_child(choose_sfx_player)
+
+	move_sfx_player.stream = move_between_options_sfx
+	choose_sfx_player.stream = choose_option_sfx
+
+	move_sfx_player.volume_db = move_sfx_volume_db
+	choose_sfx_player.volume_db = choose_sfx_volume_db
+
+
+func play_move_between_options_sfx() -> void:
+	if move_sfx_player == null:
+		return
+
+	if move_sfx_player.stream == null:
+		return
+
+	move_sfx_player.volume_db = move_sfx_volume_db
+	move_sfx_player.stop()
+	move_sfx_player.play()
+
+
+func play_choose_option_sfx() -> void:
+	if choose_sfx_player == null:
+		return
+
+	if choose_sfx_player.stream == null:
+		return
+
+	choose_sfx_player.volume_db = choose_sfx_volume_db
+	choose_sfx_player.stop()
+	choose_sfx_player.play()
 
 
 func open_ui(_is_upgrade: bool = false):
-	# db and is_upgrade parameters kept for signature compatibility with LevelManager
 	if visible:
 		return
+
+	reward_choice_locked = false
 
 	show()
 	get_tree().paused = true
@@ -51,11 +103,9 @@ func _setup_abilities():
 
 	var reward_choices: Array[AbilityData] = []
 
-	# Always include restore life if it exists
 	if heal_reward != null:
 		reward_choices.append(heal_reward)
 
-	# Fill slots with abilities the player does not have
 	var remaining_slots := rewards_to_show - reward_choices.size()
 	if remaining_slots > 0:
 		for reward in ability_pool.slice(0, remaining_slots):
@@ -72,17 +122,44 @@ func _setup_abilities():
 		reward_container.add_child(card)
 		card.setup(res)
 		card.selected.connect(_on_reward_clicked)
-		buttons.append(card.button)
+
+		if "button" in card:
+			buttons.append(card.button)
+			_connect_reward_button_sfx(card.button)
+		elif card is Button:
+			buttons.append(card)
+			_connect_reward_button_sfx(card)
 
 	_setup_button_focus(buttons)
 
 
+func _connect_reward_button_sfx(btn: Button) -> void:
+	if btn == null:
+		return
+
+	if not btn.focus_entered.is_connected(_on_reward_button_focused):
+		btn.focus_entered.connect(_on_reward_button_focused)
+
+
+func _on_reward_button_focused() -> void:
+	play_move_between_options_sfx()
+
+
 func _on_reward_clicked(res: AbilityData):
+	if reward_choice_locked:
+		return
+
+	reward_choice_locked = true
+
+	play_choose_option_sfx()
+
+	if choose_sfx_delay_before_close > 0.0:
+		await get_tree().create_timer(choose_sfx_delay_before_close).timeout
+
 	if res.id == HEAL_REWARD_ID:
 		_restore_one_life()
 		ability_selected.emit("")
 	else:
-		# Sync with run_manager for future room filtering
 		run_manager.add_ability(res.id)
 		save_data.unlock_seen_ability(res.id)
 		ability_selected.emit(res.id)
@@ -93,14 +170,16 @@ func _on_reward_clicked(res: AbilityData):
 func _close_ui():
 	hide()
 	get_tree().paused = false
-	upgrade_completed.emit() # Signal manager to go back to map
+	upgrade_completed.emit()
 
 
 func _restore_one_life():
 	var player = get_tree().get_first_node_in_group("player")
-	if player == null: return
+	if player == null:
+		return
 
 	player.health = min(player.health + 1, player.max_health)
+
 	if player.has_signal("health_changed"):
 		player.health_changed.emit(player.health)
 
@@ -108,8 +187,10 @@ func _restore_one_life():
 func _setup_button_focus(buttons: Array):
 	for i in range(buttons.size()):
 		var btn = buttons[i]
+
 		if i > 0:
 			btn.focus_neighbor_left = buttons[i - 1].get_path()
+
 		if i < buttons.size() - 1:
 			btn.focus_neighbor_right = buttons[i + 1].get_path()
 

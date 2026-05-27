@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://codpjsbh30r3x" path="res://scenes/upgrade_card.tscn" id="2_h31ri"]
 [ext_resource type="Script" uid="uid://eb86v03dhajv" path="res://player/abilities/AbilityData.gd" id="3_34xxx"]
 [ext_resource type="Resource" uid="uid://d0gjfwtt475qm" path="res://player/abilities/ability_data/double_jump_data.tres" id="4_34xxx"]
+[ext_resource type="Script" uid="uid://dnvwtapn7v2ry" path="res://scripts/menu_sfx_connector.gd" id="5_er7yw"]
+[ext_resource type="AudioStream" uid="uid://c5bvs6hiewx8v" path="res://assets/audio/select1.wav" id="6_ffspg"]
+[ext_resource type="AudioStream" uid="uid://b6cjd5qldrvmj" path="res://assets/audio/select2.wav" id="7_1stc5"]
 
 [node name="RewardPicker" type="Control" unique_id=97351657]
 layout_mode = 3
@@ -28,3 +31,10 @@ layout_mode = 2
 
 [node name="UpgradeCard3" parent="VBoxContainer/HBoxContainer" unique_id=774572977 instance=ExtResource("2_h31ri")]
 layout_mode = 2
+
+[node name="UISFXConnector" type="Node" parent="." unique_id=155721426]
+script = ExtResource("5_er7yw")
+move_between_options_sfx = ExtResource("6_ffspg")
+choose_option_sfx = ExtResource("7_1stc5")
+move_sfx_volume_db = -5.0
+choose_sfx_volume_db = -7.0

@@ -1636,7 +1636,7 @@ size = Vector2(20, 151)
 size = Vector2(20, 129)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyiw4"]
-size = Vector2(23, 66)
+size = Vector2(23, 90)
 
 [node name="RoomBase" type="Node2D" unique_id=2127497181]
 
@@ -1756,7 +1756,7 @@ script = ExtResource("8_otjdj")
 trigger_id = "collectible"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialTriggers/CollectibleTrigger" unique_id=2006384137]
-position = Vector2(21.5, -14)
+position = Vector2(-7, -26)
 shape = SubResource("RectangleShape2D_jyiw4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1215074032]
