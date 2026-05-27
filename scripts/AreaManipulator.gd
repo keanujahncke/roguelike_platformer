@@ -2,7 +2,7 @@ extends Node2D
 class_name AreaManipulator
 
 @export var ground_map: TileMapLayer
-@export var chunk_move: ChunkMove
+@export var chunk_moves: Array[ChunkMove] = []
 
 @export var black_hole_indicator_scene: PackedScene
 
@@ -33,22 +33,23 @@ class_name AreaManipulator
 # Negative = earlier than peak.
 @export var peak_timing_offset := 0.0
 
+# If true, boss uses CM1, then CM2, then CM3, then repeats.
+# If false, boss randomly picks one CM each cycle.
+@export var use_chunk_moves_in_order := true
+
 var attack_running := false
 var stored_source_tiles: Array[Dictionary] = []
+var current_chunk_index := 0
 
 
 func _ready() -> void:
 	if ground_map == null:
 		push_error("AreaManipulator: GroundMap is not assigned.")
 
-	if chunk_move == null:
-		push_error("AreaManipulator: ChunkMove is not assigned.")
-
 	if black_hole_indicator_scene == null:
 		push_warning("AreaManipulator: BlackHoleIndicator scene is not assigned.")
 
-	if chunk_move != null:
-		chunk_move.hide_boss_terrain()
+	hide_all_boss_terrain()
 
 	if use_attack_timer:
 		start_attack_loop()
@@ -57,20 +58,64 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if allow_manual_test_input and Input.is_action_just_pressed(test_input_action):
 		print("AreaManipulator: manual test input pressed.")
-		perform_full_black_hole_cycle(chunk_move)
+		var move := get_next_chunk_move()
+		if move != null:
+			perform_full_black_hole_cycle(move)
+
+
+func hide_all_boss_terrain() -> void:
+	for move in chunk_moves:
+		if move != null:
+			move.hide_boss_terrain()
 
 
 func start_attack_loop() -> void:
 	await get_tree().create_timer(first_attack_delay).timeout
 
 	while use_attack_timer:
-		await perform_full_black_hole_cycle(chunk_move)
+		var move := get_next_chunk_move()
+
+		if move != null:
+			await perform_full_black_hole_cycle(move)
+		else:
+			print("AreaManipulator: No valid ChunkMoves assigned.")
+
 		await get_tree().create_timer(attack_interval).timeout
+
+
+func get_next_chunk_move() -> ChunkMove:
+	if chunk_moves.is_empty():
+		push_warning("AreaManipulator: chunk_moves array is empty.")
+		return null
+
+	var valid_moves: Array[ChunkMove] = []
+
+	for move in chunk_moves:
+		if move != null:
+			valid_moves.append(move)
+
+	if valid_moves.is_empty():
+		push_warning("AreaManipulator: No valid ChunkMove references found.")
+		return null
+
+	if use_chunk_moves_in_order:
+		if current_chunk_index >= valid_moves.size():
+			current_chunk_index = 0
+
+		var selected_move := valid_moves[current_chunk_index]
+		current_chunk_index += 1
+		return selected_move
+
+	return valid_moves.pick_random()
 
 
 func perform_full_black_hole_cycle(move: ChunkMove) -> void:
 	if attack_running:
 		print("Attack already running.")
+		return
+
+	if move == null:
+		push_error("AreaManipulator: ChunkMove is missing.")
 		return
 
 	attack_running = true
@@ -103,7 +148,7 @@ func perform_forward_attack(move: ChunkMove) -> void:
 	var source_cells: Array[Vector2i] = get_cells_in_global_rect(source_rect_global)
 
 	if source_cells.is_empty():
-		print("No source cells found inside the source rectangle.")
+		print("No source cells found inside the source rectangle for ", move.name)
 		return
 
 	store_source_tiles(source_cells)
@@ -121,7 +166,7 @@ func perform_forward_attack(move: ChunkMove) -> void:
 	if move.clear_source_after_move:
 		remove_ground_tiles(source_cells)
 
-	print("Forward: source tiles removed.")
+	print("Forward: source tiles removed for ", move.name)
 
 	var source_remaining_time: float = max(source_lifetime - source_peak_time - peak_timing_offset, 0.0)
 	await get_tree().create_timer(source_remaining_time).timeout
@@ -147,7 +192,7 @@ func perform_forward_attack(move: ChunkMove) -> void:
 
 	move.reveal_boss_terrain()
 
-	print("Forward: boss terrain revealed.")
+	print("Forward: boss terrain revealed for ", move.name)
 
 	var destination_remaining_time: float = max(destination_lifetime - destination_peak_time - peak_timing_offset, 0.0)
 	await get_tree().create_timer(destination_remaining_time).timeout
@@ -155,7 +200,7 @@ func perform_forward_attack(move: ChunkMove) -> void:
 	if destination_black_hole != null and is_instance_valid(destination_black_hole):
 		destination_black_hole.queue_free()
 
-	print("Forward attack complete.")
+	print("Forward attack complete for ", move.name)
 
 
 func perform_reverse_attack(move: ChunkMove) -> void:
@@ -172,7 +217,7 @@ func perform_reverse_attack(move: ChunkMove) -> void:
 		return
 
 	if stored_source_tiles.is_empty():
-		print("No stored source tiles to restore.")
+		print("No stored source tiles to restore for ", move.name)
 		return
 
 	var source_rect_global: Rect2 = move.get_source_rect_global()
@@ -190,7 +235,7 @@ func perform_reverse_attack(move: ChunkMove) -> void:
 
 	move.hide_boss_terrain()
 
-	print("Reverse: boss terrain hidden.")
+	print("Reverse: boss terrain hidden for ", move.name)
 
 	var destination_remaining_time: float = max(destination_lifetime - destination_peak_time - peak_timing_offset, 0.0)
 	await get_tree().create_timer(destination_remaining_time).timeout
@@ -216,7 +261,7 @@ func perform_reverse_attack(move: ChunkMove) -> void:
 
 	restore_source_tiles()
 
-	print("Reverse: source tiles restored.")
+	print("Reverse: source tiles restored for ", move.name)
 
 	var source_remaining_time: float = max(source_lifetime - source_peak_time - peak_timing_offset, 0.0)
 	await get_tree().create_timer(source_remaining_time).timeout
@@ -226,7 +271,7 @@ func perform_reverse_attack(move: ChunkMove) -> void:
 
 	stored_source_tiles.clear()
 
-	print("Reverse attack complete.")
+	print("Reverse attack complete for ", move.name)
 
 
 func store_source_tiles(source_cells: Array[Vector2i]) -> void:
