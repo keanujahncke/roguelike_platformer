@@ -6,10 +6,11 @@ class_name AreaManipulator
 
 @export var black_hole_indicator_scene: PackedScene
 
-# Automatically perform the attack on a loop.
-@export var use_attack_timer := true
+# Keep this OFF in the boss room inspector.
+# BossIntroTrigger will turn this on later.
+@export var use_attack_timer := false
 
-# How long to wait before the first attack starts.
+# How long to wait before the first attack starts AFTER activate_attacks() is called.
 @export var first_attack_delay := 2.0
 
 # How long to wait after the full forward + reverse cycle finishes.
@@ -38,6 +39,7 @@ class_name AreaManipulator
 @export var use_chunk_moves_in_order := true
 
 var attack_running := false
+var attack_loop_running := false
 var stored_source_tiles: Array[Dictionary] = []
 var current_chunk_index := 0
 
@@ -51,6 +53,9 @@ func _ready() -> void:
 
 	hide_all_boss_terrain()
 
+	# IMPORTANT:
+	# Do not automatically start attacks unless Use Attack Timer is on.
+	# For the boss intro system, keep Use Attack Timer OFF in the Inspector.
 	if use_attack_timer:
 		start_attack_loop()
 
@@ -63,6 +68,23 @@ func _process(_delta: float) -> void:
 			perform_full_black_hole_cycle(move)
 
 
+func activate_attacks() -> void:
+	if attack_loop_running:
+		return
+	
+	use_attack_timer = true
+	start_attack_loop()
+	print("AreaManipulator attacks activated.")
+
+
+func deactivate_attacks() -> void:
+	use_attack_timer = false
+	attack_loop_running = false
+	attack_running = false
+	hide_all_boss_terrain()
+	print("AreaManipulator attacks deactivated.")
+
+
 func hide_all_boss_terrain() -> void:
 	for move in chunk_moves:
 		if move != null:
@@ -70,6 +92,11 @@ func hide_all_boss_terrain() -> void:
 
 
 func start_attack_loop() -> void:
+	if attack_loop_running:
+		return
+	
+	attack_loop_running = true
+	
 	await get_tree().create_timer(first_attack_delay).timeout
 
 	while use_attack_timer:
@@ -81,6 +108,8 @@ func start_attack_loop() -> void:
 			print("AreaManipulator: No valid ChunkMoves assigned.")
 
 		await get_tree().create_timer(attack_interval).timeout
+	
+	attack_loop_running = false
 
 
 func get_next_chunk_move() -> ChunkMove:

@@ -6,8 +6,27 @@ signal fake_death_finished
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
-@export var idle_animation: String = "idle"
-@export var fake_death_animation: String = "death"
+@export var idle_animation: String = "boss_idle"
+@export var fake_death_animation: String = "boss_death"
+
+# One full animation:
+# frame starts with boss sitting on throne,
+# then continues into boss getting up.
+@export var throne_intro_animation: String = "boss_intro"
+
+# If true, boss starts the room frozen on one frame of throne_intro_animation.
+@export var start_frozen_on_throne_intro: bool = true
+
+# Godot frames are 0-indexed.
+# 0 = first frame, 1 = second frame, etc.
+@export var frozen_throne_frame: int = 0
+
+# If true, boss always faces one direction instead of tracking player direction.
+@export var force_constant_facing_direction: bool = true
+
+# false = original sprite direction
+# true = horizontally flipped
+@export var constant_flip_h: bool = true
 
 # This animation plays once when the laser phase starts.
 # After it finishes, the boss returns to idle while the laser phase continues.
@@ -16,8 +35,7 @@ signal fake_death_finished
 # Delay between boss attack animation starting and lasers beginning to spawn.
 @export var laser_phase_start_delay: float = 1.0
 
-# NEW:
-# Delay after the boss room loads before the laser phase loop begins.
+# Delay after the boss encounter activates before the first laser phase begins.
 @export var initial_laser_start_delay: float = 5.0
 
 # Boss physical collision.
@@ -25,10 +43,9 @@ signal fake_death_finished
 @export var disable_boss_collision: bool = true
 
 # Boss follow settings.
-@export var follow_player: bool = true
+@export var follow_player: bool = false
 
 # If true, the boss remembers its starting offset from the player AFTER the room loads.
-# Example: if boss starts 200px above/right of player, it keeps that same relative position.
 @export var use_starting_relative_offset: bool = false
 
 # Used only if use_starting_relative_offset is false.
@@ -42,17 +59,16 @@ signal fake_death_finished
 @export var follow_smoothing_speed: float = 2.5
 
 # If the boss is already close enough to the target position, he will not move.
-# This helps stop tiny jittery movements.
 @export var follow_deadzone: float = 8.0
 
 # If true, boss sprite flips depending on whether player is left/right.
-@export var face_player: bool = true
+# This is ignored if force_constant_facing_direction is true.
+@export var face_player: bool = false
 
-# Turn this on if the boss is facing the wrong direction.
+# Turn this on if the boss is facing the wrong direction when using face_player.
 @export var invert_face_player_direction: bool = false
 
 # If true, the fake death sequence waits for the death animation to finish.
-# If false, the fake death sequence waits for fake_death_delay seconds instead.
 @export var wait_for_fake_death_animation_to_finish: bool = true
 
 # Only used if wait_for_fake_death_animation_to_finish is false.
@@ -65,14 +81,15 @@ signal fake_death_finished
 # --- LASER ATTACK SETTINGS ---
 
 @export var boss_laser_scene: PackedScene
+
+# Keep this OFF in the inspector.
+# BossIntroTrigger will turn it on later.
 @export var laser_attack_enabled: bool = false
 
 # Time between each laser during the active laser phase.
 @export var laser_interval: float = 3.0
 
 # How long the boss keeps firing lasers before taking a break.
-# With laser_interval = 3.0 and laser_phase_duration = 12.0,
-# the boss will fire about 4 lasers per phase.
 @export var laser_phase_duration: float = 12.0
 
 # How long the boss waits before starting the next laser phase.
@@ -93,12 +110,14 @@ signal fake_death_finished
 ]
 
 # Use this to make the laser visually/collision-wise longer or wider.
-# Example: Vector2(1, 2) makes it twice as long if your art/collision is vertical.
 @export var laser_spawn_scale: Vector2 = Vector2(1.0, 2.0)
 
 
 var trap_sequence_running: bool = false
 var fake_death_is_finished: bool = false
+
+var boss_encounter_started: bool = false
+var boss_intro_running: bool = false
 
 var laser_loop_running: bool = false
 var laser_start_delay_running: bool = false
@@ -116,7 +135,12 @@ func _ready() -> void:
 	randomize()
 	
 	setup_boss_collision()
-	play_idle()
+	apply_constant_facing_direction()
+	
+	if start_frozen_on_throne_intro:
+		play_frozen_throne_intro_frame()
+	else:
+		play_idle()
 	
 	# IMPORTANT:
 	# When this boss room is loaded by LevelManager, the boss may enter the tree
@@ -127,17 +151,118 @@ func _ready() -> void:
 	
 	setup_follow_offset()
 	
-	if laser_attack_enabled:
-		start_laser_phase_loop_after_delay()
+	# Do NOT automatically start lasers here anymore.
+	# BossIntroTrigger starts the encounter.
 
 
 func _physics_process(delta: float) -> void:
 	update_follow_player(delta)
 
 
+func activate_boss_encounter() -> void:
+	if boss_encounter_started:
+		return
+	
+	boss_encounter_started = true
+	trap_sequence_running = false
+	
+	apply_constant_facing_direction()
+	
+	# Boss starts following only after the throne room trigger.
+	follow_player = true
+	
+	# Lasers start only after the throne room trigger.
+	laser_attack_enabled = true
+	start_laser_phase_loop_after_delay()
+	
+	print("Boss encounter activated.")
+
+
+func play_intro_then_activate_boss_encounter() -> void:
+	if boss_encounter_started:
+		return
+	
+	if boss_intro_running:
+		return
+	
+	boss_intro_running = true
+	
+	await play_throne_intro_from_frozen_frame()
+	
+	boss_intro_running = false
+	
+	activate_boss_encounter()
+
+
 func setup_boss_collision() -> void:
 	if disable_boss_collision and collision_shape != null:
 		collision_shape.disabled = true
+
+
+func apply_constant_facing_direction() -> void:
+	if animated_sprite == null:
+		return
+	
+	if force_constant_facing_direction:
+		animated_sprite.flip_h = constant_flip_h
+
+
+func play_frozen_throne_intro_frame() -> void:
+	if animated_sprite == null:
+		push_error("Boss: AnimatedSprite2D not found.")
+		return
+
+	if animated_sprite.sprite_frames == null:
+		push_error("Boss: AnimatedSprite2D has no SpriteFrames assigned.")
+		return
+	
+	apply_constant_facing_direction()
+
+	if not animated_sprite.sprite_frames.has_animation(throne_intro_animation):
+		push_warning("Boss: Throne intro animation '" + throne_intro_animation + "' does not exist. Falling back to idle.")
+		play_idle_forced()
+		return
+	
+	var frame_count: int = animated_sprite.sprite_frames.get_frame_count(throne_intro_animation)
+	var safe_frame: int = clampi(frozen_throne_frame, 0, frame_count - 1)
+	
+	animated_sprite.sprite_frames.set_animation_loop(throne_intro_animation, false)
+	animated_sprite.animation = throne_intro_animation
+	animated_sprite.stop()
+	animated_sprite.frame = safe_frame
+	
+	print("Boss frozen on throne intro frame: ", safe_frame)
+
+
+func play_throne_intro_from_frozen_frame() -> void:
+	if animated_sprite == null:
+		push_error("Boss: AnimatedSprite2D not found.")
+		return
+
+	if animated_sprite.sprite_frames == null:
+		push_error("Boss: AnimatedSprite2D has no SpriteFrames assigned.")
+		return
+	
+	apply_constant_facing_direction()
+
+	if not animated_sprite.sprite_frames.has_animation(throne_intro_animation):
+		push_warning("Boss: Throne intro animation '" + throne_intro_animation + "' does not exist. Skipping intro.")
+		play_idle_forced()
+		return
+	
+	var frame_count: int = animated_sprite.sprite_frames.get_frame_count(throne_intro_animation)
+	var safe_frame: int = clampi(frozen_throne_frame, 0, frame_count - 1)
+	
+	animated_sprite.sprite_frames.set_animation_loop(throne_intro_animation, false)
+	animated_sprite.animation = throne_intro_animation
+	animated_sprite.stop()
+	animated_sprite.frame = safe_frame
+	animated_sprite.play(throne_intro_animation)
+	
+	await animated_sprite.animation_finished
+	
+	apply_constant_facing_direction()
+	play_idle_forced()
 
 
 func setup_follow_offset() -> void:
@@ -187,10 +312,14 @@ func update_follow_player(delta: float) -> void:
 
 
 func update_facing_direction() -> void:
-	if not face_player:
+	if animated_sprite == null:
 		return
 	
-	if animated_sprite == null:
+	if force_constant_facing_direction:
+		animated_sprite.flip_h = constant_flip_h
+		return
+	
+	if not face_player:
 		return
 	
 	if player_ref == null or not is_instance_valid(player_ref):
@@ -219,6 +348,8 @@ func play_idle_forced() -> void:
 	if animated_sprite.sprite_frames == null:
 		push_error("Boss: AnimatedSprite2D has no SpriteFrames assigned.")
 		return
+	
+	apply_constant_facing_direction()
 
 	if animated_sprite.sprite_frames.has_animation(idle_animation):
 		animated_sprite.sprite_frames.set_animation_loop(idle_animation, true)
@@ -242,6 +373,8 @@ func play_laser_attack_then_return_to_idle() -> void:
 	if not animated_sprite.sprite_frames.has_animation(laser_attack_animation):
 		push_warning("Boss: Laser attack animation '" + laser_attack_animation + "' does not exist.")
 		return
+	
+	apply_constant_facing_direction()
 
 	laser_attack_animation_token += 1
 	var my_token := laser_attack_animation_token
@@ -256,8 +389,6 @@ func play_laser_attack_then_return_to_idle() -> void:
 	if trap_sequence_running:
 		return
 
-	# Only return to idle if this is still the most recent laser attack animation.
-	# This prevents older awaits from interrupting newer boss animations.
 	if my_token != laser_attack_animation_token:
 		return
 
@@ -323,18 +454,14 @@ func run_laser_phase() -> void:
 	if not laser_attack_enabled or trap_sequence_running:
 		return
 
-	# 1. Boss attack animation starts first.
-	# Do not await it. It returns to idle by itself when finished.
 	play_laser_attack_then_return_to_idle()
 
-	# 2. Small delay before lasers begin.
 	if laser_phase_start_delay > 0.0:
 		await get_tree().create_timer(laser_phase_start_delay).timeout
 
 	if not laser_attack_enabled or trap_sequence_running:
 		return
 
-	# 3. Laser phase continues for the full laser_phase_duration.
 	var phase_elapsed := 0.0
 	
 	while phase_elapsed < laser_phase_duration and laser_attack_enabled and not trap_sequence_running:
@@ -345,10 +472,6 @@ func run_laser_phase() -> void:
 		
 		await get_tree().create_timer(laser_interval).timeout
 		phase_elapsed += laser_interval
-	
-	# 4. Laser phase ends here. Cooldown happens in start_laser_phase_loop().
-	# Do not force idle here because the boss animation already returns to idle
-	# naturally when laser_attack finishes.
 
 
 func stop_laser_loop() -> void:
@@ -360,7 +483,6 @@ func stop_all_laser_attacks(force_idle: bool = true) -> void:
 	laser_start_delay_running = false
 	waiting_cleanup_for_lasers()
 
-	# Invalidate any laser attack animation await that might later try to return to idle.
 	laser_attack_animation_token += 1
 
 	for laser in active_lasers:
@@ -461,7 +583,6 @@ func get_random_laser_angle_degrees() -> float:
 	
 	var random_index := randi_range(0, laser_angle_choices_degrees.size() - 1)
 	
-	# Avoid repeating the exact same angle twice in a row.
 	while random_index == last_laser_angle_index:
 		random_index = randi_range(0, laser_angle_choices_degrees.size() - 1)
 	
@@ -476,10 +597,8 @@ func fake_death_only() -> void:
 	trap_sequence_running = true
 	fake_death_is_finished = false
 	
-	# Stop laser attacks immediately and remove any existing laser/indicator.
 	stop_all_laser_attacks(false)
 
-	# Boss should not have physical collision.
 	if disable_boss_collision and collision_shape != null:
 		collision_shape.disabled = true
 
@@ -497,6 +616,8 @@ func fake_death_only() -> void:
 		push_warning("Boss: Fake death animation '" + fake_death_animation + "' does not exist.")
 		_finish_fake_death()
 		return
+	
+	apply_constant_facing_direction()
 
 	animated_sprite.sprite_frames.set_animation_loop(fake_death_animation, false)
 	animated_sprite.frame = 0
@@ -529,7 +650,6 @@ func kill_player(player: Node) -> void:
 	if player == null:
 		return
 
-	# Do not re-enable boss collision here.
 	if disable_boss_collision and collision_shape != null:
 		collision_shape.disabled = true
 

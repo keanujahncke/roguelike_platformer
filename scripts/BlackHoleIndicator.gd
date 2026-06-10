@@ -5,6 +5,12 @@ class_name BlackHoleIndicator
 
 @export var animation_name: String = "black_hole"
 
+# Higher = faster black hole animation.
+# 1.0 = normal speed
+# 2.0 = twice as fast
+# 3.0 = three times as fast
+@export var animation_speed_scale: float = 2.0
+
 @export var padding: Vector2 = Vector2(0, 0)
 
 @export var stretch_to_rect: bool = true
@@ -12,6 +18,7 @@ class_name BlackHoleIndicator
 @export var size_multiplier: Vector2 = Vector2(1.25, 1.25)
 
 # Your black hole peaks around frame 14.
+# Tile removal/reveal happens around this frame.
 @export var scale_reference_frame: int = 14
 
 
@@ -53,6 +60,8 @@ func play_from_start() -> void:
 	if animated_sprite == null:
 		return
 
+	animated_sprite.speed_scale = animation_speed_scale
+
 	if animated_sprite.sprite_frames != null:
 		if animated_sprite.sprite_frames.has_animation(animation_name):
 			animated_sprite.animation = animation_name
@@ -84,7 +93,7 @@ func get_animation_length() -> float:
 		var frame_duration: float = animated_sprite.sprite_frames.get_frame_duration(animation_name, i)
 		total_duration_units += frame_duration
 
-	var speed: float = max(float(animated_sprite.speed_scale), 0.01)
+	var speed: float = max(float(animation_speed_scale), 0.01)
 
 	return total_duration_units / fps / speed
 
@@ -105,7 +114,7 @@ func get_peak_time() -> float:
 		return 0.5
 
 	var frame_count: int = animated_sprite.sprite_frames.get_frame_count(animation_name)
-	var peak_frame: int = clamp(scale_reference_frame, 0, frame_count - 1)
+	var peak_frame: int = clampi(scale_reference_frame, 0, frame_count - 1)
 
 	var total_duration_units: float = 0.0
 
@@ -113,7 +122,7 @@ func get_peak_time() -> float:
 		var frame_duration: float = animated_sprite.sprite_frames.get_frame_duration(animation_name, i)
 		total_duration_units += frame_duration
 
-	var speed: float = max(float(animated_sprite.speed_scale), 0.01)
+	var speed: float = max(float(animation_speed_scale), 0.01)
 
 	return total_duration_units / fps / speed
 
@@ -133,7 +142,7 @@ func get_reference_sprite_size() -> Vector2:
 	if frame_count <= 0:
 		return Vector2.ZERO
 
-	var frame_index: int = clamp(scale_reference_frame, 0, frame_count - 1)
+	var frame_index: int = clampi(scale_reference_frame, 0, frame_count - 1)
 	var tex: Texture2D = animated_sprite.sprite_frames.get_frame_texture(animation_name, frame_index)
 
 	if tex == null:

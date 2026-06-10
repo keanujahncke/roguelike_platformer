@@ -164,9 +164,10 @@ script = ExtResource("1_x1dq0")
 laser_animation_speed_scale = 1.8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1083237642]
+z_index = 20
 scale = Vector2(4, 50)
 sprite_frames = SubResource("SpriteFrames_rftol")
-animation = &"indicator"
+animation = &"laser"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1230104395]
 position = Vector2(-2, 0)

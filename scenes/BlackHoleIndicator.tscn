@@ -223,6 +223,7 @@ animations = [{
 
 [node name="BlackHoleIndicator" type="Node2D" unique_id=905769148]
 script = ExtResource("1_844bs")
+animation_speed_scale = 1.5
 preserve_aspect_ratio = true
 size_multiplier = Vector2(3, 3)
 
